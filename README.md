@@ -40,7 +40,7 @@ This theme is inspired at [polybar](https://github.com/polybar/polybar) settings
 modkey=Mod4
 weather_api_key=api_weather_key # openweathermap.org
 city_id=your_city_id # openweathermap.org
-logo={THEME_PATH}/icons/tux.png
+logo=$THEMES/icons/tux.png
 
 [commands]
 lock_screen=dm-tool lock # uses ligthdm locker
@@ -54,7 +54,7 @@ left_widgets=tag_list separator task_list
 right_widgets=weather arrow_layoutbox
 
 [startup]
-picom=picom --config {THEME_PATH} picom.conf
+picom=picom --config $THEMES/picom.conf
 ```
 
 You can modify many behaviors and styles in the ini file rather than customizing 

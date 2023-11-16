@@ -38,8 +38,8 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
--- beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.init(awesome_dir .. "ebenezer/theme.lua")
+
 local topbar = require("ebenezer.topbar.main")
 local taglist = require("ebenezer.topbar.taglist")
 local behaviours = require("ebenezer.behaviours")
@@ -48,6 +48,7 @@ local keybindings = require('ebenezer.keybindings')
 local rules = require('ebenezer.rules')
 local envs = require('ebenezer.envs')
 local create_menu = require('ebenezer.menu')
+local wallpaper = require('ebenezer.wallpaper')
 
 -- This is used later as the default terminal and editor to run.
 local terminal = envs.environment.terminal or "xterm"
@@ -86,23 +87,7 @@ end)
 -- }}}
 
 -- {{{ Wallpaper
-screen.connect_signal("request::wallpaper", function(s)
-    awful.wallpaper {
-        screen = s,
-        widget = {
-            {
-                image = beautiful.wallpaper,
-                upscale = true,
-                downscale = true,
-                widget = wibox.widget.imagebox
-            },
-            valign = "center",
-            halign = "center",
-            tiled = false,
-            widget = wibox.container.tile
-        }
-    }
-end)
+wallpaper.setup(screen)
 -- }}}
 
 -- {{{ Wibar

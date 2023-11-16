@@ -27,7 +27,7 @@ local default_config = {
         cpu_thermal = 'sensors | sed -rn "s/.*Core 0:\\s+.([0-9.]+).*/\1/p"'
     },
     topbar = {left_widgets = 'tag_list', right_widgets = 'arrow_layoutbox'},
-    startup = {picom = "picom --config {THEME_PATH} picom.conf"},
+    startup = {picom = "picom --config $THEMES/picom.conf"},
     wm_class = {browsers = "firefox", editors = "code-oss"},
     fonts = {
         font = "Inter Medium 10",
@@ -61,7 +61,8 @@ local default_config = {
         border_color_marked = "#CC9393",
         titlebar_bg_focus = "#263238",
         titlebar_bg_normal = "#253238"
-    }
+    },
+    path_vars = {THEMES= theme_path:sub(1, -2), HOME = home, AWESOME = awesome_path}
 }
 
 local function build_wm_classes(wm_class)

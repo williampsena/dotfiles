@@ -3,13 +3,10 @@ local envs = require('ebenezer.envs')
 local dpi = require("beautiful.xresources").apply_dpi
 local style = {}
 
--- wallpaper
-style.wallpaper = home .. "/Pictures/Wallpapers/active.jpg"
-
 -- {{{ Styles
 style.font = envs.fonts.font
 style.font_regular = envs.fonts.font_regular
-style.font_light =  envs.fonts.font_light
+style.font_light = envs.fonts.font_light
 style.font_strong = envs.fonts.font_strong
 style.font_strong_bold = envs.fonts.font_strong_bold
 style.font_icon = envs.fonts.font_icon

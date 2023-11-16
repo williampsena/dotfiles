@@ -1,10 +1,8 @@
 local spawn = require("awful.spawn")
 local envs = require("ebenezer.envs")
-
+local fs = require('ebenezer.helpers.fs')
 local function prepare_command(template_command)
-    local command = template_command:gsub("{THEME_PATH}", envs.theme_path)
-
-    return command
+    return fs.resolve_path(template_command, envs.path_vars)
 end
 
 local function startup()
