@@ -1,4 +1,5 @@
 local home = os.getenv("HOME")
+local envs = require('ebenezer.envs')
 local dpi = require("beautiful.xresources").apply_dpi
 local style = {}
 
@@ -6,53 +7,49 @@ local style = {}
 style.wallpaper = home .. "/Pictures/Wallpapers/active.jpg"
 
 -- {{{ Styles
-style.font  = "Inter Medium 10"
-style.font_regular = "Inter Medium 9"
-style.font_light = "Inter Light 10"
-style.font_strong = "Inter 12"
-style.font_strong_bold = "Inter Bold 12"
-style.font_alternative = "Iosevka Nerd Font 10"
-style.font_icon = "Material Icons 11"
-style.font_icon_alternative = "Font Awesome 11"
+style.font = envs.fonts.font
+style.font_regular = envs.fonts.font_regular
+style.font_light =  envs.fonts.font_light
+style.font_strong = envs.fonts.font_strong
+style.font_strong_bold = envs.fonts.font_strong_bold
+style.font_icon = envs.fonts.font_icon
 
 -- {{{ Top bar
 
-style.topbar = "#253237"
-style.topbar_arrow = "#5c6b73"
-
--- {{{ Colors
-style.fg_normal = "#e0fbfc"
-style.fg_focus = "#C4C7C5"
-style.fg_urgent = "#CC9393"
-style.bg_normal = "#263238"
-style.bg_focus = "#1E2320"
-style.bg_urgent = "#424242"
-style.bg_systray = style.bg_normal
-style.bg_selected = "#5c6b73"
--- }}}
+style.topbar = envs.colors.bg_topbar
+style.topbar_arrow = envs.colors.bg_topbar_arrow
 
 -- {{{ Borders
 style.useless_gap = dpi(1)
 style.border_width = dpi(1)
-style.border_color_normal = "#9db4c0"
-style.border_color_active = "#c2dfe3"
-style.border_color_marked = "#CC9393"
+style.border_color_normal = envs.colors.border_color_normal
+style.border_color_active = envs.colors.border_color_active
+style.border_color_marked = envs.colors.border_color_marked
 -- }}}
 
 -- {{{ Titlebars
-style.titlebar_bg_focus = "#263238"
-style.titlebar_bg_normal = "#253238"
+style.titlebar_bg_focus = envs.colors.titlebar_bg_focus
+style.titlebar_bg_normal = envs.colors.titlebar_bg_normal
 -- }}}
 
 -- {{{ Colors
-style.fg_blue = "#304FFE"
-style.fg_ligth_blue = "#B3E5FC"
-style.fg_yellow = "#FFFF00"
-style.fg_red = "#D50000"
-style.fg_orange = "#FFC107"
-style.fg_purple = "#AA00FF"
-style.fg_purple2 = "#6200EA"
-style.fg_green = "#4BC1CC"
+style.fg_normal = envs.colors.fg_normal
+style.fg_focus = envs.colors.fg_focus
+style.fg_urgent = envs.colors.fg_urgent
+style.bg_normal = envs.colors.bg_normal
+style.bg_focus = envs.colors.bg_focus
+style.bg_urgent = envs.colors.bg_urgent
+style.bg_systray = envs.colors.bg_systray
+style.bg_selected = envs.colors.bg_selected
+
+style.fg_blue = envs.colors.fg_blue
+style.fg_ligth_blue = envs.colors.fg_ligth_blue
+style.fg_yellow = envs.colors.fg_yellow
+style.fg_red = envs.colors.fg_red
+style.fg_orange = envs.colors.fg_orange
+style.fg_purple = envs.colors.fg_purple
+style.fg_purple2 = envs.colors.fg_purple2
+style.fg_green = envs.colors.fg_green
 -- }}}
 
 return style

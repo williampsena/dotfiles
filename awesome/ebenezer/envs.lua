@@ -7,7 +7,6 @@ local lip = require('ebenezer.helpers.ini')
 local fs = require('ebenezer.helpers.fs')
 local merge_tables = require('ebenezer.helpers.table').merge_tables
 local split = require('ebenezer.helpers.table').split
-local naughty = require('naughty')
 
 local default_config = {
     modkey = "Mod4",
@@ -29,7 +28,40 @@ local default_config = {
     },
     topbar = {left_widgets = 'tag_list', right_widgets = 'arrow_layoutbox'},
     startup = {picom = "picom --config {THEME_PATH} picom.conf"},
-    wm_class = {browsers = "firefox", editors = "code-oss"}
+    wm_class = {browsers = "firefox", editors = "code-oss"},
+    fonts = {
+        font = "Inter Medium 10",
+        font_regular = "Inter Medium 9",
+        font_light = "Inter Light 10",
+        font_strong = "Inter 12",
+        font_strong_bold = "Inter Bold 12",
+        font_icon = "Material Icons 11"
+    },
+    colors = {
+        fg_normal = "#e0fbfc",
+        fg_focus = "#C4C7C5",
+        fg_urgent = "#CC9393",
+        bg_normal = "#263238",
+        bg_focus = "#1E2320",
+        bg_urgent = "#424242",
+        bg_systray = "#e0fbfc",
+        bg_selected = "#5c6b73",
+        fg_blue = "#304FFE",
+        fg_ligth_blue = "#B3E5FC",
+        fg_yellow = "#FFFF00",
+        fg_red = "#D50000",
+        fg_orange = "#FFC107",
+        fg_purple = "#AA00FF",
+        fg_purple2 = "#6200EA",
+        fg_green = "#4BC1CC",
+        bg_topbar = "#253237",
+        bg_topbar_arrow = "#5c6b73",
+        border_color_normal = "#9db4c0",
+        border_color_active = "#c2dfe3",
+        border_color_marked = "#CC9393",
+        titlebar_bg_focus = "#263238",
+        titlebar_bg_normal = "#253238"
+    }
 }
 
 local function build_wm_classes(wm_class)
@@ -58,6 +90,8 @@ local function get_config()
     user_config.startup = merge_tables(default_config.startup, config.startup)
     user_config.wm_class = build_wm_classes(config.wm_class or
                                                 default_config.wm_class)
+    user_config.fonts = merge_tables(default_config.fonts, config.fonts)
+    user_config.colors = merge_tables(default_config.colors, config.colors)
 
     return user_config
 end
