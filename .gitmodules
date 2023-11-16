@@ -1,0 +1,9 @@
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = https://github.com/lcpz/lain
+[submodule "awesome/awesome-buttons"]
+	path = awesome/awesome-buttons
+	url = https://github.com/streetturtle/awesome-buttons
+[submodule "awesome/awesome-wm-widgets"]
+	path = awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
