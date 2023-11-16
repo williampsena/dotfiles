@@ -79,7 +79,7 @@ local function print_screen_delay()
     })
 end
 
-local function setup_keybindings()
+local function setup_keybindings(_modkey)
     awful.keyboard.append_client_keybindings({
         awful.key({}, "Print", print_screen, {
             description = "Take a screenshot of entire screen",

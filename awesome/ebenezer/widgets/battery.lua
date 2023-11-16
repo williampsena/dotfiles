@@ -51,7 +51,7 @@ local function factory()
             if bat_now.ac_status == 1 or bat_now.status == "Charging" then
                 widget:set_markup(markup.font(style.font, " AC "))
                 baticon:set_markup(battery_ac)
-                battery_text = "AC"
+                battery_text = "Charging " .. bat_now.perc .. "%"
                 return
             elseif bat_now.perc and tonumber(bat_now.perc) >= 99 then
                 baticon:set_markup(battery_full)

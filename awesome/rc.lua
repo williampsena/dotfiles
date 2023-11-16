@@ -46,10 +46,12 @@ local behaviours = require("ebenezer.behaviours")
 local optimizer = require("ebenezer.optimizer")
 local keybindings = require('ebenezer.keybindings')
 local rules = require('ebenezer.rules')
+local envs = require('ebenezer.envs')
+local create_menu = require('ebenezer.menu')
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "kitty"
-local editor = os.getenv("EDITOR") or "nano"
+local terminal = envs.environment.terminal or "xterm"
+local editor = envs.environment.editor or os.getenv("EDITOR") or "nano"
 local editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -62,27 +64,7 @@ modkey = "Mod4"
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-local myawesomemenu = {
-    {
-        "Hotkeys",
-        function() hotkeys_popup.show_help(nil, awful.screen.focused()) end
-    }, {"Manual", string.format("%s -e man awesome", terminal)}, {
-        "Edit config",
-        string.format("%s -e %s %s", terminal, editor, awesome.conffile)
-    }, {"Restart", awesome.restart}, {"Quit", function() awesome.quit() end}
-}
-
-mymainmenu = awful.menu({
-    items = {
-        {"awesome", myawesomemenu, beautiful.awesome_icon},
-        {"open terminal", terminal}
-    }
-})
-
-mylauncher = awful.widget.launcher({
-    image = beautiful.awesome_icon,
-    menu = mymainmenu
-})
+local awesome_menu, main_menu, menu_launcher = create_menu(beautiful)
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -155,7 +137,7 @@ end)
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
-    awful.button({}, 3, function() mymainmenu:toggle() end),
+    awful.button({}, 3, function() main_menu:toggle() end),
     awful.button({}, 4, awful.tag.viewprev),
     awful.button({}, 5, awful.tag.viewnext)
 })
@@ -172,7 +154,7 @@ keybindings.setup(client)
 awful.keyboard.append_global_keybindings({
     awful.key({modkey}, "s", hotkeys_popup.show_help,
               {description = "show help", group = "awesome"}),
-    awful.key({modkey}, "w", function() mymainmenu:show() end,
+    awful.key({modkey}, "w", function() main_menu:show() end,
               {description = "show main menu", group = "awesome"}),
     awful.key({modkey, "Control"}, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),

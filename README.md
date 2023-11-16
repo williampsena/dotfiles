@@ -64,11 +64,11 @@ everything at lua.
 
 Install all prerequisites first, then run the script below to prepare the dotfiles.
 
->> Please **ATTENTION** configurations $HOME/.config/{awesome,kitty,xrandr} will be overwritten.
+>> Please **ATTENTION** configurations $HOME/.config/{awesome,kitty,xrandr,i3lock} will be overwritten.
 
 ```shell
 (cd /tmp && git clone https://github.com/williampsena/awesome-wm-dotfiles)
-cp -R /tmp/awesome-wm-dotfiles/{awesome,kitty,xrandr} ~/.config
+cp -R /tmp/awesome-wm-dotfiles/{awesome,kitty,xrandr,i3lock} ~/.config
 
 # If no config.ini exists, this action will create one with the default parameters.
 cp -n ~/.config/awesome/config.default.ini ~/.config/awesome/config.ini

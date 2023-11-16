@@ -1,4 +1,5 @@
 local awful = require('awful')
+local naughty = require('naughty')
 local microphone = require('ebenezer.widgets.microphone')
 local brightness = require('ebenezer.widgets.brightness')
 local screenshot = require('ebenezer.helpers.screenshot')
@@ -41,7 +42,11 @@ function setup(client)
             awful.key({modkey, "Shift"}, "m", function(c)
                 c.maximized_horizontal = not c.maximized_horizontal
                 c:raise()
-            end, {description = "(un)maximize horizontally", group = "client"}) 
+            end, {description = "(un)maximize horizontally", group = "client"}),
+             awful.key({modkey, "Control"}, "Escape", function(c)
+                awful.spawn.with_shell(envs.commands.lock_screen)
+            end, {description = "Lock screen", group = "launcher"}),
+            
         })
 
         -- extra keybinds
