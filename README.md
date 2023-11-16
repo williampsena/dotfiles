@@ -71,7 +71,7 @@ Install all prerequisites first, then run the script below to prepare the dotfil
 cp -R /tmp/awesome-wm-dotfiles/{awesome,kitty,xrandr} ~/.config
 
 # If no config.ini exists, this action will create one with the default parameters.
-cp -n ~/.config/awesome/config.default.ini awesome/config.ini
+cp -n ~/.config/awesome/config.default.ini ~/.config/awesome/config.ini
 ```
 
 Reload your environment, **ModKey + R**.
