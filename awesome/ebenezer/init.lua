@@ -1,6 +1,7 @@
 local spawn = require("awful.spawn")
 local envs = require("ebenezer.envs")
 local fs = require('ebenezer.helpers.fs')
+
 local function prepare_command(template_command)
     return fs.resolve_path(template_command, envs.path_vars)
 end

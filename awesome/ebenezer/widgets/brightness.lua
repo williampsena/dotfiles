@@ -101,13 +101,13 @@ end
 
 local function setup_keybindings(modkey)
     awful.keyboard.append_global_keybindings({
-        awful.key({modkey}, "XF86MonBrightnessUp", function()
+        awful.key({}, "XF86MonBrightnessUp", function()
             awful.spawn.easy_async(commands.brightness_level_up,
                                    function()
                 notify_brightness_level()
             end)
         end, {description = "Brightness up", group = "Hotkeys"}),
-        awful.key({modkey}, "XF86MonBrightnessDown", function()
+        awful.key({}, "XF86MonBrightnessDown", function()
             awful.spawn.easy_async(commands.brightness_level_down,
                                    function()
                 notify_brightness_level()

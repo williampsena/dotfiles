@@ -7,7 +7,7 @@ local envs = require('ebenezer.envs')
 local modkey = envs.modkey
 
 function setup(client)
-    awful.keyboard.append_global_keybindings({
+    awful.keyboard.append_client_keybindings({
         awful.key({modkey}, "f", function(c)
             c.fullscreen = not c.fullscreen
             c:raise()
@@ -39,11 +39,14 @@ function setup(client)
         awful.key({modkey, "Shift"}, "m", function(c)
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
-        end, {description = "(un)maximize horizontally", group = "client"}),
+        end, {description = "(un)maximize horizontally", group = "client"})
+
+    })
+
+    awful.keyboard.append_global_keybindings({
         awful.key({modkey, "Control"}, "c", function(c)
             awful.spawn.with_shell(envs.commands.lock_screen)
         end, {description = "Lock screen", group = "launcher"})
-
     })
 
     -- extra keybinds
