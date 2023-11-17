@@ -18,6 +18,7 @@ I use Manjaro, and the packages listed below are used to support this Awesome WM
 - [ttf-font-awesome](https://archlinux.org/packages/extra/any/ttf-font-awesome/)
 - [scrot](https://archlinux.org/packages/extra/x86_64/scrot/)
 - [xclip](https://archlinux.org/packages/extra/x86_64/xclip/)
+- [unclutter](https://archlinux.org/packages/extra/x86_64/unclutter/)
 - [i3color](https://aur.archlinux.org/packages/i3lock-color)
 
 # Dependencies
