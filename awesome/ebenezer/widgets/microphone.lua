@@ -43,7 +43,7 @@ local function build()
 end
 
 local function setup_keybindings(modkey)
-    awful.keyboard.append_client_keybindings({
+    awful.keyboard.append_global_keybindings({
         awful.key({ modkey, "Shift" }, "p", function()
             beautiful.mic:toggle()
         end, { description = "Toggle microphone (amixer)", group = "Hotkeys" })

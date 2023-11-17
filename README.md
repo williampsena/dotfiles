@@ -76,11 +76,19 @@ cp -n ~/.config/awesome/config.default.ini ~/.config/awesome/config.ini
 
 Reload your environment, **ModKey + R**.
 
+# Screenshot
+
+- Nov 16, 2023
+
+[screenshot](./images/Screenshot.png)
+
+
 # TODO
 
 - The Pacman widget in the topbar is not effectively designed.
-- Add apt widget support - Move systray to a popup or dropdown menu.
-- Improve wifi widget information
+- Add apt widget support.
+- Move systray to a popup or dropdown menu.
+- Improve wifi widget information.
 - Improve the brightness of notification lights.
-- Improve notification sound
-- Build install script
+- Improve notification sound.
+- Build install script.
