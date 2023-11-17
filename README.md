@@ -44,7 +44,7 @@ city_id=your_city_id # openweathermap.org
 logo=$THEMES/icons/tux.png
 
 [commands]
-lock_screen=dm-tool lock # uses ligthdm locker
+lock_screen=~/.config/i3lock/run.sh
 
 [wm_class]
 browsers=firefox chromium-browser microsoft-edge
