@@ -39,66 +39,81 @@ local function build()
 
     awful.tooltip {
         font = style.font,
-        objects = { brighticon },
+        objects = {brighticon},
         timer_function = function() return brightness_text end
     }
 
     -- If you use xbacklight, comment the line with "light -G" and uncomment the line bellow
     -- local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
     local brightwidget = awful.widget.watch(commands.brightness_level, 0.1,
-        function(widget, stdout, stderr,
-                 exitreason, exitcode)
-            local brightness_level = parse_brightness_level(stdout)
-            local update_brightness_icon = get_brightness_icon(brightness_level)
+                                            function(widget, stdout, stderr,
+                                                     exitreason, exitcode)
+        local brightness_level = parse_brightness_level(stdout)
+        local update_brightness_icon = get_brightness_icon(brightness_level)
 
-            brightness_text = "Brightness level: " .. brightness_level .. "%"
+        brightness_text = "Brightness level: " .. brightness_level .. "%"
 
-            brighticon:set_markup(update_brightness_icon)
-        end)
+        brighticon:set_markup(update_brightness_icon)
+    end)
 
     return wibox.container.margin(wibox.widget {
         brighticon,
         brightwidget,
-        layout = wibox.layout.align.horizontal,
+        layout = wibox.layout.align.horizontal
     }, dpi(2), dpi(3))
 end
 
+local function build_progressbar(level)
+    local icon = ""
+    local bar = ""
+    local color = ""
+
+    level = level / 20
+
+    for i = 1, level do bar = bar .. icon end
+
+    return bar
+end
+
 local function notify_brightness_level()
-    awful.spawn.easy_async(commands.brightness_level, function(stdout, stderr, reason, exit_code)
+    awful.spawn.easy_async(commands.brightness_level,
+                           function(stdout, stderr, reason, exit_code)
         local brightness_level = parse_brightness_level(stdout)
         local brightness_icon = get_brightness_icon(brightness_level)
 
-        if brightness_level == current_brightness_level then
-            return
-        end
+        if brightness_level == current_brightness_level then return end
 
         current_brightness_level = brightness_level
 
         notify_id = naughty.notify({
-            icon = brightness_icon,
-            title = "Brightness",
-            font = style.font,
-            text = brightness_icon .. " " .. brightness_level .. '%',
+            title = brightness_icon .. " Brightness",
+            font = style.font_strong,
+            text = build_progressbar(brightness_level) .. " " ..
+                brightness_level .. '%',
             position = 'top_right',
-            replaces_id = notify_id,
+            bg = style.bg_focus,
+            fg = style.fg_normal,
+            margin = 10,
+            replaces_id = notify_id
         }).id
     end)
 end
 
 local function setup_keybindings(modkey)
     awful.keyboard.append_global_keybindings({
-        awful.key({ modkey }, "XF86MonBrightnessUp", function()
-            awful.spawn.easy_async(commands.brightness_level_up, function()
-                notify_brightness_level()
-            end
-            )
-        end, { description = "Brightness up", group = "Hotkeys" }),
-        awful.key({ modkey }, "XF86MonBrightnessDown", function()
-            awful.spawn.easy_async(commands.brightness_level_down, function()
+        awful.key({modkey}, "XF86MonBrightnessUp", function()
+            awful.spawn.easy_async(commands.brightness_level_up,
+                                   function()
                 notify_brightness_level()
             end)
-        end, { description = "Brightness down", group = "Hotkeys" })
+        end, {description = "Brightness up", group = "Hotkeys"}),
+        awful.key({modkey}, "XF86MonBrightnessDown", function()
+            awful.spawn.easy_async(commands.brightness_level_down,
+                                   function()
+                notify_brightness_level()
+            end)
+        end, {description = "Brightness down", group = "Hotkeys"})
     })
 end
 
-return { build = build, setup_keybindings = setup_keybindings }
+return {build = build, setup_keybindings = setup_keybindings}
