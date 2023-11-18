@@ -60,7 +60,7 @@ local function wallpaper_solo(screen)
     local wallpaper =
         fs.resolve_path(envs.environment.wallpaper, envs.path_vars)
 
-    setup_wallpaper(wallpaper, screen)
+    setup_wallpaper(screen, wallpaper)
 end
 
 function setup(screen)
