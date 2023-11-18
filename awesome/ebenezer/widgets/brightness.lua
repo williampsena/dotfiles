@@ -30,7 +30,7 @@ local function build()
     local brighticon = wibox.widget {
         markup = '󰃟',
         font = style.font_icon,
-        align = 'center',
+        halign = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
     }

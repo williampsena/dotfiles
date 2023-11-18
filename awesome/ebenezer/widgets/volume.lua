@@ -12,8 +12,8 @@ local function factory()
     local volumeicon = wibox.widget {
         markup = volume_enabled,
         font = style.font_icon,
-        align = 'center',
         valign = 'center',
+        halign = "center",
         widget = wibox.widget.textbox,
         forced_width = dpi(envs.environment.icon_widget_with)
     }

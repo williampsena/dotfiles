@@ -39,8 +39,8 @@ local function factory()
     local baticon = wibox.widget {
         markup = battery_ok,
         font = style.font_icon,
-        align = 'center',
         valign = 'center',
+        halign = "center",
         widget = wibox.widget.textbox,
         forced_width = dpi(envs.environment.icon_widget_with)
     }

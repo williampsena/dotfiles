@@ -3,13 +3,13 @@ local wibox = require('wibox')
 local lain = require("lain")
 local style = require('ebenezer.style')
 local dpi = require('beautiful').xresources.apply_dpi
-local commands = require('ebenezer.envs').commands
+local envs = require('ebenezer.envs')
 
-local wifi_great = "󰤨 "
-local wifi_good = "󰤨 "
-local wifi_mid = "󰤢 "
-local wifi_weak = "󰤟 "
-local wifi_diconnected = "󰤯 "
+local wifi_great = "󰤨"
+local wifi_good = "󰤨"
+local wifi_mid = "󰤢"
+local wifi_weak = "󰤟"
+local wifi_diconnected = "󰤯"
 local wifi_signal = 0
 local wifi_signal_count = 0
 
@@ -24,9 +24,9 @@ local function calculate_signal(current_wifi_signal)
 end
 
 local function bind_open_network_manager(net_icon)
-    if commands.network_manager then
+    if envs.commands.network_manager then
         net_icon:connect_signal("button::press", function(_, _, _, _)
-            awful.spawn(commands.network_manager)
+            awful.spawn(envs.commands.network_manager)
         end)
     end
 end
@@ -35,9 +35,10 @@ local function factory()
     local net_icon = wibox.widget {
         markup = wifi_diconnected,
         font = style.font_icon,
-        align = 'center',
         valign = 'center',
-        widget = wibox.widget.textbox
+        halign = "center",
+        widget = wibox.widget.textbox,
+        forced_width = dpi(envs.environment.icon_widget_with)
     }
 
     bind_open_network_manager(net_icon)
@@ -94,7 +95,7 @@ local function factory()
         net_icon,
         net.widget,
         layout = wibox.layout.align.horizontal
-    }, dpi(2), dpi(3))
+    }, dpi(0), dpi(0))
 end
 
 return factory

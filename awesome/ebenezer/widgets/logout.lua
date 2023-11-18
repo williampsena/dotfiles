@@ -11,8 +11,8 @@ local function factory()
     local logout_icon = wibox.widget {
         markup = "⏻",
         font = style.font_icon,
-        align = 'center',
-        valigtextboxn = 'center',
+        halign = 'center',
+        valign = 'center',
         widget = wibox.widget.textbox,
         forced_width = dpi(envs.environment.icon_widget_with)
     }
