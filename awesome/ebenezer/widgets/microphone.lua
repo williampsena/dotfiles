@@ -4,12 +4,13 @@ local beautiful = require("beautiful")
 local lain = require("lain")
 local dpi = require('beautiful').xresources.apply_dpi
 local style = require("ebenezer.style")
+local envs = require("ebenezer.envs")
 local widgets = { mic = require("ebenezer.widgets.mic") }
 
 local markup = lain.util.markup
 
-local microphone_enabled = markup.fontfg(style.font_icon, style.fg_normal, "")
-local microphone_mute = markup.fontfg(style.font_icon, style.fg_normal, "")
+local microphone_enabled = markup.fontfg(style.font_icon, style.fg_normal, "")
+local microphone_mute = markup.fontfg(style.font_icon, style.fg_normal, "")
 
 local function build()
     local microphone_icon = wibox.widget {
@@ -17,7 +18,8 @@ local function build()
         font = style.font_icon,
         align = 'center',
         valign = 'center',
-        widget = wibox.widget.textbox
+        widget = wibox.widget.textbox,
+        forced_width = dpi(envs.environment.icon_widget_with)
     }
 
     beautiful.mic = widgets.mic({

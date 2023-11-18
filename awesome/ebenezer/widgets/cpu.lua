@@ -1,11 +1,12 @@
 local wibox = require('wibox')
 local lain = require("lain")
 local style = require('ebenezer.style')
+local envs = require('ebenezer.envs')
 local dpi = require('beautiful').xresources.apply_dpi
 
 local markup = lain.util.markup
 
-local cpu_font_icon = " 󰍛 "
+local cpu_font_icon = ""
 
 local cpu_low = markup.fontfg(style.font_icon, style.fg_yellow, cpu_font_icon)
 local cpu_avg = markup.fontfg(style.font_icon, style.fg_orange, cpu_font_icon)
@@ -17,7 +18,8 @@ local function factory()
         font = style.font_icon,
         align = 'center',
         valign = 'center',
-        widget = wibox.widget.textbox
+        widget = wibox.widget.textbox,
+        forced_width = dpi(envs.environment.icon_widget_with)
     }
 
     local cpu = lain.widget.cpu({

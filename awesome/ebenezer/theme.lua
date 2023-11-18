@@ -46,6 +46,8 @@ theme.menu_font = style.font_strong
 -- }}}
 
 -- {{{ Icons
+theme.icon_theme = envs.environment.icon_theme
+
 -- {{{ Taglist
 
 theme.taglist_font = style.font_icon
@@ -80,10 +82,8 @@ theme.layout_cornerse = themes_path .. "layouts/cornerse.png"
 -- }}}
 
 -- {{{ Titlebar
-theme.titlebar_close_button_focus = themes_path ..
-                                        "titlebar/close_focus.png"
-theme.titlebar_close_button_normal = themes_path ..
-                                         "titlebar/close_normal.png"
+theme.titlebar_close_button_focus = themes_path .. "titlebar/close_focus.png"
+theme.titlebar_close_button_normal = themes_path .. "titlebar/close_normal.png"
 
 theme.titlebar_minimize_button_normal = global_themes_path ..
                                             "default/titlebar/minimize_normal.png"
@@ -127,6 +127,11 @@ theme.titlebar_maximized_button_normal_inactive = themes_path ..
                                                       "titlebar/maximized_normal_inactive.png"
 -- }}}
 -- }}}
+
+-- Client
+theme.gaps = dpi(2)
+theme.border_width = dpi(2)
+theme.gap_single_client = false
 
 -- Set different colors for urgent notifications.
 rnotification.connect_signal('request::rules', function()

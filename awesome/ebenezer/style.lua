@@ -17,8 +17,8 @@ style.topbar = envs.colors.bg_topbar
 style.topbar_arrow = envs.colors.bg_topbar_arrow
 
 -- {{{ Borders
-style.useless_gap = dpi(1)
-style.border_width = dpi(1)
+style.useless_gap = dpi(5)
+style.border_width = dpi(2)
 style.border_color_normal = envs.colors.border_color_normal
 style.border_color_active = envs.colors.border_color_active
 style.border_color_marked = envs.colors.border_color_marked

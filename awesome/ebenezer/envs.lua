@@ -17,6 +17,8 @@ local default_config = {
     global_themes_path = global_themes_path,
     environment = {tag_list = "  󰎪 󰎭 󰎱 󰎳"},
     tags = {first = "1", second = "2", third = "3"},
+    icon_theme="Papirus",
+    icon_widget_with = 30,
     commands = {
         lock_screen = 'systemctl suspend',
         brightness = 'light -G',

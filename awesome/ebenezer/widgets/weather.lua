@@ -7,8 +7,8 @@ local dpi = require('beautiful').xresources.apply_dpi
 local markup = lain.util.markup
 
 local icon_clear_sky = markup.fontfg(style.font_icon, style.fg_yellow, " ")
-local icon_rainy = markup.fontfg(style.font_icon, style.fg_blue, " ")
-local icon_clouds = markup.fontfg(style.font_icon, style.fg_blue, " ")
+local icon_rainy = markup.fontfg(style.font_icon, style.fg_blue, " ")
+local icon_clouds = markup.fontfg(style.font_icon, style.fg_orange, " ")
 
 local function factory()
     local weather = lain.widget.weather({

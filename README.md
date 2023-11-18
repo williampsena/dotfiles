@@ -12,12 +12,11 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 I use Manjaro, and the packages listed below are used to support this Awesome WM theme.
 
 - [picom-git](https://aur.archlinux.org/packages/picom-git)
-- [inter-font](https://archlinux.org/packages/extra/any/inter-font/)
-- [ttf-material-icons-git](https://aur.archlinux.org/packages/ttf-material-icons-git)
+- [ttf-firacode-nerd](https://archlinux.org/packages/extra/any/ttf-firacode-nerd/)
 - [ttf-hack-nerd](https://archlinux.org/packages/extra/any/ttf-hack-nerd/)
-- [ttf-font-awesome](https://archlinux.org/packages/extra/any/ttf-font-awesome/)
 - [scrot](https://archlinux.org/packages/extra/x86_64/scrot/)
 - [xclip](https://archlinux.org/packages/extra/x86_64/xclip/)
+- [polkit](https://archlinux.org/packages/extra/x86_64/polkit/)
 - [unclutter](https://archlinux.org/packages/extra/x86_64/unclutter/)
 - [i3color](https://aur.archlinux.org/packages/i3lock-color)
 
@@ -87,7 +86,6 @@ Reload your environment, **ModKey + R**.
 
 # TODO
 
-- The Pacman widget in the topbar is not effectively designed.
 - Add apt widget support.
 - Move systray to a popup or dropdown menu.
 - Improve wifi widget information.

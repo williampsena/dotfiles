@@ -3,12 +3,13 @@ local lain = require("lain")
 local style = require('ebenezer.style')
 local dpi = require('beautiful').xresources.apply_dpi
 local watch = require("awful.widget.watch")
-local commands = require('ebenezer.envs').commands
+local envs = require('ebenezer.envs')
 
 local markup = lain.util.markup
 
-local temperature_ok = markup.fontfg(style.font_icon, style.fg_ligth_blue, ' ')
-local temperature_high = markup.fontfg(style.font_icon, style.fg_red, ' ')
+local temperature_ok = markup.fontfg(style.font_icon, style.fg_ligth_blue,
+                                     '󱃃')
+local temperature_high = markup.fontfg(style.font_icon, style.fg_red, '󱃂')
 
 local function factory()
     local tempicon = wibox.widget {
@@ -16,10 +17,12 @@ local function factory()
         font = style.font_icon,
         align = 'center',
         valign = 'center',
-        widget = wibox.widget.textbox
+        widget = wibox.widget.textbox,
+        forced_width = dpi(envs.environment.icon_widget_with)
     }
 
-    local temp = watch(commands.cpu_thermal, 30, function(widget, core_temperature)
+    local temp = watch(envs.commands.cpu_thermal, 30,
+                       function(widget, core_temperature)
         local update_tempicon = temperature_ok
 
         core_temperature = core_temperature:gsub("%s+", "")
@@ -28,7 +31,8 @@ local function factory()
             update_tempicon = temperature_high
         end
 
-        widget:set_markup(markup.font(style.font_regular, core_temperature .. "ºC"))
+        widget:set_markup(markup.font(style.font_regular,
+                                      core_temperature .. "ºC"))
         tempicon:set_markup(update_tempicon)
     end)
 

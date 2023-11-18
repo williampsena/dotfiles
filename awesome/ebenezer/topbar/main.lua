@@ -20,13 +20,12 @@ local microphone_widget = require('ebenezer.widgets.microphone').build
 local separator_widget = require('ebenezer.widgets.separator')
 local pacman_widget = require('ebenezer.widgets.pacman')
 local logo_widget = require('ebenezer.widgets.logo')
+local layoutbox_widget = require('ebenezer.widgets.layoutbox')
 
 local separators = lain.util.separators
 
 local function wrap_arrow_background(color)
-    return function(widget)
-        return wibox.container.background(widget, color)
-    end
+    return function(widget) return wibox.container.background(widget, color) end
 end
 
 local function supported_widgets(screen)
@@ -36,10 +35,10 @@ local function supported_widgets(screen)
 
     local task_list = function() return tasklist.build(screen) end
     local tag_list = function() return screen.mytaglist end
-    local layoutbox = function() return screen.mylayoutbox end
+    local layoutbox = function() return layoutbox_widget(screen) end
 
     return {
-        logo = function () return logo_widget() end,
+        logo = function() return logo_widget() end,
         weather = function() return weather_widget() end,
         cpu_temp = function() return cpu_temp_widget() end,
         cpu = function() return cpu_widget() end,
@@ -66,13 +65,9 @@ local function build_arrow_widget(arrow_widget_key, supported_widgets)
 
     local widget = supported_widgets[widget_key]
 
-    if not widget then
-        return nil
-    end
+    if not widget then return nil end
 
-    return function()
-        return supported_widgets.arrow_widget(widget())
-    end
+    return function() return supported_widgets.arrow_widget(widget()) end
 end
 
 local function build_widgets_group(string_widgets, supported_widgets)
@@ -94,24 +89,26 @@ local function build_widgets_group(string_widgets, supported_widgets)
 end
 
 local function build(screen)
-    screen.tasklist     = tasklist.build(screen)
+    screen.tasklist = tasklist.build(screen)
 
     -- Keyboard map indicator and switcher
     -- local mykeyboardlayout = awful.widget.keyboardlayout()
 
     -- Create a textclock widget
-    local mytextclock   = wibox.widget.textclock()
+    local mytextclock = wibox.widget.textclock()
 
-    local widgets       = supported_widgets(screen)
-    local left_widgets  = merge_tables({ layout = wibox.layout.fixed.horizontal },
-        build_widgets_group(envs.topbar.left_widgets, widgets))
-    local right_widgets = merge_tables({ layout = wibox.layout.fixed.horizontal },
-        build_widgets_group(envs.topbar.right_widgets, widgets))
-
+    local widgets = supported_widgets(screen)
+    local left_widgets = merge_tables({layout = wibox.layout.fixed.horizontal},
+                                      build_widgets_group(
+                                          envs.topbar.left_widgets, widgets))
+    local right_widgets = merge_tables({layout = wibox.layout.fixed.horizontal},
+                                       build_widgets_group(
+                                           envs.topbar.right_widgets, widgets))
 
     return awful.wibar {
+        margins = 10,
         position = "top",
-        bg = style.topbar, --.. 55,
+        bg = style.topbar, -- .. 55,
         screen = screen,
         widget = {
 
@@ -132,4 +129,4 @@ local function build(screen)
     }
 end
 
-return { build = build }
+return {build = build}
