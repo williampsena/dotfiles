@@ -81,7 +81,7 @@ Reload your environment, **ModKey + R**.
 
 - Nov 18, 2023
 
-![screenshot](./images/Screenshot.png)
+![screenshot](../images/Screenshot.png)
 
 
 # TODO
