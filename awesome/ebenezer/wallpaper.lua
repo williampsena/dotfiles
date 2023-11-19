@@ -4,9 +4,22 @@ local gears = require('gears')
 local envs = require('ebenezer.envs')
 local fs = require('ebenezer.helpers.fs')
 
+local function get_random_wallpaper(wallpapers)
+    wallpapers = wallpapers or fs.get_files(envs.environment.wallpaper_dir)
+    local random_wallpaper = wallpapers[math.random(1, #wallpapers)]
+
+    return random_wallpaper, wallpapers
+end
+
 local function change_wallpaper(screen, wallpaper)
     local wallpaper_path = fs.resolve_path(wallpaper, envs.path_vars)
     gears.wallpaper.maximized(wallpaper_path, s, true)
+end
+
+local function change_random_wallpaper(screen)
+    local wallpaper, _ = get_random_wallpaper(nil)
+
+    change_wallpaper(screen, wallpaper)
 end
 
 local function setup_wallpaper(screen, wallpaper)
@@ -20,6 +33,8 @@ local function setup_wallpaper(screen, wallpaper)
                     image = wallpaper,
                     upscale = true,
                     downscale = true,
+                    horizontal_fit_policy = "fit",
+                    vertical_fit_policy = "auto",
                     widget = wibox.widget.imagebox
                 },
                 valign = "center",
@@ -33,8 +48,10 @@ end
 
 local function wallpaper_slideshow(screen)
     local wallpapers = fs.get_files(envs.environment.wallpaper_dir)
+
     local random_wallpaper = function()
-        return wallpapers[math.random(1, #wallpapers)]
+        local wallpapers = fs.get_files(envs.environment.wallpaper_dir)
+        return get_random_wallpaper(wallpapers)
     end
 
     if next(wallpapers) == nil then return end
@@ -73,4 +90,4 @@ function setup(screen)
     end
 end
 
-return {setup = setup}
+return {setup = setup, change_random_wallpaper = change_random_wallpaper}

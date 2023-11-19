@@ -1,6 +1,7 @@
 local awful = require('awful')
 local hotkeys_popup = require("awful.hotkeys_popup")
 local envs = require('ebenezer.envs')
+local wallpaper = require('ebenezer.wallpaper')
 
 local function factory(beautiful)
     local awesome_menu = {
@@ -21,10 +22,15 @@ local function factory(beautiful)
         theme = {width = 300},
         items = {
             {"awesome", awesome_menu, beautiful.awesome_icon},
-            {"open terminal", terminal},
-            {
+            {"open terminal", terminal}, {
+                "change wallpaper", function()
+                    wallpaper.change_random_wallpaper(awful.screen.focused())
+                end
+            }, {
                 "lock screen",
-                function() awful.spawn.with_shell(envs.commands.lock_screen) end
+                function()
+                    awful.spawn.with_shell(envs.commands.lock_screen)
+                end
             }
         }
     })
