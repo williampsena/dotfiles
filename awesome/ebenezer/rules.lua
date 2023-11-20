@@ -1,7 +1,7 @@
 local awful = require('awful')
 local envs = require('ebenezer.envs')
 
-local tag_browser_index = envs.tags.browser or 1
+local tag_browser_index = envs.tags.browsers or 1
 local tag_editors_index = envs.tags.editors or 3
 
 local function setup(ruled)
@@ -66,9 +66,9 @@ local function setup(ruled)
         end
 
         -- Set browsers to always map on the browser tag
-        if envs.wm_class.browser then
+        if envs.wm_class.browsers then
             ruled.client.append_rule {
-                rule_any = {class = envs.wm_class.browser},
+                rule_any = {class = envs.wm_class.browsers},
                 properties = {
                     screen = 1,
                     tag = awful.screen.focused().tags[tag_browser_index]
