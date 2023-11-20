@@ -94,27 +94,27 @@ Reload your environment, **ModKey + R**.
 
 > The Screenshot default place is $HOME/Pictures/Screenshots
 
-![screenshot-features](./images/screenshot-features.git)
+![screenshot-features](../images/screenshot-features.gif)
 
 ## Notifications feedbacks
 
-![notification-feedback](./images/notification.git)
+![notification-feedback](../images/notification.gif)
 
 ## Launcher (rofi)
 
-![launcher-rofi](./images/launcher.png)
+![launcher-rofi](../images/launcher.png)
 
 ## Lock screen (i3lock)
 
-![launcher-rofi](./images/lock.png)
+![launcher-rofi](../images/lock.png)
 
 ## Tooltip
 
-![tooltip](./images/tooltip.git)
+![tooltip](../images/tooltip.gif)
 
 ## Terminal
 
-![tooltip](./images/terminal.png)
+![terminal](../images/terminal.png)
 
 
 # TODO
