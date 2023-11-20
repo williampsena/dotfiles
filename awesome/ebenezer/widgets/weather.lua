@@ -29,7 +29,7 @@ local function factory()
 
             widget:set_markup(description ..
                 markup.fontfg(style.font_regular, style.fg_normal,
-                    " " .. units .. "ºC "))
+                    " " .. units .. "ºC"))
         end
     })
 
