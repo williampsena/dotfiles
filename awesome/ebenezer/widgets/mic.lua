@@ -55,112 +55,116 @@ awful.key({ modkey, "Shift" }, "m",
 beautiful.mic:mute()
 ```
 
---]]
-
-
-local awful   = require("awful")
+--]] local awful = require("awful")
 local naughty = require("naughty")
-local gears   = require("gears")
-local wibox   = require("wibox")
+local gears = require("gears")
+local wibox = require("wibox")
+local lain = require('lain')
+
+local style = require('ebenezer.style')
+
+local markup = lain.util.markup
+
+local microphone_enabled =
+    markup.fontfg(style.font_icon, style.fg_normal, "")
+local microphone_mute = markup.fontfg(style.font_icon, style.fg_normal, "")
 
 local function factory(args)
     local args = args or {}
 
     local mic = {
-        widget   = args.widget or wibox.widget.imagebox(),
+        widget = args.widget or wibox.widget.imagebox(),
         settings = args.settings or function(self) end,
-        timeout  = args.timeout or 10,
-        timer    = gears.timer,
-        state    = "",
+        timeout = args.timeout or 10,
+        timer = gears.timer,
+        state = "",
+        notify_id = nil
     }
 
     function mic:mute()
         awful.spawn.easy_async({"amixer", "set", "Capture", "nocap"},
-            function()
-                self:update()
-            end
-        )
+                               function() self:update() end)
     end
 
     function mic:unmute()
         awful.spawn.easy_async({"amixer", "set", "Capture", "cap"},
-            function()
-                self:update()
-            end
-        )
+                               function() self:update() end)
     end
 
     function mic:toggle()
         awful.spawn.easy_async({"amixer", "set", "Capture", "toggle"},
-            function()
-                self:update()
-            end
-        )
+                               function() self:update() end)
     end
 
-    function mic:pressed(button)
-        if button == 1 then
-            self:toggle()
-        end
-    end
+    function mic:pressed(button) if button == 1 then self:toggle() end end
 
     function mic:update()
         -- Check that timer has started
-        if self.timer.started then
-            self.timer:emit_signal("timeout")
-        end
+        if self.timer.started then self.timer:emit_signal("timeout") end
+    end
+
+    local function notify(args)
+        local muted = args.muted or false
+        local icon = muted and microphone_mute or microphone_enabled
+
+        mic.notify_id = naughty.notify({
+            preset = args.preset or naughty.config.presets.normal,
+            title = icon .. " Microphone",
+            font = style.font_strong,
+            text = args.text,
+            position = 'top_right',
+            bg = style.bg_focus,
+            fg = style.fg_normal,
+            margin = 10,
+            width = 200,
+            replaces_id = mic.notify_id
+        }).id
     end
 
     -- Read `amixer get Capture` command and try to `grep` all "[on]" lines.
     --   - If there are lines with "[on]" then assume microphone is "unmuted".
     --   - If there are NO lines with "[on]" then assume microphone is "muted".
-    mic, mic.timer = awful.widget.watch(
-        {"bash", "-c", "amixer get Capture | grep '\\[on\\]'"},
-        mic.timeout,
-        function(self, stdout, stderr, exitreason, exitcode)
-            local current_micState = "error"
+    mic, mic.timer = awful.widget.watch({
+        "bash", "-c", "amixer get Capture | grep '\\[on\\]'"
+    }, mic.timeout, function(self, stdout, stderr, exitreason, exitcode)
+        local current_micState = "error"
 
-            if exitcode == 1 then
-                -- Exit code 1 - no line selected
-                current_micState = "muted"
-            elseif exitcode == 0 then
-                -- Exit code 0 - a line is selected
-                current_micState = "unmuted"
+        if exitcode == 1 then
+            -- Exit code 1 - no line selected
+            current_micState = "muted"
+        elseif exitcode == 0 then
+            -- Exit code 0 - a line is selected
+            current_micState = "unmuted"
+        else
+            -- Other exit code (2) - error occurred
+            current_micState = "error"
+        end
+
+        -- Compare new and old state
+        if current_micState ~= self.state then
+            if current_micState == "muted" then
+                notify({muted = true, text = 'Muted'})
+            elseif current_micState == "unmuted" then
+                notify({text = 'Unmuted'})
             else
-                -- Other exit code (2) - error occurred
-                current_micState = "error"
+                notify({
+                    preset = naughty.config.presets.critical,
+                    text = 'Error on "amixer get Capture | grep \'\\[on\\]\'"'
+                })
             end
 
-            -- Compare new and old state
-            if current_micState ~= self.state then
-                if current_micState == "muted" then
-                    naughty.notify({preset=naughty.config.presets.normal,
-                                    title="mic widget info",
-                                    text='muted'})
-                elseif current_micState == "unmuted" then
-                    naughty.notify({preset=naughty.config.presets.normal,
-                                    title="mic widget info",
-                                    text='unmuted'})
-                else
-                    naughty.notify({preset=naughty.config.presets.critical,
-                                    title="mic widget error",
-                                    text='Error on "amixer get Capture | grep \'\\[on\\]\'"'})
-                end
+            -- Store new microphone state
+            self.state = current_micState
+        end
 
-                -- Store new microphone state
-                self.state = current_micState
-            end
-
-            -- Call user/theme defined function
-            self:settings()
-        end,
-        mic  -- base_widget (passed in callback function as first parameter)
+        -- Call user/theme defined function
+        self:settings()
+    end, mic -- base_widget (passed in callback function as first parameter)
     )
 
     -- add mouse click
-    mic.widget:connect_signal("button::press", function(c, _, _, button)
-        mic:pressed(button)
-    end)
+    mic.widget:connect_signal("button::press",
+                              function(c, _, _, button) mic:pressed(button) end)
 
     return mic
 end
