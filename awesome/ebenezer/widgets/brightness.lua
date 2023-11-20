@@ -2,6 +2,8 @@ local awful = require('awful')
 local wibox = require('wibox')
 local style = require('ebenezer.style')
 local envs = require('ebenezer.envs')
+local build_progressbar =
+    require('ebenezer.helpers.progressbar').build_progressbar
 local dpi = require('beautiful').xresources.apply_dpi
 local naughty = require('naughty')
 
@@ -64,18 +66,6 @@ local function build()
     }, dpi(0), dpi(0))
 end
 
-local function build_progressbar(level)
-    local icon = ""
-    local bar = ""
-    local color = ""
-
-    level = level / 20
-
-    for i = 1, level do bar = bar .. icon end
-
-    return bar
-end
-
 local function notify_brightness_level()
     awful.spawn.easy_async(envs.commands.brightness_level,
                            function(stdout, stderr, reason, exit_code)
@@ -89,12 +79,13 @@ local function notify_brightness_level()
         notify_id = naughty.notify({
             title = brightness_icon .. " Brightness",
             font = style.font_strong,
-            text = build_progressbar(brightness_level) .. " " ..
+            text = build_progressbar(brightness_level, 10) .. " " ..
                 brightness_level .. '%',
             position = 'top_right',
             bg = style.bg_focus,
             fg = style.fg_normal,
             margin = 10,
+            width = 200,
             replaces_id = notify_id
         }).id
     end)
