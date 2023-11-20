@@ -15,7 +15,6 @@ local battery_30 = markup.fontfg(style.font_icon, style.fg_normal, '󰁾')
 local battery_full = markup.fontfg(style.font_icon, style.fg_normal, '󰂄')
 local battery_low = markup.fontfg(style.font_icon, style.fg_yellow, '󰁻')
 local battery_empty = markup.fontfg(style.font_icon, style.fg_red, '󰂃')
-local battery_ac = markup.fontfg(style.font_icon, style.fg_normal, '󰂅 ')
 local battery_error = markup.fontfg(style.font_icon, style.fg_red, '󰂑')
 
 local battery_ac_90 = markup.fontfg(style.font_icon, style.fg_normal, '󰂋')
@@ -56,7 +55,8 @@ local function factory()
         battery = "BAT0",
         font = style.font,
         settings = function()
-            local charging = bat_now.ac_status == 1
+            local charging = bat_now.ac_status == 1 or bat_now.status ==
+                                 "Charging"
 
             if bat_now.perc and tonumber(bat_now.perc) >= 99 then
                 baticon:set_markup(charging and battery_ac_full or battery_full)
@@ -76,9 +76,8 @@ local function factory()
                 baticon:set_markup(battery_error)
             end
 
-            if bat_now.ac_status == 1 or bat_now.status == "Charging" then
+            if charging then
                 widget:set_markup(markup.font(style.font, " AC "))
-                baticon:set_markup(battery_ac)
                 battery_text = "Charging " .. bat_now.perc .. "%"
             else
                 widget:set_markup("")

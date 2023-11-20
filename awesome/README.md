@@ -106,7 +106,7 @@ Reload your environment, **ModKey + R**.
 
 ## Lock screen (i3lock)
 
-![launcher-rofi](../images/lock.png)
+![i3lock](../images/lock.png)
 
 ## Tooltip
 
