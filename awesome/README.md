@@ -77,11 +77,44 @@ cp -n ~/.config/awesome/config.default.ini ~/.config/awesome/config.ini
 
 Reload your environment, **ModKey + R**.
 
+
 # Screenshot
 
 - Nov 18, 2023
 
 ![screenshot](../images/Screenshot.png)
+
+# Features
+
+## Changing the wallpaper when using the slide show mode
+
+![slide-show](../images/slide-show.gif)
+
+## Screenshot desktop, window, delayed and area
+
+> The Screenshot default place is $HOME/Pictures/Screenshots
+
+![screenshot-features](./images/screenshot-features.git)
+
+## Notifications feedbacks
+
+![notification-feedback](./images/notification.git)
+
+## Launcher (rofi)
+
+![launcher-rofi](./images/launcher.png)
+
+## Lock screen (i3lock)
+
+![launcher-rofi](./images/lock.png)
+
+## Tooltip
+
+![tooltip](./images/tooltip.git)
+
+## Terminal
+
+![tooltip](./images/terminal.png)
 
 
 # TODO

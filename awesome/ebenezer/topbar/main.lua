@@ -13,7 +13,7 @@ local brightness_widget = require('ebenezer.widgets.brightness').build
 local cpu_temp_widget = require('ebenezer.widgets.cpu_temp')
 local network_widget = require('ebenezer.widgets.network')
 local logout_widget = require('ebenezer.widgets.logout')
-local systray_widget = require('ebenezer.widgets.systray')
+local systray_widget = require('ebenezer.widgets.systray').build
 local weather_widget = require('ebenezer.widgets.weather')
 local volume_widget = require('ebenezer.widgets.volume')
 local microphone_widget = require('ebenezer.widgets.microphone').build
@@ -33,10 +33,6 @@ local function supported_widgets(screen)
     local arrow_left = separators.arrow_left("alpha", arrow_color)
     local _arrow_widget = wrap_arrow_background(arrow_color)
 
-    local task_list = function() return tasklist.build(screen) end
-    local tag_list = function() return screen.mytaglist end
-    local layoutbox = function() return layoutbox_widget(screen) end
-
     return {
         logo = function() return logo_widget() end,
         weather = function() return weather_widget() end,
@@ -47,13 +43,13 @@ local function supported_widgets(screen)
         microphone = function() return microphone_widget() end,
         network = function() return network_widget() end,
         battery = function() return battery_widget() end,
-        systray = function() return systray_widget() end,
+        systray = function() return systray_widget(screen) end,
         pacman = function() return pacman_widget() end,
         brightness = function() return brightness_widget end,
         logout = function() return logout_widget() end,
-        task_list = task_list,
-        tag_list = tag_list,
-        layoutbox = layoutbox,
+        task_list = function() return tasklist.build(screen) end,
+        tag_list = function() return screen.mytaglist end,
+        layoutbox = function() return layoutbox_widget(screen) end,
         separator = function() return separator_widget() end,
         arrow_widget = _arrow_widget,
         arrow = function() return arrow_left end

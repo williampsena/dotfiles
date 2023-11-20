@@ -2,6 +2,7 @@ local awful = require('awful')
 local naughty = require('naughty')
 local microphone = require('ebenezer.widgets.microphone')
 local brightness = require('ebenezer.widgets.brightness')
+local systray = require('ebenezer.widgets.systray')
 local screenshot = require('ebenezer.helpers.screenshot')
 local envs = require('ebenezer.envs')
 local modkey = envs.modkey
@@ -53,6 +54,7 @@ function setup(client)
     microphone.setup_keybindings(modkey)
     brightness.setup_keybindings(modkey)
     screenshot.setup_keybindings(modkey)
+    systray.setup_keybindings(modkey)
 end
 
 return {setup = setup}
