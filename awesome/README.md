@@ -10,7 +10,7 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 
 I wrote a post about this Awesome WM theme:
 
-[Exploring Awesome WM, my preferred window manager](https://willsena.dev/exploring-awesome-wm-my-preferred-window-manager/)
+[Exploring Awesome WM, my preferred window manager](https://willsena.dev/exploring-awesome-wm-my-preferred-window-manager/?r=github)
 
 
 # Requirements
