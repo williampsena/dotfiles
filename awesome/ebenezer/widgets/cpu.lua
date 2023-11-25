@@ -4,13 +4,14 @@ local style = require('ebenezer.style')
 local envs = require('ebenezer.envs')
 local dpi = require('beautiful').xresources.apply_dpi
 
+local colors = style.colors
 local markup = lain.util.markup
 
 local cpu_font_icon = ""
 
-local cpu_low = markup.fontfg(style.font_icon, style.fg_yellow, cpu_font_icon)
-local cpu_avg = markup.fontfg(style.font_icon, style.fg_orange, cpu_font_icon)
-local cpu_high = markup.fontfg(style.font_icon, style.fg_red, cpu_font_icon)
+local cpu_low = markup.fontfg(style.font_icon, colors.fg_yellow, cpu_font_icon)
+local cpu_avg = markup.fontfg(style.font_icon, colors.fg_orange, cpu_font_icon)
+local cpu_high = markup.fontfg(style.font_icon, colors.fg_red, cpu_font_icon)
 
 local function factory()
     local cpu_icon = wibox.widget {

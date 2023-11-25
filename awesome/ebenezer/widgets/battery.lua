@@ -5,24 +5,25 @@ local style = require('ebenezer.style')
 local dpi = require('beautiful').xresources.apply_dpi
 local envs = require('ebenezer.envs')
 
+local colors = style.colors
 local markup = lain.util.markup
 
-local battery_ok = markup.fontfg(style.font_icon, style.fg_normal, '󰁹')
-local battery_90 = markup.fontfg(style.font_icon, style.fg_normal, '󰂂')
-local battery_70 = markup.fontfg(style.font_icon, style.fg_normal, '󰂀')
-local battery_50 = markup.fontfg(style.font_icon, style.fg_normal, '󰁿')
-local battery_30 = markup.fontfg(style.font_icon, style.fg_normal, '󰁾')
-local battery_full = markup.fontfg(style.font_icon, style.fg_normal, '󰂄')
-local battery_low = markup.fontfg(style.font_icon, style.fg_yellow, '󰁻')
-local battery_empty = markup.fontfg(style.font_icon, style.fg_red, '󰂃')
-local battery_error = markup.fontfg(style.font_icon, style.fg_red, '󰂑')
+local battery_ok = markup.fontfg(style.font_icon, colors.fg_normal, '󰁹')
+local battery_90 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂂')
+local battery_70 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂀')
+local battery_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁿')
+local battery_30 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁾')
+local battery_full = markup.fontfg(style.font_icon, colors.fg_normal, '󰂄')
+local battery_low = markup.fontfg(style.font_icon, colors.fg_yellow, '󰁻')
+local battery_empty = markup.fontfg(style.font_icon, colors.fg_red, '󰂃')
+local battery_error = markup.fontfg(style.font_icon, colors.fg_red, '󰂑')
 
-local battery_ac_90 = markup.fontfg(style.font_icon, style.fg_normal, '󰂋')
-local battery_ac_70 = markup.fontfg(style.font_icon, style.fg_normal, '󰂉')
-local battery_ac_50 = markup.fontfg(style.font_icon, style.fg_normal, '󰂈')
-local battery_ac_30 = markup.fontfg(style.font_icon, style.fg_normal, '󰂆')
-local battery_ac_full = markup.fontfg(style.font_icon, style.fg_normal, '󰂄')
-local battery_ac_low = markup.fontfg(style.font_icon, style.fg_normal, '󰂆')
+local battery_ac_90 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂋')
+local battery_ac_70 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂉')
+local battery_ac_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂈')
+local battery_ac_30 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂆')
+local battery_ac_full = markup.fontfg(style.font_icon, colors.fg_normal, '󰂄')
+local battery_ac_low = markup.fontfg(style.font_icon, colors.fg_normal, '󰂆')
 
 local battery_text = ""
 

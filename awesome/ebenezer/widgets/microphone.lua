@@ -7,11 +7,12 @@ local style = require("ebenezer.style")
 local envs = require("ebenezer.envs")
 local widgets = {mic = require("ebenezer.widgets.mic")}
 
+local colors = style.colors
 local markup = lain.util.markup
 
 local microphone_enabled =
-    markup.fontfg(style.font_icon, style.fg_normal, "")
-local microphone_mute = markup.fontfg(style.font_icon, style.fg_normal, "")
+    markup.fontfg(style.font_icon, colors.fg_normal, "")
+local microphone_mute = markup.fontfg(style.font_icon, colors.fg_normal, "")
 
 local function build()
     local microphone_icon = wibox.widget {

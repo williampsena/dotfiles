@@ -63,11 +63,12 @@ local lain = require('lain')
 
 local style = require('ebenezer.style')
 
+local colors = style.colors
 local markup = lain.util.markup
 
 local microphone_enabled =
-    markup.fontfg(style.font_icon, style.fg_normal, "")
-local microphone_mute = markup.fontfg(style.font_icon, style.fg_normal, "")
+    markup.fontfg(style.font_icon, colors.fg_normal, "")
+local microphone_mute = markup.fontfg(style.font_icon, colors.fg_normal, "")
 
 local function factory(args)
     local args = args or {}
@@ -113,8 +114,8 @@ local function factory(args)
             font = style.font_strong,
             text = args.text,
             position = 'top_right',
-            bg = style.bg_focus,
-            fg = style.fg_normal,
+            bg = colors.bg_focus,
+            fg = colors.fg_normal,
             margin = 10,
             width = 200,
             replaces_id = mic.notify_id

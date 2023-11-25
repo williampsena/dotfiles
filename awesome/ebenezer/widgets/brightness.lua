@@ -7,6 +7,8 @@ local build_progressbar =
 local dpi = require('beautiful').xresources.apply_dpi
 local naughty = require('naughty')
 
+local colors = style.colors
+
 local icon_brightness_low = '󰃞 '
 local icon_brightness_mid = '󰃟 '
 local icon_brightness_high = '󰃠 '
@@ -82,8 +84,8 @@ local function notify_brightness_level()
             text = build_progressbar(brightness_level, 10) .. " " ..
                 brightness_level .. '%',
             position = 'top_right',
-            bg = style.bg_focus,
-            fg = style.fg_normal,
+            bg = colors.bg_focus,
+            fg = colors.fg_normal,
             margin = 10,
             width = 200,
             replaces_id = notify_id

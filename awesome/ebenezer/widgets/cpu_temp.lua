@@ -5,11 +5,12 @@ local dpi = require('beautiful').xresources.apply_dpi
 local watch = require("awful.widget.watch")
 local envs = require('ebenezer.envs')
 
+local colors = style.colors
 local markup = lain.util.markup
 
-local temperature_ok = markup.fontfg(style.font_icon, style.fg_ligth_blue,
+local temperature_ok = markup.fontfg(style.font_icon, colors.fg_ligth_blue,
                                      '󱃃')
-local temperature_high = markup.fontfg(style.font_icon, style.fg_red, '󱃂')
+local temperature_high = markup.fontfg(style.font_icon, colors.fg_red, '󱃂')
 
 local function factory()
     local tempicon = wibox.widget {

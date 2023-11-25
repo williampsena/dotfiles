@@ -9,6 +9,8 @@ local build_progressbar =
     require('ebenezer.helpers.progressbar').build_progressbar
 local dpi = require('beautiful').xresources.apply_dpi
 
+local colors = style.colors
+
 local volume_enabled = "󰕾"
 local volume_mute = "󰖁"
 local notify_id = nil
@@ -16,7 +18,7 @@ local notify_id = nil
 local function get_volume_level(callback)
     awful.spawn.easy_async_with_shell(envs.commands.volume_level,
                                       function(volume_level, stderr, _reason,
-                                               _exitcode)
+                                               _existyletcode)
         callback(tonumber(volume_level))
     end)
 end
@@ -37,8 +39,8 @@ local function notify_change_level(volumeicon)
                 text = build_progressbar(volume_level, 10) .. " " ..
                     volume_level .. '%',
                 position = 'top_right',
-                bg = style.bg_focus,
-                fg = style.fg_normal,
+                bg = colors.bg_focus,
+                fg = colors.fg_normal,
                 margin = 10,
                 width = 200,
                 replaces_id = notify_id

@@ -30,23 +30,7 @@ style.titlebar_bg_normal = envs.colors.titlebar_bg_normal
 -- }}}
 
 -- {{{ Colors
-style.fg_normal = envs.colors.fg_normal
-style.fg_focus = envs.colors.fg_focus
-style.fg_urgent = envs.colors.fg_urgent
-style.bg_normal = envs.colors.bg_normal
-style.bg_focus = envs.colors.bg_focus
-style.bg_urgent = envs.colors.bg_urgent
-style.bg_systray = envs.colors.bg_systray
-style.bg_selected = envs.colors.bg_selected
-
-style.fg_blue = envs.colors.fg_blue
-style.fg_ligth_blue = envs.colors.fg_ligth_blue
-style.fg_yellow = envs.colors.fg_yellow
-style.fg_red = envs.colors.fg_red
-style.fg_orange = envs.colors.fg_orange
-style.fg_purple = envs.colors.fg_purple
-style.fg_purple2 = envs.colors.fg_purple2
-style.fg_green = envs.colors.fg_green
+style.colors = envs.colors
 -- }}}
 
 return style

@@ -33,7 +33,8 @@ local function setup(ruled)
                     role = {
                         "AlarmWindow", -- Thunderbird's calendar.
                         "ConfigManager", -- Thunderbird's about:config.
-                        "pop-up" -- e.g. Google Chrome's (detached) Developer Tools.
+                        "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+                        "GtkFileChooserDialog" -- modals
                     }
                 },
                 properties = {floating = true}
@@ -86,7 +87,6 @@ local function setup(ruled)
                 }
             }
         end
-
     end)
 end
 

@@ -4,14 +4,15 @@ local lain = require("lain")
 local style = require('ebenezer.style')
 local dpi = require('beautiful').xresources.apply_dpi
 
+local colors = style.colors
 local markup = lain.util.markup
 local separators = lain.util.separators
 
 local mem_icon_font = "󰄧 "
 
-local mem_low = markup.fontfg(style.font_icon, style.fg_purple, mem_icon_font)
-local mem_avg = markup.fontfg(style.font_icon, style.fg_purple2, mem_icon_font)
-local mem_high = markup.fontfg(style.font_icon, style.fg_red, mem_icon_font)
+local mem_low = markup.fontfg(style.font_icon, colors.fg_purple, mem_icon_font)
+local mem_avg = markup.fontfg(style.font_icon, colors.fg_purple2, mem_icon_font)
+local mem_high = markup.fontfg(style.font_icon, colors.fg_red, mem_icon_font)
 
 local function factory()
     local mem_icon = wibox.widget {

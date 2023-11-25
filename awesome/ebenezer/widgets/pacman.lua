@@ -5,6 +5,7 @@ local envs = require('ebenezer.envs')
 local dpi = require('beautiful').xresources.apply_dpi
 
 local ghost_icon = "󰮯 "
+local colors = style.colors
 
 local function factory()
 
@@ -19,9 +20,9 @@ local function factory()
 
     local widget = pacman_widget({
         interval = 600, -- Refresh every 10 minutes
-        popup_bg_color = style.bg_focus,
+        popup_bg_color = colors.bg_focus,
         popup_border_width = 1,
-        popup_border_color = style.fg_normal,
+        popup_border_color = colors.fg_normal,
         popup_height = 10, -- 10 packages shown in scrollable window
         popup_width = 300,
         polkit_agent_path = '/usr/bin/lxpolkit'

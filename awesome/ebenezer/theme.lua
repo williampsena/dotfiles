@@ -10,6 +10,8 @@ local global_themes_path = envs.global_themes_path
 local rnotification = require("ruled.notification")
 local dpi = require("beautiful.xresources").apply_dpi
 
+local colors = style.colors
+
 -- {{{ Main
 local theme = style
 
@@ -52,7 +54,7 @@ theme.icon_theme = envs.environment.icon_theme
 
 theme.taglist_font = style.font_icon
 theme.taglist_spacing = 0
-theme.taglist_fg_focus = style.fg_normal
+theme.taglist_fg_focus = colors.fg_normal
 -- theme.taglist_bg_focus = style.bg_normal
 -- theme.taglist_squares_resize = "false"
 -- }}}

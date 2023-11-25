@@ -6,6 +6,7 @@ local style = require('ebenezer.style')
 local fs = require('ebenezer.helpers.fs')
 local dpi = require('beautiful').xresources.apply_dpi
 
+local colors = style.colors
 local markup = lain.util.markup
 
 local default_image = "$THEMES/icons/tux.png"
@@ -23,7 +24,7 @@ local function get_logo_path(logo) return fs.resolve_path(logo, envs.path_vars) 
 
 local function build_icon()
     local icon = envs.environment.logo_icon or default_icon
-    local color = envs.environment.logo_icon_color or style.fg_normal
+    local color = envs.environment.logo_icon_color or colors.fg_normal
 
     return wibox.widget {
         markup = markup.fontfg(style.font_icon, color, icon),

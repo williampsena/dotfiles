@@ -2,6 +2,8 @@ local awful = require("awful")
 local naughty = require("naughty")
 local style = require('ebenezer.style')
 
+local colors = style.colors
+
 local delay_timers = {5, 10}
 local screenshot_dir = os.getenv("HOME") .. "/Pictures/Screenshots"
 local screenshot_icon = ""
@@ -25,8 +27,8 @@ local function run_command(command, filename)
             font = style.font_strong,
             text = filename,
             position = 'top_right',
-            bg = style.bg_focus,
-            fg = style.fg_normal,
+            bg = colors.bg_focus,
+            fg = colors.fg_normal,
             margin = 10
         })
     end)
