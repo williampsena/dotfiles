@@ -10,20 +10,28 @@ local markup = lain.util.markup
 
 local battery_ok = markup.fontfg(style.font_icon, colors.fg_normal, '󰁹')
 local battery_90 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂂')
+local battery_80 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂁')
 local battery_70 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂀')
-local battery_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁿')
-local battery_30 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁾')
+local battery_60 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁿')
+local battery_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁾')
+local battery_40 = markup.fontfg(style.font_icon, colors.fg_normal, '󰁽')
+local battery_30 = markup.fontfg(style.font_icon, colors.fg_yellow, '󰁽')
+local battery_20 = markup.fontfg(style.font_icon, colors.fg_orange, '󰁻')
+local battery_10 = markup.fontfg(style.font_icon, colors.fg_red, '󰁺')
 local battery_full = markup.fontfg(style.font_icon, colors.fg_normal, '󰂄')
-local battery_low = markup.fontfg(style.font_icon, colors.fg_yellow, '󰁻')
 local battery_empty = markup.fontfg(style.font_icon, colors.fg_red, '󰂃')
 local battery_error = markup.fontfg(style.font_icon, colors.fg_red, '󰂑')
 
 local battery_ac_90 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂋')
-local battery_ac_70 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂉')
-local battery_ac_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂈')
-local battery_ac_30 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂆')
-local battery_ac_full = markup.fontfg(style.font_icon, colors.fg_normal, '󰂄')
-local battery_ac_low = markup.fontfg(style.font_icon, colors.fg_normal, '󰂆')
+local battery_ac_80 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂊')
+local battery_ac_70 = markup.fontfg(style.font_icon, colors.fg_normal, '󰢞')
+local battery_ac_60 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂉')
+local battery_ac_50 = markup.fontfg(style.font_icon, colors.fg_normal, '󰢝')
+local battery_ac_40 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂈')
+local battery_ac_30 = markup.fontfg(style.font_icon, colors.fg_normal, '󰂇')
+local battery_ac_20 = markup.fontfg(style.font_icon, colors.fg_orange, '󰂆')
+local battery_ac_10 = markup.fontfg(style.font_icon, colors.fg_red, '󰢜')
+local battery_ac_full = markup.fontfg(style.font_icon, colors.fg_normal, '󰂅')
 
 local battery_text = ""
 
@@ -63,14 +71,22 @@ local function factory()
                 baticon:set_markup(charging and battery_ac_full or battery_full)
             elseif bat_now.perc and tonumber(bat_now.perc) >= 90 then
                 baticon:set_markup(charging and battery_ac_90 or battery_90)
+            elseif bat_now.perc and tonumber(bat_now.perc) >= 80 then
+                baticon:set_markup(charging and battery_ac_80 or battery_80)
             elseif bat_now.perc and tonumber(bat_now.perc) >= 70 then
                 baticon:set_markup(charging and battery_ac_70 or battery_70)
+            elseif bat_now.perc and tonumber(bat_now.perc) >= 60 then
+                baticon:set_markup(charging and battery_ac_60 or battery_60)
             elseif bat_now.perc and tonumber(bat_now.perc) >= 50 then
                 baticon:set_markup(charging and battery_ac_50 or battery_50)
+            elseif bat_now.perc and tonumber(bat_now.perc) >= 40 then
+                baticon:set_markup(charging and battery_ac_40 or battery_40)
             elseif bat_now.perc and tonumber(bat_now.perc) >= 30 then
                 baticon:set_markup(charging and battery_ac_30 or battery_30)
-            elseif bat_now.perc and tonumber(bat_now.perc) >= 15 then
-                baticon:set_markup(charging and battery_ac_low or battery_low)
+            elseif bat_now.perc and tonumber(bat_now.perc) >= 20 then
+                baticon:set_markup(charging and battery_ac_20 or battery_20)
+            elseif bat_now.perc and tonumber(bat_now.perc) >= 10 then
+                baticon:set_markup(charging and battery_ac_10 or battery_10)
             elseif bat_now.perc and tonumber(bat_now.perc) <= 5 then
                 baticon:set_markup(battery_empty)
             else
