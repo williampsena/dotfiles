@@ -9,11 +9,13 @@ local themes_path = envs.theme_path
 local global_themes_path = envs.global_themes_path
 local rnotification = require("ruled.notification")
 local dpi = require("beautiful.xresources").apply_dpi
+local merge_tables = require('ebenezer.helpers.table').merge_tables
 
 local colors = style.colors
 
 -- {{{ Main
-local theme = style
+local theme = merge_tables(style, colors)
+theme.colors = nil
 
 theme.tasklist_disable_icon = true
 
@@ -129,6 +131,11 @@ theme.titlebar_maximized_button_normal_inactive = themes_path ..
                                                       "titlebar/maximized_normal_inactive.png"
 -- }}}
 -- }}}
+
+-- Tooltip
+
+theme.tooltip_fg = colors.fg_normal
+theme.tooltip_bg = colors.bg_normal
 
 -- Client
 theme.gaps = dpi(2)
