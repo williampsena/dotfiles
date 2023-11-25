@@ -14,12 +14,15 @@ local ethernet_on = "󰈀"
 
 local wifi_signal = 0
 local wifi_signal_count = 0
+local network_name = nil
 
-local function get_network_name()
-    awful.spawn.easy_async_with_shell(envs.commands.snetwork_connected_name,
-                                      function(network_name, stderr, _reason,
-                                               _existyletcode)
-        widget:set_markup(network_name)
+local function get_wifi_network_name()
+    if network_name then return end
+
+    awful.spawn.easy_async_with_shell(envs.commands.network_connected_name,
+                                      function(current_network_name, stderr,
+                                               _reason, _existyletcode)
+        network_name = current_network_name:gsub("[\n\r]", " ")
     end)
 end
 
@@ -68,13 +71,12 @@ local function get_wifi_status(net_now, net_icon)
 
             wifi_signal = calculate_signal(signal)
 
-            -- waiting statistics
+            get_wifi_network_name()
+
             if waiting_statistics then
                 wifi_signal_count = wifi_signal_count + 1
                 net_icon:set_markup(wifi_good)
-
             else
-
                 if wifi_signal < -83 then
                     net_icon:set_markup(wifi_weak)
                 elseif wifi_signal < -70 then
@@ -88,7 +90,12 @@ local function get_wifi_status(net_now, net_icon)
                 network_text = network_text .. "\nSignal: " ..
                                    string.format("%.3f", wifi_signal)
             end
+
+            if network_name then
+                network_text = network_text .. "\nNetwork: " .. network_name
+            end
         else
+            network_name = nil
             net_icon:set_markup(wifi_weak)
         end
     end
@@ -111,7 +118,7 @@ local function factory()
     local network_text = "Waiting status"
 
     awful.tooltip {
-        font = style.font_regular,
+        font = style.font,
         objects = {net_icon},
         timer_function = function() return network_text end
     }
