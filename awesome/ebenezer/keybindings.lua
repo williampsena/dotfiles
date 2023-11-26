@@ -30,7 +30,8 @@ function setup(client)
             c.minimized = true
         end, {description = "minimize", group = "client"}),
         awful.key({modkey}, "m", function(c)
-            c.maximized = not c.maximized
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
             c:raise()
         end, {description = "(un)maximize", group = "client"}),
         awful.key({modkey, "Control"}, "m", function(c)
