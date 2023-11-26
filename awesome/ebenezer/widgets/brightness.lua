@@ -9,9 +9,9 @@ local naughty = require('naughty')
 
 local colors = style.colors
 
-local icon_brightness_low = '󰃞 '
-local icon_brightness_mid = '󰃟 '
-local icon_brightness_high = '󰃠 '
+local icon_brightness_low = '󰃞'
+local icon_brightness_mid = '󰃟'
+local icon_brightness_high = '󰃠'
 
 local current_brightness_level = nil
 local notify_id = nil
@@ -34,6 +34,7 @@ local function build()
     local brighticon = wibox.widget {
         markup = '󰃟',
         font = style.font_icon,
+        forced_width = dpi(envs.environment.icon_widget_with),
         halign = 'center',
         valign = 'center',
         widget = wibox.widget.textbox
@@ -64,7 +65,6 @@ local function build()
         brighticon,
         brightwidget,
         layout = wibox.layout.align.horizontal,
-        forced_width = dpi(envs.environment.icon_widget_with)
     }, dpi(0), dpi(0))
 end
 

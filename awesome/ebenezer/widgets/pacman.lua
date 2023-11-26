@@ -38,8 +38,9 @@ local function factory()
     return wibox.container.margin(wibox.widget {
         group,
         font = style.font_regular,
-        layout = wibox.layout.align.horizontal
-    }, dpi(2), dpi(3))
+        layout = wibox.layout.align.horizontal,
+        forced_width = dpi(envs.environment.icon_widget_with * 1.5)
+    }, dpi(0), dpi(0))
 end
 
 return factory
