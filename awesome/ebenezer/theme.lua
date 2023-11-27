@@ -5,13 +5,14 @@
 local envs = require("ebenezer.envs")
 local init = require("ebenezer.init")
 local style = require("ebenezer.style")
-local themes_path = envs.theme_path
-local global_themes_path = envs.global_themes_path
 local rnotification = require("ruled.notification")
 local dpi = require("beautiful.xresources").apply_dpi
 local merge_tables = require('ebenezer.helpers.table').merge_tables
 
+local themes_path = envs.theme_path
+local global_themes_path = envs.global_themes_path
 local colors = style.colors
+local titlebar_icons = themes_path .. "titlebar/" .. envs.titlebars.theme .. "/"
 
 -- {{{ Main
 local theme = merge_tables(style, colors)
@@ -86,49 +87,48 @@ theme.layout_cornerse = themes_path .. "layouts/cornerse.png"
 -- }}}
 
 -- {{{ Titlebar
-theme.titlebar_close_button_focus = themes_path .. "titlebar/close_focus.png"
-theme.titlebar_close_button_normal = themes_path .. "titlebar/close_normal.png"
+theme.titlebar_size = dpi(34)
+theme.titlebar_close_button_focus = titlebar_icons .. "close_focus.svg"
+theme.titlebar_close_button_normal = titlebar_icons .. "close_normal.svg"
 
-theme.titlebar_minimize_button_normal = global_themes_path ..
-                                            "default/titlebar/minimize_normal.png"
-theme.titlebar_minimize_button_focus = global_themes_path ..
-                                           "default/titlebar/minimize_focus.png"
+theme.titlebar_minimize_button_normal = titlebar_icons .. "minimize_normal.svg"
+theme.titlebar_minimize_button_focus = titlebar_icons .. "minimize_focus.svg"
 
-theme.titlebar_ontop_button_focus_active = themes_path ..
-                                               "titlebar/ontop_focus_active.png"
-theme.titlebar_ontop_button_normal_active = themes_path ..
-                                                "titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_inactive = themes_path ..
-                                                 "titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_inactive = themes_path ..
-                                                  "titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_active = titlebar_icons ..
+                                               "ontop_focus_active.svg"
+theme.titlebar_ontop_button_normal_active = titlebar_icons ..
+                                                "ontop_normal_active.svg"
+theme.titlebar_ontop_button_focus_inactive = titlebar_icons ..
+                                                 "ontop_focus_inactive.svg"
+theme.titlebar_ontop_button_normal_inactive = titlebar_icons ..
+                                                  "ontop_normal_inactive.svg"
 
-theme.titlebar_sticky_button_focus_active = themes_path ..
-                                                "titlebar/sticky_focus_active.png"
-theme.titlebar_sticky_button_normal_active = themes_path ..
-                                                 "titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_inactive = themes_path ..
-                                                  "titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_inactive = themes_path ..
-                                                   "titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_active = titlebar_icons ..
+                                                "sticky_focus_active.svg"
+theme.titlebar_sticky_button_normal_active = titlebar_icons ..
+                                                 "sticky_normal_active.svg"
+theme.titlebar_sticky_button_focus_inactive = titlebar_icons ..
+                                                  "sticky_focus_inactive.svg"
+theme.titlebar_sticky_button_normal_inactive = titlebar_icons ..
+                                                   "sticky_normal_inactive.svg"
 
-theme.titlebar_floating_button_focus_active = themes_path ..
-                                                  "titlebar/floating_focus_active.png"
-theme.titlebar_floating_button_normal_active = themes_path ..
-                                                   "titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_inactive = themes_path ..
-                                                    "titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_inactive = themes_path ..
-                                                     "titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_active = titlebar_icons ..
+                                                  "floating_focus_active.svg"
+theme.titlebar_floating_button_normal_active = titlebar_icons ..
+                                                   "floating_normal_active.svg"
+theme.titlebar_floating_button_focus_inactive = titlebar_icons ..
+                                                    "floating_focus_inactive.svg"
+theme.titlebar_floating_button_normal_inactive = titlebar_icons ..
+                                                     "floating_normal_inactive.svg"
 
-theme.titlebar_maximized_button_focus_active = themes_path ..
-                                                   "titlebar/maximized_focus_active.png"
-theme.titlebar_maximized_button_normal_active = themes_path ..
-                                                    "titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_inactive = themes_path ..
-                                                     "titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_inactive = themes_path ..
-                                                      "titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_active = titlebar_icons ..
+                                                   "maximized_focus_active.svg"
+theme.titlebar_maximized_button_normal_active = titlebar_icons ..
+                                                    "maximized_normal_active.svg"
+theme.titlebar_maximized_button_focus_inactive = titlebar_icons ..
+                                                     "maximized_focus_inactive.svg"
+theme.titlebar_maximized_button_normal_inactive = titlebar_icons ..
+                                                      "maximized_normal_inactive.svg"
 -- }}}
 -- }}}
 

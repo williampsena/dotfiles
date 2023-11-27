@@ -17,8 +17,9 @@ local default_config = {
     global_themes_path = global_themes_path,
     environment = {tag_list = "  󰎪 󰎭 󰎱 󰎳"},
     tags = {first = "1", second = "2", third = "3"},
-    icon_theme="Papirus",
+    icon_theme = "Papirus",
     icon_widget_with = 30,
+    titlebars = {theme = 'win10'},
     commands = {
         lock_screen = 'systemctl suspend',
         brightness = 'light -G',
@@ -64,7 +65,11 @@ local default_config = {
         titlebar_bg_focus = "#263238",
         titlebar_bg_normal = "#253238"
     },
-    path_vars = {THEMES= theme_path:sub(1, -2), HOME = home, AWESOME = awesome_path}
+    path_vars = {
+        THEMES = theme_path:sub(1, -2),
+        HOME = home,
+        AWESOME = awesome_path
+    }
 }
 
 local function build_wm_classes(wm_class)
@@ -86,6 +91,9 @@ local function get_config()
 
     user_config.environment = merge_tables(default_config.environment,
                                            config.environment)
+
+    user_config.titlebars = merge_tables(default_config.titlebars,
+                                         config.titlebars)
     user_config.tags = config.tags or default_config.tags
     user_config.commands =
         merge_tables(default_config.commands, config.commands)
