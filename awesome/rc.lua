@@ -390,6 +390,6 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 -- Setup behaviours
-behaviours.setup()
+behaviours.setup(client)
 
 optimizer.run()

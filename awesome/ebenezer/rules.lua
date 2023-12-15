@@ -13,8 +13,11 @@ local function setup(ruled)
             properties = {
                 focus = awful.client.focus.filter,
                 raise = true,
-                screen = awful.screen.preferred,
-                placement = awful.placement.centered
+                placement =
+                  awful.placement.no_offscreen +
+                  awful.placement.centered +
+                  awful.placement.no_overlap,
+                size_hints_honor = false
             }
         }
 
