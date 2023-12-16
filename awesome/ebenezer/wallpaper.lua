@@ -26,23 +26,7 @@ local function setup_wallpaper(screen, wallpaper)
     local wallpaper = fs.resolve_path(wallpaper, envs.path_vars)
 
     screen.connect_signal("request::wallpaper", function(s)
-        awful.wallpaper {
-            screen = s,
-            widget = {
-                {
-                    image = wallpaper,
-                    upscale = true,
-                    downscale = true,
-                    horizontal_fit_policy = "fit",
-                    vertical_fit_policy = "auto",
-                    widget = wibox.widget.imagebox
-                },
-                valign = "center",
-                halign = "center",
-                tiled = false,
-                widget = wibox.container.tile
-            }
-        }
+        gears.wallpaper.maximized(wallpaper, s)
     end)
 end
 
