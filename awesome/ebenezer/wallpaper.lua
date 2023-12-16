@@ -13,7 +13,7 @@ end
 
 local function change_wallpaper(screen, wallpaper)
     local wallpaper_path = fs.resolve_path(wallpaper, envs.path_vars)
-    gears.wallpaper.maximized(wallpaper_path, s, true)
+    gears.wallpaper.maximized(wallpaper_path, screen, false)
 end
 
 local function change_random_wallpaper(screen)
