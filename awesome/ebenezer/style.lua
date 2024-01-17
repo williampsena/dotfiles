@@ -33,4 +33,8 @@ style.titlebar_bg_normal = envs.colors.titlebar_bg_normal
 style.colors = envs.colors
 -- }}}
 
+-- {{{ Taglist
+style.taglist_bg_focus = envs.colors.taglist_bg_focus
+-- }}}
+
 return style

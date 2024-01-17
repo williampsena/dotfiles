@@ -63,7 +63,8 @@ local default_config = {
         border_color_active = "#c2dfe3",
         border_color_marked = "#CC9393",
         titlebar_bg_focus = "#263238",
-        titlebar_bg_normal = "#253238"
+        titlebar_bg_normal = "#253238",
+        taglist_bg_focus = "#37474F",
     },
     path_vars = {
         THEMES = theme_path:sub(1, -2),
