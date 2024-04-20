@@ -1,0 +1,67 @@
+{
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "JetBrainsMonoNL Nerd Font",
+    "editor.fontSize": 15,
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontSize": 13,
+    "[javascript]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[handlebars]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[dart]": {
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.rulers": [80],
+      "editor.selectionHighlight": false,
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      "editor.suggestSelection": "first",
+      "editor.tabCompletion": "onlySnippets",
+      "editor.wordBasedSuggestions": "off"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.userWords": ["cacheable", "seguinte"],
+    "colorize.languages": ["javascript", "lua", "ini", "sh", "conf", "rasi"],
+    "extensions.experimental.affinity": {
+      "asvetliakov.vscode-neovim": 1
+    },
+    "[lua]": {
+      "editor.defaultFormatter": "Koihik.vscode-lua-format"
+    },
+    "window.zoomLevel": 1,
+    "terminal.integrated.gpuAcceleration": "off",
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "colorize.colorized_colors": [
+      "BROWSERS_COLORS",
+      "HEXA",
+      "RGB",
+      "HSL"
+    ],
+    "workbench.colorTheme": "Bearded Theme Arc",
+    "workbench.iconTheme": "bearded-icons"
+  }
+  
