@@ -73,7 +73,7 @@
     "RGB",
     "HSL"
   ],
-  "workbench.colorTheme": "Bearded Theme Arc",
+  "workbench.colorTheme": "Bearded Theme Aquarelle Hydrangea",
   "workbench.iconTheme": "bearded-icons",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
