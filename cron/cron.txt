@@ -1,0 +1,1 @@
+*/20 * * * * (export DISPLAY=:0.0 && /bin/date && /usr/bin/nitrogen --set-zoom-fill --random /wallpapers/folder/ --save) > /tmp/myNitrogen.log 2>&1

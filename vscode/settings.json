@@ -54,13 +54,11 @@
     "ini",
     "sh",
     "conf",
-    "rasi"
+    "rasi",
+    "python"
   ],
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
-  },
-  "[lua]": {
-    "editor.defaultFormatter": "Koihik.vscode-lua-format"
   },
   "window.zoomLevel": 1,
   "terminal.integrated.gpuAcceleration": "off",
@@ -78,4 +76,19 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.defaultProfile.windows": "zsh",
+  "[lua]": {
+    "editor.defaultFormatter": "Koihik.vscode-lua-format"
+  },
+  "pixelbyte.love2d.path": "/usr/bin/love",
+  "pixelbyte.love2d.debug": false,
+  "pixelbyte.love2d.runOnSave": true,
+  "go.toolsManagement.autoUpdate": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+  "python.experiments.optOutFrom": [
+    "All"
+  ],
+  "window.menuBarVisibility": "compact",
 }

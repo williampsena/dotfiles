@@ -43,3 +43,5 @@ luac.out
 # personal config files
 awesome/config.ini
 awesome/config.backup.ini
+
+.env/*
