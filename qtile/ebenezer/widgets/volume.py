@@ -1,6 +1,6 @@
 from libqtile import widget
-from settings import AppSettings
 from libqtile.log_utils import logger
+from ebenezer.core.settings import AppSettings
 
 
 def build_volume_widget(settings: AppSettings):

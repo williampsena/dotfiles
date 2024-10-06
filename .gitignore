@@ -44,4 +44,4 @@ luac.out
 awesome/config.ini
 awesome/config.backup.ini
 
-.env/*
+.venv/*

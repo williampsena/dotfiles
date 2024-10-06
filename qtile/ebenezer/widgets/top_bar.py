@@ -1,16 +1,17 @@
 from libqtile import bar, widget
 from libqtile.log_utils import logger
-from settings import AppSettings
-from wallpaper import build_wallpaper_widget
-from widgets.battery import build_battery_widget
-from widgets.clock import build_clock_widget
-from widgets.cpu import build_cpu_widget
-from widgets.exit import build_exit_widget
-from widgets.memory import build_memory_widget
-from widgets.layout import build_current_layout_widget
-from widgets.thermal import build_thermal_widget
-from widgets.volume import build_volume_widget
-from widgets.weather import build_weather_widget
+from ebenezer.core.settings import AppSettings
+from ebenezer.widgets.battery import build_battery_widget
+from ebenezer.widgets.clock import build_clock_widget
+from ebenezer.widgets.cpu import build_cpu_widget
+from ebenezer.widgets.exit import build_exit_widget
+from ebenezer.widgets.memory import build_memory_widget
+from ebenezer.widgets.layout import build_current_layout_widget
+from ebenezer.widgets.thermal import build_thermal_widget
+from ebenezer.widgets.volume import build_volume_widget
+from ebenezer.widgets.weather import build_weather_widget
+from ebenezer.widgets.notification import build_notification_widget
+from ebenezer.widgets.task_list import build_task_list_widget
 
 
 def build_top_bar(settings: AppSettings):
@@ -24,8 +25,17 @@ def build_top_bar(settings: AppSettings):
                 rounded=False,
                 highlight_method="line",
             ),
-            widget.Prompt(),
-            widget.WindowName(),
+            widget.Prompt(
+                font=settings.fonts.font_icon,
+                fontsize=settings.fonts.font_icon_size,
+                foreground=settings.colors.get("fg_normal"),
+            ),
+            build_task_list_widget(settings),
+            widget.WindowName(
+                font=settings.fonts.font_icon,
+                fontsize=settings.fonts.font_icon_size,
+                foreground=settings.colors.get("fg_normal"),
+            ),
             widget.Chord(
                 chords_colors={
                     "launch": ("#ff0000", "#ffffff"),
@@ -33,6 +43,8 @@ def build_top_bar(settings: AppSettings):
                 name_transform=lambda name: name.upper(),
             ),
             build_weather_widget(settings),
+            build_clock_widget(settings),
+            widget.Spacer(length=bar.STRETCH),
         ]
         + build_thermal_widget(settings)
         + build_cpu_widget(settings)
@@ -40,10 +52,9 @@ def build_top_bar(settings: AppSettings):
         + [
             build_battery_widget(settings),
             build_volume_widget(settings),
-            build_clock_widget(settings),
             build_exit_widget(settings),
+            build_notification_widget(settings),
             build_current_layout_widget(settings),
-            build_wallpaper_widget(settings),
         ]
     )
 

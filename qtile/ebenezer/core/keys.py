@@ -2,7 +2,14 @@ from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from settings import AppSettings
+from ebenezer.core.settings import AppSettings
+import os
+
+
+def restore_all_minimized():
+    for window in qtile.current_group.windows:
+        if window.minimized:
+            window.toggle_minimize()
 
 
 def build_keys(settings: AppSettings):
@@ -22,6 +29,12 @@ def build_keys(settings: AppSettings):
             desc="Run Launcher",
         ),
         Key([mod], "b", lazy.spawn(settings.environment.browser), desc="Web browser"),
+        Key(
+            [mod, "control"],
+            "x",
+            lazy.spawn(os.path.expanduser(settings.lock_screen.command)),
+            desc="Lock screen",
+        ),
         Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
         Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
         Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -70,6 +83,12 @@ def build_keys(settings: AppSettings):
         Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
         Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
         Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+        Key(
+            [mod],
+            "m",
+            lazy.function(restore_all_minimized),
+            desc="Restore all minimized windows",
+        ),
         # Toggle between split and unsplit sides of stack.
         # Split = all windows displayed
         # Unsplit = 1 window displayed, like Max layout, but still with

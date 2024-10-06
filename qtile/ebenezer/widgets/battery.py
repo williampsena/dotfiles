@@ -1,6 +1,6 @@
 from libqtile import bar, widget
 from libqtile.log_utils import logger
-from settings import AppSettings
+from ebenezer.core.settings import AppSettings
 
 
 def build_battery_widget(settings: AppSettings):

@@ -11,13 +11,17 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 # Installing
 
 ```shell
+pamac install dunst zenity ttf-dejavu
+
 DOTFILES_PATH="$HOME/dotfiles"
 mkdir -p $DOTFILES_PATH
 
 ln -sf $DOTFILES_PATH/qtile $HOME/.config/qtile  
+ln -sf $DOTFILES_PATH/dunst $HOME/.config/dunst  
 ```
 
 # Inspirations
 
 - https://github.com/JhonatanFerrer/JhoalfercoQtileDotfiles
 - https://gitlab.com/dwt1/dotfiles
+- https://github.com/neo-fetch/shinrai-dotfiles

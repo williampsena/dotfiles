@@ -1,4 +1,4 @@
-timeout=${LOCK_SCREEN_TIMEOUT:-30}
+timeout=${LOCK_SCREEN_TIMEOUT:-1}
 
 if pgrep -x "xautolock" >/dev/null
 then

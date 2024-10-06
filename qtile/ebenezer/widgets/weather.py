@@ -1,5 +1,5 @@
 from libqtile import widget
-from settings import AppSettings
+from ebenezer.core.settings import AppSettings
 
 
 def build_weather_widget(settings: AppSettings):
@@ -10,5 +10,5 @@ def build_weather_widget(settings: AppSettings):
         cityid=settings.environment.city_id,
         app_key=settings.environment.weather_api_key,
         location="London",
-        format="{location_city}: {icon}",
+        format="{icon}",
     )

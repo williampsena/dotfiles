@@ -1,7 +1,8 @@
 import configparser
+from typing import Any
 from pathlib import Path
 from libqtile.utils import guess_terminal
-from files import home, qtile_home, resolve_file_path
+from ebenezer.core.files import home, qtile_home, resolve_file_path
 
 config_file = str(Path.joinpath(Path(qtile_home), "config.ini"))
 
@@ -63,7 +64,7 @@ class AppSettingsFonts:
 
 
 class AppSettingsColors:
-    colors = {}
+    colors: dict[str, str] = {}
 
     def __init__(self, **args):
         self.colors = args.get("font", args)
@@ -72,15 +73,59 @@ class AppSettingsColors:
         return self.colors.get(color, "#fff")
 
 
+class AppLockScreen:
+    command = ""
+    timeout = 10
+    font = ""
+    font_size = 17
+    joke_providers = "reddit,icanhazdad"
+    joke_foreground_color = "#000"
+    joke_text_color = "#fff"
+    icanhazdad_joke_url = "https://icanhazdadjoke.com/"
+    reddit_joke_url = "https://www.reddit.com/r/ProgrammerDadJokes.json"
+    blurtype = "0x5"
+    blank_color = "#00000000"
+    clear_color = "#ffffff22"
+    default_color = "#9db4c0"
+    key_color = "#8a8ea800"
+    text_color = "#4BC1CC"
+    wrong_color = "#D50000"
+    verifying_color = "#41445800"
+
+    def __init__(self, **args):
+        self.command = args.get("command", self.command)
+        self.timeout = args.get("timeout", str(self.timeout))
+        self.font = args.get("font", self.font)
+        self.font_size = int(args.get("font_size", str(self.font_size)))
+        self.joke_providers = args.get("joke_providers", self.joke_providers).split(",")
+        self.joke_foreground_color = args.get(
+            "joke_foreground_color", self.joke_foreground_color
+        )
+        self.joke_text_color = args.get("joke_text_color", self.joke_text_color)
+        self.icanhazdad_joke_url = args.get(
+            "icanhazdad_joke_url", self.icanhazdad_joke_url
+        )
+        self.reddit_joke_url = args.get("reddit_joke_url", self.reddit_joke_url)
+        self.blurtype = args.get("blurtype", self.blurtype)
+        self.blank_color = args.get("blank_color", self.blank_color)
+        self.clear_color = args.get("clear_color", self.clear_color)
+        self.default_color = args.get("default_color", self.default_color)
+        self.key_color = args.get("key_color", self.key_color)
+        self.text_color = args.get("text_color", self.text_color)
+        self.wrong_color = args.get("wrong_color", self.wrong_color)
+        self.verifying_color = args.get("verifying_color", self.verifying_color)
+
+
 class AppSettings:
     environment = AppSettingsEnvironment(**{})
     fonts = AppSettingsFonts(**{})
-    groups = []
-    groups_layout = []
-    startup = []
-    floating = {}
+    groups: list[Any] = []
+    groups_layout: dict[str, str] = {}
+    startup: dict[str, str] = {}
+    floating: dict[str, str] = {}
     colors: AppSettingsColors = AppSettingsColors(*{})
-    commands = {}
+    commands: dict[str, str] = {}
+    lock_screen = AppLockScreen(**{})
 
     def __init__(self, **args):
         self.groups = args.get("groups", [])
@@ -91,6 +136,7 @@ class AppSettings:
         self.fonts = args.get("fonts", self.fonts)
         self.colors = args.get("colors", self.colors)
         self.commands = args.get("commands", self.commands)
+        self.lock_screen = args.get("lock_screen", self.lock_screen)
 
 
 def load_settings():
@@ -104,6 +150,7 @@ def load_settings():
     fonts = AppSettingsFonts(**__build__dict_from_ini__(config, "fonts"))
     colors = AppSettingsColors(**__build__dict_from_ini__(config, "colors"))
     commands = __build__dict_from_ini__(config, "commands")
+    lock_screen = AppLockScreen(**__build__dict_from_ini__(config, "lock_screen"))
 
     groups = [(key, config["groups"][key]) for key in list(config["groups"].keys())]
     groups_layout = __build__dict_from_ini__(config, "groups.layout")
@@ -118,6 +165,7 @@ def load_settings():
         fonts=fonts,
         colors=colors,
         commands=commands,
+        lock_screen=lock_screen,
         groups=groups,
         groups_layout=groups_layout,
         startup=startup,

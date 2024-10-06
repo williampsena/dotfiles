@@ -29,14 +29,11 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
-from keys import build_keys
-from groups import build_groups
-from settings import load_settings
-from startup import run as run_startup
-from wallpaper import build_wallpaper_widget
-from widgets.top_bar import build_top_bar
-
-logger.warning("Loading Qtile")
+from ebenezer.core.keys import build_keys
+from ebenezer.core.groups import build_groups
+from ebenezer.core.settings import load_settings
+from ebenezer.core.startup import run_startup_once, run_startup_always
+from ebenezer.widgets.top_bar import build_top_bar
 
 settings = load_settings()
 keys = build_keys(settings)
@@ -150,9 +147,13 @@ layouts = [
 def start_once():
     try:
         settings = load_settings()
-        run_startup(settings)
+        run_startup_once(settings)
     except Exception as error:
-        logger.warning(f"An exception occurred while trying to startup scripts {error}")
+        logger.error(
+            "An exception occurred while trying to startup scripts run once.",
+            error,
+            exc_info=True,
+        )
 
 
 # Allows you to input a name when adding treetab section.
@@ -178,3 +179,6 @@ def maximize_by_switching_layout(qtile):
         qtile.current_group.layout = "max"
     elif current_layout_name == "max":
         qtile.current_group.layout = "monadtall"
+
+
+run_startup_always(settings)

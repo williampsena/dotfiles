@@ -1,1 +1,8 @@
 mypy
+requests
+types-requests
+qtile
+pillow
+types-Pillow
+black
+psutil

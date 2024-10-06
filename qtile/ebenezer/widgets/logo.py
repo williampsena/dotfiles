@@ -1,5 +1,5 @@
 from libqtile import widget, qtile
-from settings import AppSettings
+from core.settings import AppSettings
 from files import resolve_file_path
 
 

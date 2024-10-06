@@ -1,7 +1,7 @@
-from typing import List
+from typing import List, Any
 from libqtile.config import Group, Key
-from keys import *
-from settings import AppSettings
+from ebenezer.core.keys import *
+from ebenezer.core.settings import AppSettings
 
 
 def build_groups(keys: List, settings: AppSettings):
@@ -20,7 +20,7 @@ def build_groups(keys: List, settings: AppSettings):
             )
         )
 
-    groups = []
+    groups: list[Any] = []
     group_layouts = [
         "monadtall",
         "monadtall",
@@ -46,22 +46,22 @@ def build_groups(keys: List, settings: AppSettings):
             )
         )
 
-    for i in groups:
+    for g in groups:
         keys.extend(
             [
                 # mod1 + letter of group = switch to group
                 Key(
                     [mod],
-                    i.name,
-                    lazy.group[i.name].toscreen(),
-                    desc="Switch to group {}".format(i.name),
+                    g.name,
+                    lazy.group[g.name].toscreen(),
+                    desc="Switch to group {}".format(g.name),
                 ),
                 # mod1 + shift + letter of group = move focused window to group
                 Key(
                     [mod, "shift"],
-                    i.name,
-                    lazy.window.togroup(i.name, switch_group=False),
-                    desc="Move focused window to group {}".format(i.name),
+                    g.name,
+                    lazy.window.togroup(g.name, switch_group=False),
+                    desc="Move focused window to group {}".format(g.name),
                 ),
             ]
         )
