@@ -4,7 +4,7 @@ from ebenezer.core.settings import AppSettings
 from ebenezer.widgets.battery import build_battery_widget
 from ebenezer.widgets.clock import build_clock_widget
 from ebenezer.widgets.cpu import build_cpu_widget
-from ebenezer.widgets.exit import build_exit_widget
+from ebenezer.widgets.powermenu import build_powermenu_widget
 from ebenezer.widgets.memory import build_memory_widget
 from ebenezer.widgets.layout import build_current_layout_widget
 from ebenezer.widgets.thermal import build_thermal_widget
@@ -12,6 +12,7 @@ from ebenezer.widgets.volume import build_volume_widget
 from ebenezer.widgets.weather import build_weather_widget
 from ebenezer.widgets.notification import build_notification_widget
 from ebenezer.widgets.task_list import build_task_list_widget
+from ebenezer.widgets.hide_tray import build_hide_tray
 
 
 def build_top_bar(settings: AppSettings):
@@ -52,7 +53,8 @@ def build_top_bar(settings: AppSettings):
         + [
             build_battery_widget(settings),
             build_volume_widget(settings),
-            build_exit_widget(settings),
+            build_hide_tray(settings),
+            build_powermenu_widget(settings),
             build_notification_widget(settings),
             build_current_layout_widget(settings),
         ]

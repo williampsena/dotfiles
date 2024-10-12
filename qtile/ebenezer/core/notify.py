@@ -2,23 +2,17 @@ from libqtile.lazy import lazy
 from ebenezer.core.command import run_shell_command
 
 
+TEMPLATE_NOTIFY = 'notify-send -r 999 -u low "$message"'
+TEMPLATE_WITH_TITLE = 'notify-send -r 999 -u low "$title" "$message"'
+
+
 def push_notification(title: str, message: str):
-    return run_shell_command(
-        'notify-send -r 999  -u low "$title" "$message"', title=title, message=message
-    )
+    return run_shell_command(TEMPLATE_WITH_TITLE, title=title, message=message)
 
 
-def push_notification_progress(message: str, progress: int, title: str = None):
+def push_notification_progress(message: str, progress: int):
     return run_shell_command(
-        f"{__build_command__(title)} -h int:value:$progress",
-        title=title,
+        f"{TEMPLATE_NOTIFY} -h int:value:$progress",
         message=message,
-        progress=progress,
+        progress=str(progress),
     )
-
-
-def __build_command__(title: str) -> str:
-    if title is None:
-        return 'notify-send -r 999 -u low "$message"'
-
-    return 'notify-send -r 999  -u low "$title" "$message"'
