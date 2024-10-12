@@ -15,6 +15,15 @@ def run_shell_command(
     return subprocess.run(
         build_shell_command(raw_cmd, **kwargs),
         shell=True,
+    )
+
+
+def run_shell_command_stdout(
+    raw_cmd: str, **kwargs: dict[str, str]
+) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        build_shell_command(raw_cmd, **kwargs),
+        shell=True,
         stdout=subprocess.PIPE,
         text=True,
     )
