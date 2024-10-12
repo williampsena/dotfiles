@@ -6,3 +6,4 @@ pillow
 types-Pillow
 black
 psutil
+rofi

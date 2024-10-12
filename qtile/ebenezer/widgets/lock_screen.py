@@ -13,6 +13,7 @@ from libqtile import qtile
 from libqtile.lazy import lazy
 from ebenezer.core.settings import AppSettings, load_settings
 from ebenezer.core.files import resolve_file_path
+from ebenezer.core.requests import request_retry
 
 OUTPUT_FILE = "/tmp/i3lock.png"
 JOKE_OUTPUT_FILE = "/tmp/joke.png"
@@ -41,11 +42,12 @@ def __remove_emojis__(text):
 
 
 def __get_joke_from_icanhazdadjoke__(settings: AppSettings) -> Callable[[], str]:
-    def inner():
+    def do_request():
         headers = {"Accept": "application/json"}
-        response = requests.get(
-            settings.lock_screen.icanhazdad_joke_url, headers=headers
-        )
+        return requests.get(settings.lock_screen.icanhazdad_joke_url, headers=headers)
+
+    def inner():
+        response = request_retry(do_request)
 
         if response.status_code == requests.codes.ok:
             return __remove_emojis__(response.json()["joke"])
@@ -56,8 +58,12 @@ def __get_joke_from_icanhazdadjoke__(settings: AppSettings) -> Callable[[], str]
 
 
 def __get_joke_from_reddit__(settings: AppSettings) -> Callable[[], str]:
+    def do_request():
+        headers = {"Accept": "application/json"}
+        return requests.get(settings.lock_screen.reddit_joke_url).json()
+
     def inner():
-        data = requests.get(settings.lock_screen.reddit_joke_url).json()
+        data = request_retry(do_request)
 
         jokes = data.get("data").get("children") or []
         joke = random.choice(jokes)
@@ -87,9 +93,11 @@ def __get_joke__(settings: AppSettings) -> str:
     for joke_provider_key in joke_providers_selected:
         try:
             return joke_providers[joke_provider_key]()
-        except Exception as error:
+        except Exception as e:
             logger.error(
-                f"error while trying to fetch jokes from {joke_provider_key}: {error}"
+                "error while trying to fetch jokes from {joke_provider_key}",
+                e,
+                exc_info=True,
             )
             next
 
@@ -172,6 +180,7 @@ def __prepare_lock_screen__(settings: AppSettings):
 
 def lock_screen(settings: AppSettings):
     __run_command__([["notify-send", '"󰌾 locking screen"']])
+    __run_command__([["pkill", 'i3lock']])
     __prepare_lock_screen__(settings)
     run_i3_lock(settings)
 
@@ -224,8 +233,10 @@ def click_lock_screen(settings: AppSettings):
     def inner():
         try:
             lock_screen(settings)
-        except Exception as error:
-            logger.error(f"error while trying to run lock screen widget {error}")
+        except Exception as e:
+            logger.error(
+                "error while trying to run lock screen widget", e, exc_info=True
+            )
 
     return inner
 

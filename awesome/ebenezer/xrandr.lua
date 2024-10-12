@@ -93,7 +93,6 @@ local function naughty_destroy_callback(reason)
         naughty.notificationClosedReason.dismissedByUser then
         local action = state.index and state.menu[state.index - 1][2]
         if action then
-            print(action)
             spawn(action, false)
             state.index = nil
         end

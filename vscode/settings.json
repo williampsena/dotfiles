@@ -55,7 +55,8 @@
     "sh",
     "conf",
     "rasi",
-    "python"
+    "python",
+    "shell"
   ],
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1

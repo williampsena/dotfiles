@@ -25,3 +25,5 @@ ln -sf $DOTFILES_PATH/dunst $HOME/.config/dunst
 - https://github.com/JhonatanFerrer/JhoalfercoQtileDotfiles
 - https://gitlab.com/dwt1/dotfiles
 - https://github.com/neo-fetch/shinrai-dotfiles
+- https://github.com/adi1090x/rofi?tab=readme-ov-file
+- https://github.com/SapuSeven/rofi-presets
