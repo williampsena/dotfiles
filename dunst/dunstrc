@@ -26,11 +26,27 @@
     # or two numbers for the minimum and maximum width. 
     # The notification will expand from the minimum width as neccesary.
     # Examples: width = 300 # constant width of 300 width = (0, 300) # width between 0 and 300
-    width = (0, 400)
+    width = (300, 500)
     
     # height
     # The maximum height of a single notification.
     height = 500
+
+    # Turn on the progess bar
+    progress_bar = true
+
+    # Set the progress bar height. This includes the frame, so make sure
+    # it's at least twice as big as the frame width.
+    progress_bar_height = 10
+
+    # Set the frame width of the progress bar
+    progress_bar_frame_width = 1
+
+    # Set the minimum width for the progress bar
+    progress_bar_min_width = 150
+
+    # Set the maximum width for the progress bar
+    progress_bar_max_width = 300
 
     # notification_limit (default: 0)
     # The number of notifications that can appear at one time.
@@ -87,7 +103,7 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#33eeffee"
+    frame_color = "#AA00FF"
 
     # Define a color for the separator.
     # possible values are:

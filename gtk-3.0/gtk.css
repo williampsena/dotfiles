@@ -1,0 +1,7 @@
+@define-color accent_color #55dfc4;
+@define-color accent_bg_color #16a085;
+
+* {
+    font-family: 'Inter Display';
+    font-size: 14pt;
+}

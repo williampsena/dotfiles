@@ -11,7 +11,7 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 # Installing
 
 ```shell
-pamac install dunst ttf-dejavu brightnessctl
+pamac install dunst ttf-dejavu brightnessctl arc-gtk-theme
 
 DOTFILES_PATH="$HOME/dotfiles"
 mkdir -p $DOTFILES_PATH

@@ -76,20 +76,8 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
-    + [Match(title=f) for f in settings.floating["wm_class"]]
-    + [Match(wm_class=f) for f in settings.floating["title"]]
-)
+
+logger.warning(settings.floating["wm_class"])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
@@ -122,9 +110,26 @@ layout_theme = {
     "border_normal": settings.colors.get("border_color_active"),
 }
 
+floating_layout = layout.Floating(
+    **layout_theme,
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class="pavucontrol"),  # gitk
+        Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="makebranch"),  # gitk
+        Match(wm_class="maketag"),  # gitk
+        Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(title="branchdialog"),  # gitk
+        Match(title="pinentry"),  # GPG key password entry
+    ]
+    + [Match(title=f) for f in settings.floating["wm_class"]]
+    + [Match(wm_class=f) for f in settings.floating["title"]]
+)
+
 layouts = [
     # layout.Bsp(**layout_theme),
-    # layout.Floating(**layout_theme)
+    floating_layout,
     # layout.RatioTile(**layout_theme),
     # layout.VerticalTile(**layout_theme),
     # layout.Matrix(**layout_theme),

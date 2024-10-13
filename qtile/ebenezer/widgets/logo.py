@@ -32,6 +32,6 @@ def build_os_logo_image(settings: AppSettings):
         filename=resolve_file_path(settings.environment.os_logo),
         scale="False",
         mouse_callbacks={
-            "Click": lambda: qtile.cmd_spawn(settings.environment.terminal)
+            "Button1": lambda: qtile.cmd_spawn(settings.environment.terminal)
         },
     )
