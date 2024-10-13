@@ -4,6 +4,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from ebenezer.core.settings import AppSettings
 from ebenezer.widgets.volume import setup_volume_keys
+from ebenezer.widgets.backlight import setup_backlight_keys
 import os
 
 
@@ -141,13 +142,6 @@ def build_keys(settings: AppSettings):
                 desc="Take a screenshot of the full desktop",
             ),
         ]
-        + [
-            Key(
-                [],
-                "XF86MonBrightnessDown",
-                lazy.spawn("brightnessctl set 5%-"),
-                desc="Down brightness",
-            ),
-        ]
         + setup_volume_keys(settings)
+        + setup_backlight_keys(settings)
     )

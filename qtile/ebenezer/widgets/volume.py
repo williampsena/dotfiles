@@ -30,7 +30,7 @@ def __get_current_volume__(settings: AppSettings):
 
     output = run_shell_command_stdout(volume_level)
 
-    return output.stdout.replace("%", "")
+    return output.stdout.replace("%", "").replace("\n", "")
 
 
 def __is_muted__(settings: AppSettings):
@@ -45,8 +45,9 @@ def __is_muted__(settings: AppSettings):
 
 
 def __push_volume_notification__(settings: AppSettings, message: str):
-    volume_level = __get_current_volume__(settings) or "0"
-    push_notification_progress(message=message, progress=int(volume_level))
+    level = __get_current_volume__(settings) or "0"
+    message = f"{message} {level}%"
+    push_notification_progress(message=message, progress=int(level))
 
 
 def __volume_up__(settings: AppSettings):
@@ -54,6 +55,11 @@ def __volume_up__(settings: AppSettings):
 
     @lazy.function
     def inner(qtile):
+        level = int(__get_current_volume__(settings) or "0")
+
+        if level > 115:
+            return
+
         __unmute__(settings)
 
         if volume_cmd:
