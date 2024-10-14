@@ -1,6 +1,6 @@
 from libqtile import bar, widget
 from libqtile.log_utils import logger
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.battery import build_battery_widget
 from ebenezer.widgets.clock import build_clock_widget
 from ebenezer.widgets.cpu import build_cpu_widget
@@ -19,23 +19,30 @@ def build_top_bar(settings: AppSettings):
     widgets = (
         [
             widget.GroupBox(
+                margin_y=3,
+                margin_x=3,
+                padding=5,
+                borderwidth=3,
+                active=settings.colors.fg_normal,
+                inactive=settings.colors.fg_normal,
+                this_current_screen_border=settings.colors.bg_topbar_selected,
+                this_screen_border=settings.colors.fg_blue,
+                highlight_method="block",
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
-                foreground=settings.colors.get("fg_normal"),
-                borderwidth=3,
+                foreground=settings.colors.fg_normal,
                 rounded=False,
-                highlight_method="line",
             ),
             widget.Prompt(
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
-                foreground=settings.colors.get("fg_normal"),
+                foreground=settings.colors.fg_normal,
             ),
             build_task_list_widget(settings),
             widget.WindowName(
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
-                foreground=settings.colors.get("fg_normal"),
+                foreground=settings.colors.fg_normal,
             ),
             widget.Chord(
                 chords_colors={
@@ -63,7 +70,5 @@ def build_top_bar(settings: AppSettings):
     return bar.Bar(
         widgets,
         30,
-        background=settings.colors.get("bg_topbar"),
-        # border_width=[4, 0, 4, 0],  # Draw top and bottom borders
-        # border_color=["ff00ff", "000000", "ff00ff", "000000"],  # Borders are magenta
+        background=settings.colors.bg_topbar,
     )

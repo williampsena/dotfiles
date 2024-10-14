@@ -1,5 +1,5 @@
 from libqtile import widget
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_thermal_widget(settings: AppSettings):
@@ -9,13 +9,13 @@ def build_thermal_widget(settings: AppSettings):
             font=settings.fonts.font_icon,
             fontsize=settings.fonts.font_icon_size,
             padding=2,
-            foreground=settings.colors.get("fg_ligth_blue"),
+            foreground=settings.colors.fg_ligth_blue,
         ),
         widget.ThermalSensor(
             font=settings.fonts.font_icon,
             fontsize=settings.fonts.font_icon_size,
             format="{temp:.0f}{unit} ",
             padding=2,
-            foreground=settings.colors.get("fg_normal"),
+            foreground=settings.colors.fg_normal,
         ),
     ]

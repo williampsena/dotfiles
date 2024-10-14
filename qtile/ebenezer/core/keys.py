@@ -2,7 +2,7 @@ from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.volume import setup_volume_keys
 from ebenezer.widgets.backlight import setup_backlight_keys
 import os
@@ -15,7 +15,7 @@ def restore_all_minimized():
 
 
 def build_keys(settings: AppSettings):
-    mod = settings.environment.mod
+    mod = settings.environment.modkey
 
     return (
         [

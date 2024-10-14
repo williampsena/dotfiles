@@ -163,4 +163,4 @@ cython_debug/
 
 
 # config files
-config.ini
+config.yml

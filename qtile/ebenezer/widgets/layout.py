@@ -1,6 +1,6 @@
 from libqtile import bar, widget
 from libqtile.log_utils import logger
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_current_layout_widget(settings: AppSettings):

@@ -1,5 +1,5 @@
 from libqtile import widget
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_task_list_widget(settings: AppSettings):
@@ -10,5 +10,5 @@ def build_task_list_widget(settings: AppSettings):
         fontsize=settings.fonts.font_icon_size,
         text_closed="  ",
         text_open=" 󰒉 ",
-        foreground=settings.colors.get("fg_normal"),
+        foreground=settings.colors.fg_normal,
     )

@@ -2,7 +2,7 @@ import subprocess
 from string import Template
 from typing import Any
 from libqtile.log_utils import logger
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.files import resolve_file_path
 from ebenezer.core.wallpaper import change_wallpaper
 from ebenezer.core.command import run_shell_command
@@ -15,7 +15,7 @@ def run_startup_once(settings: AppSettings):
             run_shell_command(cmd, **__env_substitutions__(settings))
             logger.info(f"the script {cmd} was loaded")
         except Exception as e:
-            logger.error(
+            logger.warning(
                 f"error while trying to run command {raw_cmd}", e, exc_info=True
             )
 

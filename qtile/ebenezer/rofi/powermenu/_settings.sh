@@ -2,10 +2,9 @@
 
 export QTILE_HOME=$HOME/.config/qtile
 
-function get_ini_value() {
-    section=$1
-    key=$2
-    ini_file="$QTILE_HOME/config.ini"
-    value=$(sed -nr "/^\[$section\]/ { :l /^$key[ ]*=/ { s/.*=[ ]*//; p; q;}; n; b l;}" $ini_file)
+function get_yaml_value() {
+    key="$1"
+    yaml_file="$QTILE_HOME/config.yml"
+    value=$(yq -r $key $yaml_file)
     echo $value
 }

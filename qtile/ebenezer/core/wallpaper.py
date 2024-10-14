@@ -4,7 +4,7 @@ from libqtile.log_utils import logger
 from libqtile import qtile
 from libqtile.widget.wallpaper import Wallpaper
 from libqtile import hook
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.files import resolve_file_path
 from libqtile.lazy import lazy
 

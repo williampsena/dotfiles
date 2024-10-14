@@ -6,4 +6,5 @@ pillow
 types-Pillow
 black
 psutil
-rofi
+pyyaml
+types-PyYAML

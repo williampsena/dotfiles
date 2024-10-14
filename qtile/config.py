@@ -31,14 +31,14 @@ from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
 from ebenezer.core.keys import build_keys
 from ebenezer.core.groups import build_groups
-from ebenezer.core.settings import load_settings
+from ebenezer.core.config.settings import load_settings
 from ebenezer.core.startup import run_startup_once, run_startup_always
 from ebenezer.widgets.top_bar import build_top_bar
 
 settings = load_settings()
 keys = build_keys(settings)
 groups, keys = build_groups(keys, settings)
-mod = settings.environment.mod
+mod = settings.environment.modkey
 
 widget_defaults = dict(
     font=settings.fonts.font_strong_bold,
@@ -77,7 +77,6 @@ bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 
-logger.warning(settings.floating["wm_class"])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
@@ -106,8 +105,8 @@ wmname = "LG3D"
 layout_theme = {
     "border_width": 2,
     "margin": 8,
-    "border_focus": settings.colors.get("border_color_normal"),
-    "border_normal": settings.colors.get("border_color_active"),
+    "border_focus": settings.colors.border_color_normal,
+    "border_normal": settings.colors.border_color_active,
 }
 
 floating_layout = layout.Floating(
@@ -154,7 +153,7 @@ def start_once():
         settings = load_settings()
         run_startup_once(settings)
     except Exception as error:
-        logger.error(
+        logger.warning(
             "An exception occurred while trying to startup scripts run once.",
             error,
             exc_info=True,

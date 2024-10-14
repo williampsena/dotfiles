@@ -1,11 +1,11 @@
 from typing import List, Any
 from libqtile.config import Group, Key
 from ebenezer.core.keys import *
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_groups(keys: List, settings: AppSettings):
-    mod = settings.environment.mod
+    mod = settings.environment.modkey
 
     # Add key bindings to switch VTs in Wayland.
     # We can't check qtile.core.name in default config as it is loaded before qtile is started
@@ -33,9 +33,10 @@ def build_groups(keys: List, settings: AppSettings):
         "monadtall",
     ]
 
+    
     for i, g in enumerate(settings.groups):
-        key = g[0]
-        label = f" {g[1]} "
+        key = g
+        label = f" {settings.groups[g]} "
         layout_default = settings.groups_layout.get("default", "monadtall")
 
         groups.append(

@@ -1,7 +1,7 @@
 import subprocess
 from libqtile import widget, qtile
 from libqtile.widget import base
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def __notifications_actions__():
@@ -70,5 +70,5 @@ def build_notification_widget(settings: AppSettings):
         font=settings.fonts.font_icon,
         fontsize=settings.fonts.font_icon_size,
         padding=2,
-        foreground=settings.colors.get("fg_normal"),
+        foreground=settings.colors.fg_normal,
     )

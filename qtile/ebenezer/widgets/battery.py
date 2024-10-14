@@ -1,6 +1,6 @@
 from libqtile import bar, widget
 from libqtile.log_utils import logger
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_battery_widget(settings: AppSettings):
@@ -14,6 +14,6 @@ def build_battery_widget(settings: AppSettings):
         full_char=" ",
         not_charging_char="󰚦",
         unknown_char="󰛄 ",
-        foreground=settings.colors.get("fg_normal"),
+        foreground=settings.colors.fg_normal,
         padding=5,
     )

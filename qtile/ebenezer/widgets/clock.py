@@ -1,5 +1,5 @@
 from libqtile import widget
-from ebenezer.core.settings import AppSettings
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_clock_widget(settings: AppSettings):

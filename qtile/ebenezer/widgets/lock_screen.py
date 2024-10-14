@@ -11,7 +11,7 @@ from libqtile.log_utils import logger
 from libqtile import widget
 from libqtile import qtile
 from libqtile.lazy import lazy
-from ebenezer.core.settings import AppSettings, load_settings
+from ebenezer.core.config.settings import AppSettings, load_settings
 from ebenezer.core.files import resolve_file_path
 from ebenezer.core.requests import request_retry
 
@@ -94,8 +94,8 @@ def __get_joke__(settings: AppSettings) -> str:
         try:
             return joke_providers[joke_provider_key]()
         except Exception as e:
-            logger.error(
-                "error while trying to fetch jokes from {joke_provider_key}",
+            logger.warning(
+                f"error while trying to fetch jokes from {joke_provider_key}",
                 e,
                 exc_info=True,
             )
@@ -179,7 +179,7 @@ def __prepare_lock_screen__(settings: AppSettings):
 
 
 def lock_screen(settings: AppSettings):
-    __run_command__([["notify-send", '"󰌾 locking screen"']])
+    __run_command__([["notify-send", '󰌾 locking screen...']])
     __run_command__([["pkill", 'i3lock']])
     __prepare_lock_screen__(settings)
     run_i3_lock(settings)
@@ -234,7 +234,7 @@ def click_lock_screen(settings: AppSettings):
         try:
             lock_screen(settings)
         except Exception as e:
-            logger.error(
+            logger.warning(
                 "error while trying to run lock screen widget", e, exc_info=True
             )
 
@@ -247,6 +247,6 @@ def build_lock_screen_widget(settings: AppSettings):
         font=settings.fonts.font_icon,
         fontsize=settings.fonts.font_icon_size,
         padding=2,
-        foreground=settings.colors.get("fg_normal"),
+        foreground=settings.colors.fg_normal,
         mouse_callbacks={"Button1": click_lock_screen(settings)},
     )

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from ebenezer.core.settings import load_settings
+from ebenezer.core.config.settings import load_settings
 from ebenezer.widgets.lock_screen import lock_screen
 
 

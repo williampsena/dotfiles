@@ -3,7 +3,7 @@ source ./_settings.sh
 
 dir="$(pwd)"
 
-lock_command=$(get_ini_value "lock_screen" "command")
+lock_command=$(get_yaml_value ".lock_screen.command")
 uptime=$(uptime -p | sed -e 's/up //g')
 
 rofi_command="rofi -theme $dir/powermenu.rasi"
