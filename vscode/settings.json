@@ -56,7 +56,9 @@
     "conf",
     "rasi",
     "python",
-    "shell"
+    "shell",
+    "yml",
+    "yaml"
   ],
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
