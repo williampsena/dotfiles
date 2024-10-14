@@ -9,17 +9,17 @@
 
 configuration {
     show-icons:      true;
-    icon-theme:      "Flat Remix Dark";
+    icon-theme:      "Papirus Dark";
     display-drun:    "";
     disable-history: false;
 }
 
 * {
-    font: "Mononoki Nerd Font 12";
+    font: "Fira Sans 16";
     foreground: #f8f8f2;
     background-color: #282a36;
-    active-background: #6272a4;
-    urgent-background: #ff5555;
+    active-background: #AA00FF;
+    urgent-background: #D50000;
     urgent-foreground: #282a36;
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;

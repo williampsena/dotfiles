@@ -5,6 +5,7 @@ from libqtile.utils import guess_terminal
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.volume import setup_volume_keys
 from ebenezer.widgets.backlight import setup_backlight_keys
+from ebenezer.core.command import build_shell_command
 import os
 
 
@@ -28,7 +29,11 @@ def build_keys(settings: AppSettings):
             Key(
                 [mod, "shift"],
                 "Return",
-                lazy.spawn("rofi -show drun -show-icons"),
+                lazy.spawn(
+                    build_shell_command(
+                        "rofi -show drun -show-icons -theme $rofi_home/launcher.rasi"
+                    )
+                ),
                 desc="Run Launcher",
             ),
             Key(
