@@ -21,7 +21,7 @@ def build_top_bar(settings: AppSettings):
             widget.GroupBox(
                 margin_y=3,
                 margin_x=3,
-                padding=5,
+                padding=3,
                 borderwidth=3,
                 active=settings.colors.fg_normal,
                 inactive=settings.colors.fg_normal,
@@ -33,7 +33,7 @@ def build_top_bar(settings: AppSettings):
                 fontsize=settings.fonts.font_icon_size,
                 foreground=settings.colors.fg_normal,
                 rounded=False,
-                urgent_alert_method='border',
+                urgent_alert_method="border",
                 urgent_border=settings.colors.fg_urgent,
             ),
             widget.Prompt(

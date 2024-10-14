@@ -124,12 +124,6 @@ lock_screen:
   verifying_color: "#41445800"
 ```
 
-# Screenshot
-
-- Nov 18, 2023
-
-![screenshot](images/Screenshot.png)
-
 # Features
 
 ## Wallpaper slideshow can be configured in yaml.
@@ -151,6 +145,8 @@ I intend to create a rofi wallpaper settings; now, we may select random wallpape
 - I'm going with flameshot. Scrot is cool and all, but it just doesn't have all the features that flameshot does.
 
 ## Launcher (rofi)
+
+> 🚧 Under-construction yet...
 
 ![launcher-rofi](images/launcher.png)
 

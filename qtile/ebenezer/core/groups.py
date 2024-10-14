@@ -33,10 +33,9 @@ def build_groups(keys: List, settings: AppSettings):
         "monadtall",
     ]
 
-    
     for i, g in enumerate(settings.groups):
         key = g
-        label = f" {settings.groups[g]} "
+        label = f"  {settings.groups[g].strip()}  "
         layout_default = settings.groups_layout.get("default", "monadtall")
 
         groups.append(
