@@ -11,7 +11,7 @@ This repository includes my dot files and lua scripts for Awesome Window Manager
 If you want to use this setup, [click here](./awesome/README.md) for instructions.
 
 
-# Awesome WM
+# Qtile
 
 - October 14, 2024
 
