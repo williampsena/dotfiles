@@ -171,7 +171,7 @@ I intend to create a rofi wallpaper settings; now, we may select random wallpape
 
 - October 2024
 
-![desktop](images/desktop_20241014._gif)
+![desktop](images/desktop_20241014.gif)
 
 
 # TODO
