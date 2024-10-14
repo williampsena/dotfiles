@@ -26,12 +26,15 @@ def build_top_bar(settings: AppSettings):
                 active=settings.colors.fg_normal,
                 inactive=settings.colors.fg_normal,
                 this_current_screen_border=settings.colors.bg_topbar_selected,
+                highlight_color=settings.colors.bg_topbar_selected,
                 this_screen_border=settings.colors.fg_blue,
                 highlight_method="block",
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
                 foreground=settings.colors.fg_normal,
                 rounded=False,
+                urgent_alert_method='border',
+                urgent_border=settings.colors.fg_urgent,
             ),
             widget.Prompt(
                 font=settings.fonts.font_icon,
@@ -43,12 +46,6 @@ def build_top_bar(settings: AppSettings):
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
                 foreground=settings.colors.fg_normal,
-            ),
-            widget.Chord(
-                chords_colors={
-                    "launch": ("#ff0000", "#ffffff"),
-                },
-                name_transform=lambda name: name.upper(),
             ),
             build_weather_widget(settings),
             build_clock_widget(settings),
