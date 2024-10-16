@@ -3,6 +3,7 @@ import re
 import subprocess
 import requests
 import os
+import psutil
 from string import Template
 from pathlib import Path
 from typing import List, Callable
@@ -17,6 +18,14 @@ from ebenezer.core.requests import request_retry
 
 OUTPUT_FILE = "/tmp/i3lock.png"
 JOKE_OUTPUT_FILE = "/tmp/joke.png"
+
+
+def __is_i3lock_running__():
+    try:
+        subprocess.check_output(["pgrep", "i3lock"])
+        return True
+    except subprocess.CalledProcessError:
+        return False
 
 
 def __remove_emojis__(text):
@@ -179,8 +188,11 @@ def __prepare_lock_screen__(settings: AppSettings):
 
 
 def lock_screen(settings: AppSettings):
-    __run_command__([["notify-send", '󰌾 locking screen...']])
-    __run_command__([["pkill", 'i3lock']])
+    if __is_i3lock_running__():
+        logger.warning("i3lock already running")
+        return
+
+    __run_command__([["notify-send", "󰌾 locking screen..."]])
     __prepare_lock_screen__(settings)
     run_i3_lock(settings)
 
@@ -189,6 +201,7 @@ def run_i3_lock(settings: AppSettings):
     cmd_template = Template(
         """
     i3lock
+    --nofork
     -i
     $image
     --insidever-color=$clear

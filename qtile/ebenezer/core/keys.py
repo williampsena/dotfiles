@@ -37,6 +37,16 @@ def build_keys(settings: AppSettings):
                 desc="Run Launcher",
             ),
             Key(
+                [mod, "control"],
+                "Tab",
+                lazy.spawn(
+                    build_shell_command(
+                        "rofi -show window -show-icons -theme $rofi_home/launcher.rasi"
+                    )
+                ),
+                desc="Run Launcher Window",
+            ),
+            Key(
                 [mod], "b", lazy.spawn(settings.environment.browser), desc="Web browser"
             ),
             Key(

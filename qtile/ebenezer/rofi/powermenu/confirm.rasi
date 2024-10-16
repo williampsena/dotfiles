@@ -5,7 +5,8 @@
 * {
     background-color:       @background;
     text-color:             @foreground;
-	font:				 	"FantasqueSansMono Nerd Font 12";
+    font:                   "Inter Bold 14";
+    opacity: 1.0; 
 }
 
 /*****----- Global Properties -----*****/
@@ -43,7 +44,7 @@ window {
 
 /*****----- Main Box -----*****/
 mainbox {
-    background-color:            transparent;
+    background-color:            "transparent";
     orientation:                 horizontal;
     children:                    [ "listview" ];
 }

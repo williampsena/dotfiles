@@ -23,7 +23,7 @@ def test_parse_colors():
         fg_green="#4BC1CC",
         fg_gray="#9db4c0",
         bg_topbar="#282a36",
-        bg_topbar_selected = "#6200EA",
+        bg_topbar_selected="#6200EA",
         bg_topbar_arrow="#5c6b73",
         border_color_normal="#AA00FF",
         border_color_active="#6200EA",

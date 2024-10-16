@@ -29,8 +29,8 @@ class AppSettingsEnvironment:
         self.theme = str(kwargs.get("theme", self.theme))
         self.os_logo = str(kwargs.get("os_logo", self.os_logo))
         self.os_logo_icon = str(kwargs.get("os_logo_icon", self.os_logo_icon))
-        self.os_logo_icon_color = str(kwargs.get(
-            "os_logo_icon_color", self.os_logo_icon_color
-        ))
+        self.os_logo_icon_color = str(
+            kwargs.get("os_logo_icon_color", self.os_logo_icon_color)
+        )
         self.weather_api_key = str(kwargs.get("weather_api_key", self.weather_api_key))
         self.city_id = str(kwargs.get("city_id", self.city_id))

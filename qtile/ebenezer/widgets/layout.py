@@ -4,4 +4,4 @@ from ebenezer.core.config.settings import AppSettings
 
 
 def build_current_layout_widget(settings: AppSettings):
-    return widget.CurrentLayoutIcon(padding=5, scale=0.7)
+    return widget.CurrentLayoutIcon(padding=5, scale=0.6)

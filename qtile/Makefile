@@ -1,10 +1,12 @@
-check:
-	make venv
-	qtile check
+SHELL := /bin/bash
 
-venv:
-	 . ../.venv/bin/activate
+VENV_PATH := $(shell realpath ../.venv/bin/activate)
+
+check:
+	@source $(VENV_PATH) && qtile check
 
 test:
-	make venv
-	pytest -s
+	@source $(VENV_PATH) && pytest -s
+
+format:
+	@source $(VENV_PATH) && black .

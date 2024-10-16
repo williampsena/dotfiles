@@ -20,10 +20,6 @@ def run_startup_once(settings: AppSettings):
             )
 
 
-def run_startup_always(settings: AppSettings):
-    change_wallpaper(settings)
-
-
 def __env_substitutions__(settings: AppSettings) -> dict[str, Any]:
     return {
         "lock_screen_timeout": settings.lock_screen.timeout,

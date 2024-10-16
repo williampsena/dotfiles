@@ -9,6 +9,5 @@ def load_raw_test_settings():
 
 
 def load_raw_settings(filepath: str):
-    with open(filepath, "r", encoding='utf-8') as file:
+    with open(filepath, "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
-

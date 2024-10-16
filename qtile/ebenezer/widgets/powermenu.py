@@ -14,10 +14,10 @@ def __powermenu_modal__(settings: AppSettings):
 
 def build_powermenu_widget(settings: AppSettings):
     return widget.TextBox(
-        " ",
+        "",
         font=settings.fonts.font_icon,
         fontsize=settings.fonts.font_icon_size,
-        padding=2,
+        padding=4,
         foreground=settings.colors.fg_normal,
         mouse_callbacks={"Button1": __powermenu_modal__(settings)},
     )

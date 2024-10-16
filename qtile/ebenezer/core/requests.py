@@ -1,6 +1,7 @@
 import time
 from libqtile.log_utils import logger
 
+
 def request_retry(operation, retries=5, delay=2):
     for attempt in range(retries):
         try:
@@ -10,4 +11,4 @@ def request_retry(operation, retries=5, delay=2):
             if attempt < retries - 1:
                 time.sleep(delay)
             else:
-                raise 
+                raise

@@ -6,16 +6,15 @@ from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.command import run_shell_command_stdout, run_shell_command
 from ebenezer.core.notify import push_notification, push_notification_progress
 
+
 def build_backlight_widget(settings: AppSettings):
     return widget.Backlight(
         font=settings.fonts.font_icon,
         fontsize=settings.fonts.font_icon_size,
         backlight_name=settings.environment.backlight_name,
         fmt=" ",
-        padding=2,
-        mouse_callbacks={
-            "Button1": __backlight_level__(settings)
-        },
+        padding=3,
+        mouse_callbacks={"Button1": __backlight_level__(settings)},
     )
 
 
@@ -59,7 +58,6 @@ def __backlight_down__(settings: AppSettings):
         __push_backlight_notification__(settings, "󰃠 Brightness")
 
     return inner
-
 
 
 def __backlight_level__(settings: AppSettings):

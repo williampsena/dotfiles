@@ -1,4 +1,3 @@
-
 class AppSettingsFonts:
     font: str = ""
     font_regular: str = ""
@@ -17,5 +16,6 @@ class AppSettingsFonts:
         self.font_strong_bold = kwargs.get("font_strong_bold", self.font_strong_bold)
         self.font_size = int(kwargs.get("font_size", str(self.font_size)))
         self.font_icon = kwargs.get("font_icon", self.font_icon)
-        self.font_icon_size = int(kwargs.get("font_icon_size", str(self.font_icon_size)))
-
+        self.font_icon_size = int(
+            kwargs.get("font_icon_size", str(self.font_icon_size))
+        )

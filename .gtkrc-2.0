@@ -1,5 +1,5 @@
 gtk-theme-name="Arc-Dark"
-gtk-font-name="Sans 10"
+gtk-font-name="Inter Regular 12"
 
 # Set background color
 style "user-style"

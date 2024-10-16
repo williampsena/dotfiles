@@ -32,8 +32,8 @@ from libqtile.log_utils import logger
 from ebenezer.core.keys import build_keys
 from ebenezer.core.groups import build_groups
 from ebenezer.core.config.settings import load_settings
-from ebenezer.core.startup import run_startup_once, run_startup_always
 from ebenezer.widgets.top_bar import build_top_bar
+import tkinter as tk
 
 settings = load_settings()
 keys = build_keys(settings)
@@ -152,6 +152,7 @@ def start_once():
     try:
         settings = load_settings()
         run_startup_once(settings)
+        change_wallpaper(settings)
     except Exception as error:
         logger.warning(
             "An exception occurred while trying to startup scripts run once.",
@@ -185,4 +186,7 @@ def maximize_by_switching_layout(qtile):
         qtile.current_group.layout = "monadtall"
 
 
-run_startup_always(settings)
+@hook.subscribe.client_new
+def prevent_minimize(window):
+    if window.minimized:
+        window.unminimize()

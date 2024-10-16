@@ -26,9 +26,10 @@ def build_top_bar(settings: AppSettings):
                 active=settings.colors.fg_normal,
                 inactive=settings.colors.fg_normal,
                 this_current_screen_border=settings.colors.bg_topbar_selected,
-                highlight_color=settings.colors.bg_topbar_selected,
                 this_screen_border=settings.colors.fg_blue,
-                highlight_method="block",
+                other_current_screen_border=settings.colors.bg_topbar_selected,
+                highlight_color=settings.colors.bg_topbar_selected,
+                highlight_method="text",
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
                 foreground=settings.colors.fg_normal,
@@ -36,6 +37,7 @@ def build_top_bar(settings: AppSettings):
                 urgent_alert_method="border",
                 urgent_border=settings.colors.fg_urgent,
             ),
+            widget.Sep(),
             widget.Prompt(
                 font=settings.fonts.font_icon,
                 fontsize=settings.fonts.font_icon_size,
@@ -57,15 +59,14 @@ def build_top_bar(settings: AppSettings):
         + [
             build_battery_widget(settings),
             build_volume_widget(settings),
-            build_hide_tray(settings),
-            build_powermenu_widget(settings),
             build_notification_widget(settings),
+            widget.Sep(),
+            build_powermenu_widget(settings),
+            build_hide_tray(settings),
             build_current_layout_widget(settings),
         ]
     )
 
     return bar.Bar(
-        widgets,
-        30,
-        background=settings.colors.bg_topbar,
+        widgets, 32, background=settings.colors.bg_topbar, margin=[8, 8, 0, 8]
     )

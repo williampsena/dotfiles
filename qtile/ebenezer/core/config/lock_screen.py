@@ -1,4 +1,3 @@
-
 class AppSettingsLockScreen:
     command = ""
     timeout = 10
@@ -23,7 +22,9 @@ class AppSettingsLockScreen:
         self.timeout = kwargs.get("timeout", str(self.timeout))
         self.font = kwargs.get("font", self.font)
         self.font_size = int(kwargs.get("font_size", str(self.font_size)))
-        self.joke_providers = kwargs.get("joke_providers", self.joke_providers).split(",")
+        self.joke_providers = kwargs.get("joke_providers", self.joke_providers).split(
+            ","
+        )
         self.joke_foreground_color = kwargs.get(
             "joke_foreground_color", self.joke_foreground_color
         )
