@@ -91,8 +91,10 @@ def test_parse_settings():
         lock_screen=AppSettingsLockScreen(
             command="~/.config/qtile/lock.py",
             timeout=10,
-            font="/usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf",
-            font_size=17,
+            font="Mononoki Nerd Font Bold",
+            font_size=40,
+            joke_font_path="/usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf",
+            joke_font_size=17,
             joke_providers="reddit,icanhazdad",
             joke_foreground_color="#000",
             joke_text_color="#fff",

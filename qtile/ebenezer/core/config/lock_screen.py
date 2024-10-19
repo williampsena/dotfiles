@@ -3,6 +3,8 @@ class AppSettingsLockScreen:
     timeout = 10
     font = ""
     font_size = 17
+    joke_font_path = ""
+    joke_font_size = 17
     joke_providers = "reddit"
     joke_foreground_color = "#fff"
     joke_text_color = "#000"
@@ -22,6 +24,10 @@ class AppSettingsLockScreen:
         self.timeout = kwargs.get("timeout", str(self.timeout))
         self.font = kwargs.get("font", self.font)
         self.font_size = int(kwargs.get("font_size", str(self.font_size)))
+        self.joke_font_path = kwargs.get("joke_font_path", self.joke_font_path)
+        self.joke_font_size = int(
+            kwargs.get("joke_font_size", str(self.joke_font_size))
+        )
         self.joke_providers = kwargs.get("joke_providers", self.joke_providers).split(
             ","
         )

@@ -11,7 +11,7 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 # Installing
 
 ```shell
-pamac install dunst ttf-dejavu brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd unclutter nerd-fonts-inter ttf-fira-sans python-pyaml python-pulsectl-asyncio python-dbus-next python-psutil python-pytest-subtests python-pulsectl-asyncio pulsemixer papirus-icon-theme pavucontrol xautolock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor nm-applet picom-git yq tk
+pacman -S install dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd unclutter nerd-fonts-inter ttf-fira-sans python-pyaml python-pulsectl-asyncio python-dbus-next python-psutil python-pytest-subtests python-pulsectl-asyncio pulsemixer papirus-icon-theme pavucontrol xautolock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor nm-applet picom-git yq tk
 
 DOTFILES_PATH="$HOME/dotfiles"
 mkdir -p $DOTFILES_PATH
@@ -107,7 +107,7 @@ colors:
 lock_screen:
   command: ~/.config/qtile/lock.py
   timeout: 10
-  font_size: 17
+  font_size: 20
   font: /usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf
   joke_providers: reddit,icanhazdad
   joke_foreground_color: "#000"
@@ -154,7 +154,7 @@ I intend to create a rofi wallpaper settings; now, we may select random wallpape
 
 > 🤩 deep inspired in: https://github.com/neo-fetch/shinrai-dotfiles
 
-![i3lock](images/lock.png)
+![i3lock](images/lock.gif)
 
 
 ## Terminal

@@ -127,7 +127,9 @@ def __build_joke_image__(settings: AppSettings, joke: str, width: int, height: i
     )
     draw = ImageDraw.Draw(img)
 
-    font = ImageFont.truetype(settings.lock_screen.font, settings.lock_screen.font_size)
+    font = ImageFont.truetype(
+        settings.lock_screen.joke_font_path, settings.lock_screen.joke_font_size
+    )
 
     bbox = draw.textbbox((0, 0), joke, font=font)
     text_width = bbox[2] - bbox[0]
@@ -201,9 +203,20 @@ def run_i3_lock(settings: AppSettings):
     cmd_template = Template(
         """
     i3lock
-    --nofork
     -i
     $image
+    --time-font=$font
+    --date-font=$font
+    --verif-font=$font
+    --wrong-font=$font
+    --wrong-font=$font
+    --time-size=$font_size
+    --date-size=$font_size_medium
+    --verif-size=$font_size_medium
+    --wrong-size=$font_size_medium
+    --wrong-size=$font_size_medium
+    --radius=150
+    --ring-width=10
     --insidever-color=$clear
     --ringver-color=$verifying
     --insidewrong-color=$wrong
@@ -227,6 +240,9 @@ def run_i3_lock(settings: AppSettings):
 
     cmd_options = cmd_template.substitute(
         image=OUTPUT_FILE,
+        font=settings.lock_screen.font,
+        font_size=settings.lock_screen.font_size,
+        font_size_medium=int(settings.lock_screen.font_size / 1.8),
         blurtype=settings.lock_screen.blurtype,
         blank=settings.lock_screen.blank_color,
         clear=settings.lock_screen.clear_color,
