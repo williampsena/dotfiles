@@ -60,7 +60,6 @@ def build_top_bar(settings: AppSettings):
             build_battery_widget(settings),
             build_volume_widget(settings),
             build_notification_widget(settings),
-            widget.Sep(),
             build_powermenu_widget(settings),
             build_hide_tray(settings),
             build_current_layout_widget(settings),
