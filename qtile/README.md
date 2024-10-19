@@ -162,13 +162,27 @@ I intend to create a rofi wallpaper settings; now, we may select random wallpape
 ![terminal](images/terminal.png)
 
 
-
 ## Desktop in action
 
 - October 2024
 
 ![desktop](images/desktop_20241014.gif)
 
+## Monitoring
+
+Colors show how much CPU or memory is being used. You can show the fire icon like I do, or check out the monitoring settings:
+
+```yaml
+monitoring:
+  default_color: 'fg_normal'
+  high_color: 'fg_orange'
+  medium_color: 'fg_yellow'
+  threshold_medium: 65
+  threshold_high: 85
+  burn: yes
+```
+
+![desktop](images/cpu-test.gif)
 
 # TODO
 

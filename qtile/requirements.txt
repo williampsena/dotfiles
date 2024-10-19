@@ -8,3 +8,4 @@ black
 psutil
 pyyaml
 types-PyYAML
+types-psutil

@@ -36,3 +36,11 @@ def test_parse_colors():
     )
 
     assert colors.__dict__ == expected.__dict__
+
+
+def test_get_color():
+    settings = load_raw_test_settings()
+    colors = AppSettingsColors(**settings.get("colors"))
+
+    assert colors.get_color("fg_yellow") == "#FFFF00"
+    assert colors.get_color("foo_bar") == "#D8DEE9"

@@ -122,3 +122,11 @@ lock_screen:
   text_color: "#4BC1CC"
   wrong_color: "#D50000"
   verifying_color: "#41445800"
+
+monitoring:
+  default_color: 'fg_normal'
+  high_color: 'fg_orange'
+  medium_color: 'fg_yellow'
+  threshold_medium: 70
+  threshold_high: 90
+  burn: yes

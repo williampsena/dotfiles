@@ -3,6 +3,7 @@ from ebenezer.core.config.colors import AppSettingsColors
 from ebenezer.core.config.environment import AppSettingsEnvironment
 from ebenezer.core.config.fonts import AppSettingsFonts
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
+from ebenezer.core.config.monitoring import AppSettingsMonitoring
 from ebenezer.core.config.settings import AppSettings, load_settings
 
 
@@ -106,6 +107,14 @@ def test_parse_settings():
             wrong_color="#D50000",
             verifying_color="#41445800",
         ),
+        monitoring=AppSettingsMonitoring(
+            default_color="fg_normal",
+            high_color="fg_orange",
+            medium_color="fg_yellow",
+            threshold_medium=70,
+            threshold_high=90,
+            burn=True,
+        ),
     )
 
     assert settings.environment.__dict__ == expected.environment.__dict__
@@ -117,3 +126,4 @@ def test_parse_settings():
     assert settings.colors.__dict__ == expected.colors.__dict__
     assert settings.commands == expected.commands
     assert settings.lock_screen.__dict__ == expected.lock_screen.__dict__
+    assert settings.monitoring.__dict__ == expected.monitoring.__dict__

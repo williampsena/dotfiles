@@ -6,6 +6,7 @@ from ebenezer.core.config.environment import AppSettingsEnvironment
 from ebenezer.core.config.fonts import AppSettingsFonts
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.loader import load_raw_settings
+from ebenezer.core.config.monitoring import AppSettingsMonitoring
 
 config_file = str(Path.joinpath(Path(qtile_home), "config.yml"))
 
@@ -20,6 +21,7 @@ class AppSettings:
     groups_layout: dict[str, str] = {"default": "monadtall"}
     lock_screen = AppSettingsLockScreen(**{})
     startup: dict[str, str] = {}
+    monitoring: AppSettingsMonitoring = AppSettingsMonitoring(*{})
 
     def __init__(self, **kwargs):
         self.colors = kwargs.get("colors", self.colors)
@@ -31,6 +33,7 @@ class AppSettings:
         self.groups_layout = kwargs.get("groups_layout", self.groups_layout)
         self.lock_screen = kwargs.get("lock_screen", self.lock_screen)
         self.startup = kwargs.get("startup", self.startup)
+        self.monitoring = kwargs.get("monitoring", self.monitoring)
 
 
 def load_settings(filepath: str = ""):
@@ -45,6 +48,7 @@ def load_settings(filepath: str = ""):
     environment = raw_settings.get("environment")
     fonts = raw_settings.get("fonts", {})
     lock_screen = raw_settings.get("lock_screen")
+    monitoring = raw_settings.get("monitoring")
 
     if colors:
         args["colors"] = AppSettingsColors(**colors)
@@ -60,5 +64,8 @@ def load_settings(filepath: str = ""):
 
     if fonts:
         args["fonts"] = AppSettingsFonts(**fonts)
+
+    if monitoring:
+        args["monitoring"] = AppSettingsMonitoring(**monitoring)
 
     return AppSettings(**args)

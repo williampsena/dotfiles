@@ -65,3 +65,6 @@ class AppSettingsColors:
         self.taglist_bg_focus = kwargs.get("taglist_bg_focus", self.taglist_bg_focus)
         self.group_focus = kwargs.get("group_focus", self.group_focus)
         self.group_normal = kwargs.get("group_normal", self.group_normal)
+
+    def get_color(self, color_name: str) -> str:
+        return self.__dict__.get(color_name) or self.fg_normal
