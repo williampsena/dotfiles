@@ -25,7 +25,8 @@ groups_layout:
 
 startup:
   keyboard_layout: setxkbmap -model abnt2 -layout br && localectl set-x11-keymap br
-  lxsession: lxsession &
+  pamac: GDK_BACKEND=x11 pamac-tray &
+  polkit: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   picom: picom --daemon
   nm_applet: nm-applet &
   lock_screen: xautolock -detectsleep -time 10 -locker "python ~/.config/qtile/lock.py" &
