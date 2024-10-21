@@ -2,14 +2,22 @@ import subprocess
 
 from libqtile import qtile
 from libqtile.widget import base
-
+from libqtile.log_utils import logger
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
+from ebenezer.core.command import build_shell_command
 
 
-def __notifications_actions__():
+def __notifications_actions__(cmd: str):
+    if cmd is None:
+        return
+
     result = subprocess.run(
-        ['echo -e "Yes\nNo" | rofi -dmenu -p "Would you like to clear notifications?"'],
+        [
+            build_shell_command(
+                cmd, title="Confirm", question="Would you like to clear notifications?"
+            )
+        ],
         shell=True,
         capture_output=True,
         text=True,
@@ -17,7 +25,7 @@ def __notifications_actions__():
 
     choice = result.stdout.strip()
 
-    if choice == "Yes":
+    if choice == "yes":
         qtile.cmd_spawn("dunstctl history-clear")
     else:
         qtile.cmd_spawn("dunstctl close-all")
@@ -33,6 +41,8 @@ class DunstWidget(base.ThreadPoolText):
 
         settings = config.pop("settings")
 
+        self.count = 0
+        self.modal_confirm_cmd = settings.commands.get("modal_confirm")
         self.animated = config.get("animated", False)
         self.bells_index = 0
         self.bells = ["󰂚", "󰂞"]
@@ -50,15 +60,15 @@ class DunstWidget(base.ThreadPoolText):
         )
 
     def poll(self):
-        count = self.get_notification_count()
+        self.count = self.get_notification_count()
         bell_icon = self.get_bell_icon()
 
-        if count == 0:
+        if self.count == 0:
             self.foreground = self.foreground_zero
-            return f" {count}"
+            return f" {self.count}"
         else:
             self.foreground = self.foreground_count
-            return f"{bell_icon} {count}"
+            return f"{bell_icon} {self.count}"
 
     def get_bell_icon(self):
         if self.animated is False:
@@ -85,7 +95,10 @@ class DunstWidget(base.ThreadPoolText):
         subprocess.Popen(["dunstctl", "history-pop"])
 
     def clear_notifications(self):
-        __notifications_actions__()
+        if self.count == 0:
+            return
+
+        __notifications_actions__(self.modal_confirm_cmd)
 
 
 def build_notification_widget(settings: AppSettings, kwargs: dict):

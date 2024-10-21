@@ -2,6 +2,7 @@
 source ./_settings.sh
 
 dir="$(pwd)"
+base_dir=$(realpath "$(pwd)/..")
 
 lock_command=$(get_yaml_value ".lock_screen.command")
 uptime=$(uptime -p | sed -e 's/up //g')
@@ -27,7 +28,7 @@ confirm_cmd() {
 		-dmenu \
 		-p 'Confirmation' \
 		-mesg 'Are you sure?' \
-		-theme ${dir}/confirm.rasi
+		-theme ${base_dir}/modals/confirm.rasi
 }
 
 confirm_exit() {

@@ -12,6 +12,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.requests import request_retry
+from ebenezer.core.notify import push_notification_no_histor
+
 
 OUTPUT_FILE = "/tmp/i3lock.png"
 JOKE_OUTPUT_FILE = "/tmp/joke.png"
@@ -191,7 +193,7 @@ def lock_screen(settings: AppSettings):
         logger.warning("i3lock already running")
         return
 
-    __run_command__([["notify-send", "󰌾 locking screen..."]])
+    push_notification_no_history("󰌾 Locking screen in seconds...", "")
     __prepare_lock_screen__(settings)
     run_i3_lock(settings)
 

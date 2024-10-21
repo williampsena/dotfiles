@@ -21,6 +21,4 @@ def build_spacer(settings: AppSettings, kwargs: dict):
 
     args["length"] = length
 
-    logger.warn(args)
-
     return widget.Spacer(**args)
