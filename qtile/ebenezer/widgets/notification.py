@@ -2,6 +2,7 @@ import subprocess
 from libqtile import widget, qtile
 from libqtile.widget import base
 from ebenezer.core.config.settings import AppSettings
+from ebenezer.widgets.helpers.args import build_widget_args
 
 
 def __notifications_actions__():
@@ -58,17 +59,21 @@ class DunstWidget(base.ThreadPoolText):
             return 0
 
     def show_notifications(self):
-        subprocess.Popen(["dunstctl", "history"])
+        subprocess.Popen(["dunstctl", "history-pop"])
 
     def clear_notifications(self):
         __notifications_actions__()
 
 
-def build_notification_widget(settings: AppSettings):
-    return DunstWidget(
-        default_text="",
-        font=settings.fonts.font_icon,
-        fontsize=settings.fonts.font_icon_size,
-        padding=2,
-        foreground=settings.colors.fg_normal,
-    )
+def build_notification_widget(settings: AppSettings, kwargs: dict):
+    default_args = {
+        "default_text": "",
+        "font": settings.fonts.font_icon,
+        "fontsize": settings.fonts.font_icon_size,
+        "padding": 2,
+        "foreground": settings.colors.fg_normal,
+    }
+
+    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+
+    return DunstWidget(**args)

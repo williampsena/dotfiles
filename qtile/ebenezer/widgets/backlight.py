@@ -5,17 +5,22 @@ from libqtile.config import Key
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.command import run_shell_command_stdout, run_shell_command
 from ebenezer.core.notify import push_notification, push_notification_progress
+from ebenezer.widgets.helpers.args import build_widget_args
 
 
-def build_backlight_widget(settings: AppSettings):
-    return widget.Backlight(
-        font=settings.fonts.font_icon,
-        fontsize=settings.fonts.font_icon_size,
-        backlight_name=settings.environment.backlight_name,
-        fmt=" ",
-        padding=3,
-        mouse_callbacks={"Button1": __backlight_level__(settings)},
-    )
+def build_backlight_widget(settings: AppSettings, kwargs: dict):
+    default_args = {
+        "font": settings.fonts.font_icon,
+        "fontsize": settings.fonts.font_icon_size,
+        "backlight_name": settings.environment.backlight_name,
+        "fmt": " ",
+        "padding": 3,
+        "mouse_callbacks": {"Button1": __backlight_level__(settings)},
+    }
+
+    args = build_widget_args(settings, default_args, kwargs, [])
+
+    return widget.Backlight(**args)
 
 
 def __get_backlight_level__(settings: AppSettings):

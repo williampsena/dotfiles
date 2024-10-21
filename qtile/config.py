@@ -32,8 +32,8 @@ from libqtile.log_utils import logger
 from ebenezer.core.keys import build_keys
 from ebenezer.core.groups import build_groups
 from ebenezer.core.config.settings import load_settings
-from ebenezer.widgets.top_bar import build_top_bar
 from ebenezer.core.startup import run_startup_once
+from ebenezer.core.screen import build_screen
 import tkinter as tk
 
 settings = load_settings()
@@ -48,11 +48,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=build_top_bar(settings),
-    ),
-]
+screens = [build_screen(settings)]
 
 # Drag floating layouts.
 mouse = [

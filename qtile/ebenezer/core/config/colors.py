@@ -67,4 +67,7 @@ class AppSettingsColors:
         self.group_normal = kwargs.get("group_normal", self.group_normal)
 
     def get_color(self, color_name: str) -> str:
+        if color_name.startswith("#"):
+            return color_name
+
         return self.__dict__.get(color_name) or self.fg_normal

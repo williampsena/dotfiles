@@ -134,3 +134,55 @@ monitoring:
   threshold_medium: 70
   threshold_high: 90
   burn: yes
+
+
+bar:
+  position: 'top'
+  widgets:
+    - type: 'group_box'
+      margin_y: 3
+      margin_x: 3
+      padding: 3
+      borderwidth: 3
+      active: fg_normal
+      inactive: fg_normal
+      this_current_screen_border: bg_topbar_selected
+      this_screen_border: fg_blue
+      other_current_screen_border: bg_topbar_selected
+      highlight_color: bg_topbar_selected
+      highlight_method: text
+      foreground: fg_normal
+      rounded: false
+      urgent_alert_method: border
+      urgent_border: fg_urgent
+    - type: 'separator'
+    - type: 'task_list'
+    - type: 'window_name'
+      max_chars: 20
+    - type: 'weather'
+    - type: 'spacer'
+      length: 10
+    - type: 'clock'
+    - type: 'spacer'
+      length: 10
+    - type: 'notification'
+    - type: 'spacer'
+      length: 'stretch'
+    - type: 'thermal'
+      sensor:
+        threshold_medium: 55
+        threshold_high: 65
+    - type: 'cpu'
+      sensor:
+        threshold_medium: 65
+        threshold_high: 85
+    - type: 'memory'
+      sensor:
+        threshold_medium: 65
+        threshold_high: 85
+
+    - type: 'battery'
+    - type: 'volume'
+    - type: 'powermenu'
+    - type: 'hidden_tray'
+    - type: 'current_layout'

@@ -203,6 +203,7 @@ def run_i3_lock(settings: AppSettings):
     cmd_template = Template(
         """
     i3lock
+    --nofork
     -i
     $image
     --time-font=$font

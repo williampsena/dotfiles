@@ -31,6 +31,7 @@ startup:
 commands:
   screenshot: flameshot gui --clipboard --path ~/Pictures/Screenshots
   screenshot_full: flameshot full --clipboard --path ~/Pictures/Screenshots
+  change_wallpaper: echo 'change wallpaper'
 
 floating:
   wm_class:
@@ -106,3 +107,27 @@ monitoring:
   threshold_medium: 70
   threshold_high: 90
   burn: yes
+
+
+bar:
+  position: 'top'
+  widgets:
+    - type: 'group_box'
+      margin_y: 3
+      margin_x: 3
+      padding: 3
+      borderwidth: 3
+      active: fg_normal
+      inactive: fg_normal
+      this_current_screen_border: bg_topbar_selected
+      this_screen_border: fg_blue
+      other_current_screen_border: bg_topbar_selected
+      highlight_color: bg_topbar_selected
+      highlight_method: text
+      foreground: fg_normal
+      rounded: false
+      urgent_alert_method: border
+      urgent_border: fg_urgent
+    - type: 'separator'
+    - type: 'current_layout'
+

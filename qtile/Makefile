@@ -9,7 +9,7 @@ check:
 	@source $(VENV_PATH) && qtile check
 
 test:
-	@source $(VENV_PATH) && pytest -s
+	@source $(VENV_PATH) && pytest -s -vv
 
 format:
 	@source $(VENV_PATH) && black .

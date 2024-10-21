@@ -87,6 +87,7 @@ def test_parse_settings():
         commands={
             "screenshot": "flameshot gui --clipboard --path ~/Pictures/Screenshots",
             "screenshot_full": "flameshot full --clipboard --path ~/Pictures/Screenshots",
+            "change_wallpaper": "echo 'change wallpaper'",
         },
         lock_screen=AppSettingsLockScreen(
             command="~/.config/qtile/lock.py",

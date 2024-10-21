@@ -5,21 +5,26 @@ from libqtile.config import Key
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.command import run_shell_command_stdout, run_shell_command
 from ebenezer.core.notify import push_notification, push_notification_progress
+from ebenezer.widgets.helpers.args import build_widget_args
 import subprocess
 
 
-def build_volume_widget(settings: AppSettings):
-    return widget.Volume(
-        font=settings.fonts.font_icon,
-        fontsize=settings.fonts.font_icon_size,
-        foreground=settings.colors.fg_normal,
-        padding=5,
-        emoji=True,
-        emoji_list=["󰝟", "󰕿", "󰖀", "󰕾"],
-        limit_max_volume=True,
-        step=5,
-        mouse_callbacks={"Button1": lazy.spawn(settings.commands.get("mixer"))},
-    )
+def build_volume_widget(settings: AppSettings, kwargs: dict):
+    default_args = {
+        "font": settings.fonts.font_icon,
+        "fontsize": settings.fonts.font_icon_size,
+        "foreground": settings.colors.fg_normal,
+        "padding": 5,
+        "emoji": True,
+        "emoji_list": ["󰝟", "󰕿", "󰖀", "󰕾"],
+        "limit_max_volume": True,
+        "step": 5,
+        "mouse_callbacks": {"Button1": lazy.spawn(settings.commands.get("mixer"))},
+    }
+
+    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+
+    return widget.Volume(**args)
 
 
 def __get_current_volume__(settings: AppSettings):

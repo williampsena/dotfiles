@@ -7,6 +7,7 @@ from ebenezer.core.config.fonts import AppSettingsFonts
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.loader import load_raw_settings
 from ebenezer.core.config.monitoring import AppSettingsMonitoring
+from ebenezer.core.config.bar import AppSettingsBar
 
 config_file = str(Path.joinpath(Path(qtile_home), "config.yml"))
 
@@ -22,6 +23,7 @@ class AppSettings:
     lock_screen = AppSettingsLockScreen(**{})
     startup: dict[str, str] = {}
     monitoring: AppSettingsMonitoring = AppSettingsMonitoring(*{})
+    bar: AppSettingsBar = AppSettingsBar(*{})
 
     def __init__(self, **kwargs):
         self.colors = kwargs.get("colors", self.colors)
@@ -34,6 +36,7 @@ class AppSettings:
         self.lock_screen = kwargs.get("lock_screen", self.lock_screen)
         self.startup = kwargs.get("startup", self.startup)
         self.monitoring = kwargs.get("monitoring", self.monitoring)
+        self.bar = kwargs.get("bar", self.bar)
 
 
 def load_settings(filepath: str = ""):
@@ -49,6 +52,7 @@ def load_settings(filepath: str = ""):
     fonts = raw_settings.get("fonts", {})
     lock_screen = raw_settings.get("lock_screen")
     monitoring = raw_settings.get("monitoring")
+    bar = raw_settings.get("bar")
 
     if colors:
         args["colors"] = AppSettingsColors(**colors)
@@ -67,5 +71,8 @@ def load_settings(filepath: str = ""):
 
     if monitoring:
         args["monitoring"] = AppSettingsMonitoring(**monitoring)
+
+    if bar:
+        args["bar"] = AppSettingsBar(**bar)
 
     return AppSettings(**args)
