@@ -96,7 +96,7 @@ element {
 }
 
 element-text {
-    font:                        "Inter Bold 32";
+    font:						"Fira Code Nerd Font Bold 32";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;

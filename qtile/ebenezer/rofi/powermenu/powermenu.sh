@@ -15,8 +15,8 @@ reboot=''
 lock=''
 suspend=''
 logout='󰍃'
-yes='󰗡'
-no='󰜺'
+yes='󰩐'
+no=''
 
 confirm_cmd() {
 	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
