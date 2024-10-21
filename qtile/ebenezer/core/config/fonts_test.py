@@ -1,5 +1,5 @@
-from ebenezer.core.config.loader import load_raw_test_settings
 from ebenezer.core.config.fonts import AppSettingsFonts
+from ebenezer.core.config.loader import load_raw_test_settings
 
 
 def test_parse_fonts():

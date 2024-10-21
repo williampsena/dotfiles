@@ -1,6 +1,7 @@
 from libqtile.config import Screen
-from ebenezer.widgets.bar import build_bar
+
 from ebenezer.core.config.settings import AppSettings
+from ebenezer.widgets.bar import build_bar
 
 
 def build_screen(settings: AppSettings) -> Screen:

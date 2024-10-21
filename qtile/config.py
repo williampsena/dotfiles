@@ -24,17 +24,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, qtile, hook, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import hook, layout, qtile
+from libqtile.config import Click, Drag, Match
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 from libqtile.log_utils import logger
-from ebenezer.core.keys import build_keys
-from ebenezer.core.groups import build_groups
+
 from ebenezer.core.config.settings import load_settings
-from ebenezer.core.startup import run_startup_once
+from ebenezer.core.groups import build_groups
+from ebenezer.core.keys import build_keys
 from ebenezer.core.screen import build_screen
-import tkinter as tk
+from ebenezer.core.startup import run_startup_once
 
 settings = load_settings()
 keys = build_keys(settings)

@@ -1,5 +1,4 @@
 from ebenezer.core.command import build_shell_command
-from ebenezer.core.config.settings import load_settings
 from ebenezer.core.files import qtile_home
 
 

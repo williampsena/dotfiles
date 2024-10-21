@@ -1,13 +1,14 @@
-from typing import Any, List
 from pathlib import Path
-from ebenezer.core.files import qtile_home
+from typing import Any, List
+
+from ebenezer.core.config.bar import AppSettingsBar
 from ebenezer.core.config.colors import AppSettingsColors
 from ebenezer.core.config.environment import AppSettingsEnvironment
 from ebenezer.core.config.fonts import AppSettingsFonts
-from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.loader import load_raw_settings
+from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.monitoring import AppSettingsMonitoring
-from ebenezer.core.config.bar import AppSettingsBar
+from ebenezer.core.files import qtile_home
 
 config_file = str(Path.joinpath(Path(qtile_home), "config.yml"))
 

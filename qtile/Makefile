@@ -12,4 +12,7 @@ test:
 	@source $(VENV_PATH) && pytest -s -vv
 
 format:
-	@source $(VENV_PATH) && black .
+	@source $(VENV_PATH) && \
+	autoflake --remove-all-unused-imports --in-place --recursive . && \
+	isort . && \
+	black .

@@ -1,12 +1,13 @@
-from libqtile import bar, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
-from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-from ebenezer.core.config.settings import AppSettings
-from ebenezer.widgets.volume import setup_volume_keys
-from ebenezer.widgets.backlight import setup_backlight_keys
-from ebenezer.core.command import build_shell_command
 import os
+
+from libqtile import qtile
+from libqtile.config import Key
+from libqtile.lazy import lazy
+
+from ebenezer.core.command import build_shell_command
+from ebenezer.core.config.settings import AppSettings
+from ebenezer.widgets.backlight import setup_backlight_keys
+from ebenezer.widgets.volume import setup_volume_keys
 
 
 def restore_all_minimized():

@@ -1,4 +1,5 @@
 from libqtile import widget
+
 from ebenezer.core.config.settings import AppSettings
 
 

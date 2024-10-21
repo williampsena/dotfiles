@@ -1,6 +1,7 @@
-from libqtile import widget, qtile
-from ebenezer.core.config.settings import AppSettings
 from files import resolve_file_path
+from libqtile import qtile, widget
+
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_os_logo(settings: AppSettings):

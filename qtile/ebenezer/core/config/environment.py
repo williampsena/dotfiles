@@ -1,4 +1,5 @@
 from libqtile.utils import guess_terminal
+
 from ebenezer.core.files import resolve_file_path
 
 

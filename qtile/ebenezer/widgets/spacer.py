@@ -1,6 +1,7 @@
 from libqtile import bar, widget
-from ebenezer.core.config.settings import AppSettings
 from libqtile.log_utils import logger
+
+from ebenezer.core.config.settings import AppSettings
 
 
 def build_spacer(settings: AppSettings, kwargs: dict):

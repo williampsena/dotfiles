@@ -1,4 +1,5 @@
 from typing import List
+
 from ebenezer.core.config.settings import AppSettings
 
 

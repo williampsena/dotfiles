@@ -1,6 +1,8 @@
 import subprocess
-from libqtile import widget, qtile
+
+from libqtile import qtile
 from libqtile.widget import base
+
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
 
@@ -28,6 +30,17 @@ class DunstWidget(base.ThreadPoolText):
 
     def __init__(self, **config):
         super().__init__("", **config)
+
+        settings = config.pop("settings")
+
+        self.animated = config.get("animated", False)
+        self.bells_index = 0
+        self.bells = ["󰂚", "󰂞"]
+        self.foreground_zero = config.get("foreground_zero", settings.colors.fg_normal)
+        self.foreground_count = config.get(
+            "foreground_count", settings.colors.fg_normal
+        )
+
         self.add_defaults(DunstWidget.defaults)
         self.add_callbacks(
             {
@@ -38,11 +51,21 @@ class DunstWidget(base.ThreadPoolText):
 
     def poll(self):
         count = self.get_notification_count()
+        bell_icon = self.get_bell_icon()
 
         if count == 0:
+            self.foreground = self.foreground_zero
             return f" {count}"
         else:
-            return f"󰵙 {count}"
+            self.foreground = self.foreground_count
+            return f"{bell_icon} {count}"
+
+    def get_bell_icon(self):
+        if self.animated is False:
+            return self.bells[0]
+
+        self.bells_index = 1 if self.bells_index == 0 else 0
+        return self.bells[self.bells_index]
 
     def get_notification_count(self):
         try:
@@ -67,13 +90,22 @@ class DunstWidget(base.ThreadPoolText):
 
 def build_notification_widget(settings: AppSettings, kwargs: dict):
     default_args = {
+        "settings": settings,
         "default_text": "",
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
         "padding": 2,
         "foreground": settings.colors.fg_normal,
+        "foreground_zero": settings.colors.fg_normal,
+        "foreground_count": settings.colors.fg_yellow,
+        "animated": False,
     }
 
-    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+    args = build_widget_args(
+        settings,
+        default_args,
+        kwargs,
+        ["foreground", "foreground_zero", "foreground_count"],
+    )
 
     return DunstWidget(**args)

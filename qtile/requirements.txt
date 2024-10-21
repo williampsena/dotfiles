@@ -9,3 +9,6 @@ psutil
 pyyaml
 types-PyYAML
 types-psutil
+isort
+black
+autoflake

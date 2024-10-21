@@ -1,7 +1,9 @@
-from typing import List, Any
+from typing import Any, List
+
 from libqtile.config import Group, Key
-from ebenezer.core.keys import *
+
 from ebenezer.core.config.settings import AppSettings
+from ebenezer.core.keys import *
 
 
 def build_groups(keys: List, settings: AppSettings):

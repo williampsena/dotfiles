@@ -1,12 +1,11 @@
 from libqtile import widget
-from libqtile.log_utils import logger
-from libqtile.lazy import lazy
 from libqtile.config import Key
+from libqtile.lazy import lazy
+
+from ebenezer.core.command import run_shell_command, run_shell_command_stdout
 from ebenezer.core.config.settings import AppSettings
-from ebenezer.core.command import run_shell_command_stdout, run_shell_command
 from ebenezer.core.notify import push_notification, push_notification_progress
 from ebenezer.widgets.helpers.args import build_widget_args
-import subprocess
 
 
 def build_volume_widget(settings: AppSettings, kwargs: dict):

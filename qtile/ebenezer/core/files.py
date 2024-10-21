@@ -1,5 +1,5 @@
-from string import Template
 from pathlib import Path
+from string import Template
 
 home = str(Path.home())
 qtile_home = str(Path.joinpath(Path(home), ".config/qtile"))

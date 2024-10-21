@@ -1,5 +1,5 @@
-from ebenezer.core.config.loader import load_raw_test_settings
 from ebenezer.core.config.environment import AppSettingsEnvironment
+from ebenezer.core.config.loader import load_raw_test_settings
 
 
 def test_parse_environment():

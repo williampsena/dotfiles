@@ -1,7 +1,6 @@
-import psutil
-from libqtile import bar, widget
+from libqtile import widget
 from libqtile.widget import CPU
-from libqtile.log_utils import logger
+
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.formatter import burn_text
 from ebenezer.widgets.helpers.args import build_widget_args

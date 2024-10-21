@@ -1,12 +1,12 @@
 import re
+
 import psutil
 from libqtile import widget
-from libqtile.log_utils import logger
 from libqtile.widget import ThermalSensor
+
 from ebenezer.core.config.settings import AppSettings
-from ebenezer.widgets.helpers.args import build_widget_args
-from ebenezer.core.command import run_shell_command_stdout
 from ebenezer.widgets.formatter import burn_text
+from ebenezer.widgets.helpers.args import build_widget_args
 
 
 class ColorizedThermalWidget(ThermalSensor):

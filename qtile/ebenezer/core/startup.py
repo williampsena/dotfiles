@@ -1,11 +1,9 @@
-import subprocess
-from string import Template
 from typing import Any
+
 from libqtile.log_utils import logger
-from ebenezer.core.config.settings import AppSettings
-from ebenezer.core.files import resolve_file_path
-from ebenezer.core.wallpaper import change_wallpaper
+
 from ebenezer.core.command import run_shell_command
+from ebenezer.core.config.settings import AppSettings
 
 
 def run_startup_once(settings: AppSettings):

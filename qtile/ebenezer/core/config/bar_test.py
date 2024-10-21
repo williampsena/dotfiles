@@ -1,5 +1,5 @@
+from ebenezer.core.config.bar import AppSettingsBar
 from ebenezer.core.config.loader import load_raw_test_settings
-from ebenezer.core.config.bar import AppSettingsBar, AppSettingsBarWidget
 
 
 def test_parse_bar():

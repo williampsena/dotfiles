@@ -29,7 +29,7 @@ startup:
   polkit: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   picom: picom --daemon
   nm_applet: nm-applet &
-  lock_screen: xautolock -detectsleep -time 10 -locker "python ~/.config/qtile/lock.py" &
+  lock_screen: xautolock -time 10 -locker "python ~/.config/qtile/lock.py" &
   wallpaper_slideshow: $scripts/wallpaper.sh slideshow $wallpaper_dir $wallpaper_timeout &
   dunst: pkill dunst && dunst &
 

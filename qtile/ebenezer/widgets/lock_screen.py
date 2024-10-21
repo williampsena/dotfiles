@@ -1,19 +1,16 @@
 import random
 import re
 import subprocess
-import requests
-import os
-import psutil
-from string import Template
 from pathlib import Path
-from typing import List, Callable
-from PIL import Image, ImageDraw, ImageFont
-from libqtile.log_utils import logger
+from string import Template
+from typing import Callable, List
+
+import requests
 from libqtile import widget
-from libqtile import qtile
-from libqtile.lazy import lazy
-from ebenezer.core.config.settings import AppSettings, load_settings
-from ebenezer.core.files import resolve_file_path
+from libqtile.log_utils import logger
+from PIL import Image, ImageDraw, ImageFont
+
+from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.requests import request_retry
 
 OUTPUT_FILE = "/tmp/i3lock.png"
