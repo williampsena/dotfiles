@@ -7,6 +7,7 @@ from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.battery import build_battery_widget
 from ebenezer.widgets.clock import build_clock_widget
 from ebenezer.widgets.cpu import build_cpu_widget
+from ebenezer.widgets.github import build_github_widget
 from ebenezer.widgets.group_box import build_group_box
 from ebenezer.widgets.helpers.args import build_widget_args
 from ebenezer.widgets.hidden_tray import build_hidden_tray
@@ -89,6 +90,7 @@ WIDGETS = {
     "powermenu": build_powermenu_widget,
     "hidden_tray": build_hidden_tray,
     "current_layout": build_current_layout_widget,
+    "github": build_github_widget,
 }
 
 

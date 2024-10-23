@@ -1,6 +1,8 @@
 import subprocess
 from string import Template
 
+from libqtile.lazy import lazy
+
 from ebenezer.core.files import resolve_file_path
 
 
@@ -26,3 +28,14 @@ def run_shell_command_stdout(
         stdout=subprocess.PIPE,
         text=True,
     )
+
+
+def lazy_command(cmd: str | None, **kwargs: object):
+    @lazy.function
+    def __inner__(qtile):
+        if cmd is None:
+            return
+
+        return run_shell_command(build_shell_command(cmd, **kwargs))
+
+    return __inner__

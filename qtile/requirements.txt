@@ -12,3 +12,4 @@ types-psutil
 isort
 black
 autoflake
+pycairo

@@ -1,11 +1,10 @@
 import subprocess
 
-from libqtile import qtile
 from libqtile.widget import base
-from libqtile.log_utils import logger
+
+from ebenezer.core.command import build_shell_command, run_shell_command
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
-from ebenezer.core.command import build_shell_command
 
 
 def __notifications_actions__(cmd: str):
@@ -26,9 +25,9 @@ def __notifications_actions__(cmd: str):
     choice = result.stdout.strip()
 
     if choice == "yes":
-        qtile.cmd_spawn("dunstctl history-clear")
+        run_shell_command("dunstctl history-clear")
     else:
-        qtile.cmd_spawn("dunstctl close-all")
+        run_shell_command("dunstctl close-all")
 
 
 class DunstWidget(base.ThreadPoolText):
@@ -61,12 +60,12 @@ class DunstWidget(base.ThreadPoolText):
 
     def poll(self):
         self.count = self.get_notification_count()
-        bell_icon = self.get_bell_icon()
 
         if self.count == 0:
             self.foreground = self.foreground_zero
-            return f" {self.count}"
+            return ""
         else:
+            bell_icon = self.get_bell_icon()
             self.foreground = self.foreground_count
             return f"{bell_icon} {self.count}"
 

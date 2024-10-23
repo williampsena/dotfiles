@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-source ./_settings.sh
-
 dir="$(pwd)"
 base_dir=$(realpath "$(pwd)/..")
+
+source $base_dir/_settings.sh
 
 lock_command=$(get_yaml_value ".lock_screen.command")
 uptime=$(uptime -p | sed -e 's/up //g')

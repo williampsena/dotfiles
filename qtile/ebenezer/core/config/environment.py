@@ -16,6 +16,7 @@ class AppSettingsEnvironment:
     backlight_name: str = ""
     weather_api_key: str = ""
     city_id: str = ""
+    github_notifications_token: str = ""
 
     def __init__(self, **kwargs: object):
         self.modkey = str(kwargs.get("modkey", self.modkey))
@@ -35,3 +36,6 @@ class AppSettingsEnvironment:
         )
         self.weather_api_key = str(kwargs.get("weather_api_key", self.weather_api_key))
         self.city_id = str(kwargs.get("city_id", self.city_id))
+        self.github_notifications_token = str(
+            kwargs.get("github_notifications_token", self.github_notifications_token)
+        )

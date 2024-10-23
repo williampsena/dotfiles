@@ -1,8 +1,8 @@
 from ebenezer.core.command import run_shell_command
 
-TEMPLATE_NOTIFY = 'notify-send -r 999 -u low "$message"'
-TEMPLATE_WITH_TITLE = 'notify-send -r 999 -u low "$title" "$message"'
-TEMPLATE_NO_HISTORY = ">/dev/null 2>&1"
+TEMPLATE_NOTIFY = 'notify-send -r 999 --urgency=normal  "$message"'
+TEMPLATE_WITH_TITLE = 'notify-send -r 999 --urgency=normal  "$title" "$message"'
+TEMPLATE_NO_HISTORY = 'notify-send --urgency=low "$title" "$message"'
 
 
 def push_notification(title: str, message: str):
@@ -19,7 +19,7 @@ def push_notification_progress(message: str, progress: int):
 
 def push_notification_no_history(title: str, message: str):
     return run_shell_command(
-        f"{TEMPLATE_WITH_TITLE} {TEMPLATE_NO_HISTORY}",
+        f"{TEMPLATE_NO_HISTORY}",
         title=title,
         message=message,
     )

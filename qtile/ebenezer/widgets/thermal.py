@@ -10,6 +10,10 @@ from ebenezer.widgets.helpers.args import build_widget_args
 
 
 class ColorizedThermalWidget(ThermalSensor):
+    """
+    A widget that enhances the user experience by displaying thermal sensors using color and icons
+    """
+
     def __init__(self, **config):
         settings = config.pop("settings")
         super().__init__(**config)

@@ -15,6 +15,8 @@ class AppSettingsColors:
     fg_purple = "#bababa"
     fg_green = "#bababa"
     fg_gray = "#9db4c0"
+    fg_black = "#000000"
+    fg_white = "#ffffff"
     bg_topbar = "#5c6b73"
     bg_topbar_selected = "#000"
     bg_topbar_arrow = "#5c6b73"
@@ -44,6 +46,8 @@ class AppSettingsColors:
         self.fg_purple = kwargs.get("fg_purple", self.fg_purple)
         self.fg_green = kwargs.get("fg_green", self.fg_green)
         self.fg_gray = kwargs.get("fg_gray", self.fg_gray)
+        self.fg_black = kwargs.get("fg_black", self.fg_black)
+        self.fg_white = kwargs.get("fg_white", self.fg_white)
         self.bg_topbar = kwargs.get("bg_topbar", self.bg_topbar)
         self.bg_topbar_selected = kwargs.get(
             "bg_topbar_selected", self.bg_topbar_selected
