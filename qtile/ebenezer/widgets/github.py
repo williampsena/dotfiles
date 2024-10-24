@@ -1,15 +1,12 @@
-import subprocess
-
 import requests
 from libqtile import widget
 from libqtile.lazy import lazy
 from libqtile.widget import base
 
+from ebenezer.core.command import build_shell_command
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.requests import request_retry
 from ebenezer.widgets.helpers.args import build_widget_args
-from ebenezer.core.command import run_shell_command
-import webbrowser
 
 
 class GitHubNotifications(base.ThreadPoolText):
@@ -104,13 +101,9 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
 
 
 def go_to_notifications_url(settings: AppSettings):
-    @lazy.function
-    def __inner__(qtile):
-        cmd = settings.commands.get("open_url")
+    cmd = settings.commands.get("open_url")
 
-        if cmd is None:
-            return
+    if cmd is None:
+        return
 
-        run_shell_command(cmd, url="https://github.com/notifications")
-
-    return __inner__
+    return lazy.spawn(build_shell_command(cmd, url="https://github.com/notifications"))
