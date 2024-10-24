@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+qtile = "*"
+pillow = "*"
+black = "*"
+psutil = "*"
+pyyaml = "*"
+isort = "*"
+cairocffi = "*"
+
+[dev-packages]
+black = "*"
+autoflake = "*"
+isort = "*"
+types-pyyaml = "*"
+types-psutil = "*"
+types-requests = "*"
+types-pillow = "*"
+mypy = "*"
+
+[requires]
+python_version = "3.12"

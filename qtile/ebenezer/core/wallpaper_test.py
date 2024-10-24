@@ -4,5 +4,5 @@ from ebenezer.core.wallpaper import change_wallpaper
 
 
 def test_change_wallpaper():
-    settings = load_settings(TEST_CONFIG)
+    settings = load_settings(config_file=TEST_CONFIG)
     widget = change_wallpaper(settings)

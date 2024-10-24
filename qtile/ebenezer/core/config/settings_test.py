@@ -9,7 +9,7 @@ from ebenezer.core.config.settings import AppSettings, load_settings
 
 def test_parse_settings():
     raw_settings = load_raw_test_settings()
-    settings = load_settings(TEST_CONFIG)
+    settings = load_settings(config_file=TEST_CONFIG)
     expected = AppSettings(
         environment=AppSettingsEnvironment(
             mod="mod4",

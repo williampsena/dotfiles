@@ -15,7 +15,7 @@ def build_backlight_widget(settings: AppSettings, kwargs: dict):
         "backlight_name": settings.environment.backlight_name,
         "fmt": " ",
         "padding": 3,
-        "mouse_callbacks": {"Button1": __backlight_level__(settings)},
+        "mouse_callbacks": {"Button1": _backlight_level(settings)},
     }
 
     args = build_widget_args(settings, default_args, kwargs, [])
@@ -23,7 +23,7 @@ def build_backlight_widget(settings: AppSettings, kwargs: dict):
     return widget.Backlight(**args)
 
 
-def __get_backlight_level__(settings: AppSettings):
+def _get_backlight_level(settings: AppSettings):
     cmd = settings.commands.get("backlight_level")
 
     if cmd is None:
@@ -34,12 +34,12 @@ def __get_backlight_level__(settings: AppSettings):
     return output.stdout.replace("%", "").replace("\n", "")
 
 
-def __backlight_up__(settings: AppSettings):
+def _backlight_up(settings: AppSettings):
     cmd = settings.commands.get("backlight_up")
 
     @lazy.function
     def inner(qtile):
-        level = int(__get_backlight_level__(settings) or "0")
+        level = int(_get_backlight_level(settings) or "0")
 
         if level >= 100:
             return
@@ -47,12 +47,12 @@ def __backlight_up__(settings: AppSettings):
         if cmd:
             run_shell_command(cmd)
 
-        __push_backlight_notification__(settings, "󰃠 Brightness")
+        __push_backlight_notification(settings, "󰃠 Brightness")
 
     return inner
 
 
-def __backlight_down__(settings: AppSettings):
+def __backlight_down(settings: AppSettings):
     cmd = settings.commands.get("backlight_down")
 
     @lazy.function
@@ -60,27 +60,27 @@ def __backlight_down__(settings: AppSettings):
         if cmd:
             run_shell_command(cmd)
 
-        __push_backlight_notification__(settings, "󰃠 Brightness")
+        __push_backlight_notification(settings, "󰃠 Brightness")
 
     return inner
 
 
-def __backlight_level__(settings: AppSettings):
+def _backlight_level(settings: AppSettings):
     @lazy.function
     def inner(qtile):
-        __push_backlight_notification__(settings, "󰃠 Brightness")
+        __push_backlight_notification(settings, "󰃠 Brightness")
 
     return inner
 
 
-def __push_backlight_notification__(settings: AppSettings, message: str):
-    level = __get_backlight_level__(settings) or "0"
+def __push_backlight_notification(settings: AppSettings, message: str):
+    level = _get_backlight_level(settings) or "0"
     message = f"{message} {level}%"
     push_notification_progress(message=message, progress=int(level))
 
 
 def setup_backlight_keys(settings: AppSettings):
     return [
-        Key([], "XF86MonBrightnessUp", __backlight_up__(settings)),
-        Key([], "XF86MonBrightnessDown", __backlight_down__(settings)),
+        Key([], "XF86MonBrightnessUp", _backlight_up(settings)),
+        Key([], "XF86MonBrightnessDown", __backlight_down(settings)),
     ]

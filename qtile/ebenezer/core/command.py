@@ -32,10 +32,14 @@ def run_shell_command_stdout(
 
 def lazy_command(cmd: str | None, **kwargs: object):
     @lazy.function
-    def __inner__(qtile):
+    def _inner(qtile):
         if cmd is None:
             return
 
         return run_shell_command(build_shell_command(cmd, **kwargs))
 
-    return __inner__
+    return _inner
+
+
+def lazy_spawn(cmd: str, **kwargs: object):
+    return lazy.spawn(build_shell_command(cmd, **kwargs))

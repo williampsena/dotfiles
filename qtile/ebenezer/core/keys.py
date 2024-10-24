@@ -3,161 +3,220 @@ import os
 from libqtile import qtile
 from libqtile.config import Key
 from libqtile.lazy import lazy
-
-from ebenezer.core.command import build_shell_command
+from libqtile.log_utils import logger
+from typing import List
+from ebenezer.core.config.keybindings import AppSettingsKeyBinding
+from ebenezer.core.command import build_shell_command, lazy_command, lazy_spawn
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.backlight import setup_backlight_keys
 from ebenezer.widgets.volume import setup_volume_keys
 
 
-def restore_all_minimized():
-    for window in qtile.current_group.windows:
-        if window.minimized:
-            window.toggle_minimize()
+def _build_key_spawn(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys),
+        lazy_spawn(binding.command),
+    )
+
+
+def _build_key_spawn_command(settings: AppSettings, binding: AppSettingsKeyBinding):
+    cmd = settings.commands.get(binding.command)
+
+    if cmd is None:
+        return None
+
+    return _build_key(
+        _format_keybinding(settings, binding.keys),
+        lazy_spawn(cmd),
+    )
+
+
+def _build_key_spawn_terminal(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys),
+        lazy_spawn(settings.environment.terminal),
+    )
+
+
+def _build_key_spawn_browser(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys),
+        lazy.spawn(settings.environment.browser),
+    )
+
+
+def _build_key_lock_screen(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys),
+        lazy.spawn(os.path.expanduser(settings.lock_screen.command)),
+    )
+
+
+def _build_key_next_layout(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.next_layout())
+
+
+def _build_key_kill_window(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.window.kill())
+
+
+def _build_key_reload_config(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.reload_config())
+
+
+def _build_key_shutdown(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.shutdown())
+
+
+def _build_key_spawn_cmd(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.spawncmd())
+
+
+def _build_key_focus_left(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.left())
+
+
+def _build_key_focus_right(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.right())
+
+
+def _build_key_focus_down(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.down())
+
+
+def _build_key_focus_up(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.up())
+
+
+def _build_key_focus_next(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.next())
+
+
+def _build_key_fullscreen(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.window.toggle_fullscreen()
+    )
+
+
+def _build_key_floating(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.window.toggle_floating()
+    )
+
+
+def _build_key_shuffle_left(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.shuffle_left()
+    )
+
+
+def _build_key_shuffle_right(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.shuffle_right()
+    )
+
+
+def _build_key_shuffle_down(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.shuffle_down()
+    )
+
+
+def _build_key_shuffle_up(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.shuffle_up()
+    )
+
+
+def _build_key_grow_left(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.grow_left()
+    )
+
+
+def _build_key_grow_right(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.grow_right()
+    )
+
+
+def _build_key_grow_down(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.grow_down()
+    )
+
+
+def _build_key_grow_up(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(_format_keybinding(settings, binding.keys), lazy.layout.grow_up())
+
+
+def _build_key_reset_windows(settings: AppSettings, binding: AppSettingsKeyBinding):
+    return _build_key(
+        _format_keybinding(settings, binding.keys), lazy.layout.normalize()
+    )
+
+
+ACTIONS = {
+    "cmd": _build_key_spawn_cmd,
+    "spawn": _build_key_spawn,
+    "spawn_command": _build_key_spawn_command,
+    "terminal": _build_key_spawn_terminal,
+    "browser": _build_key_spawn_browser,
+    "lock_screen": _build_key_lock_screen,
+    "next_layout": _build_key_next_layout,
+    "kill_window": _build_key_kill_window,
+    "reload_config": _build_key_reload_config,
+    "shutdown": _build_key_shutdown,
+    "focus_left": _build_key_focus_left,
+    "focus_right": _build_key_focus_right,
+    "focus_up": _build_key_focus_up,
+    "focus_down": _build_key_focus_down,
+    "focus_next": _build_key_focus_next,
+    "fullscreen": _build_key_fullscreen,
+    "floating": _build_key_floating,
+    "shuffle_left": _build_key_shuffle_left,
+    "shuffle_right": _build_key_shuffle_right,
+    "shuffle_up": _build_key_shuffle_up,
+    "shuffle_down": _build_key_shuffle_down,
+    "grow_left": _build_key_grow_left,
+    "grow_right": _build_key_grow_right,
+    "grow_down": _build_key_grow_down,
+    "grow_up": _build_key_grow_up,
+    "reset_windows": _build_key_reset_windows,
+}
 
 
 def build_keys(settings: AppSettings):
     mod = settings.environment.modkey
 
-    return (
-        [
-            Key(
-                [mod],
-                "Return",
-                lazy.spawn(settings.environment.terminal),
-                desc="Launch terminal",
-            ),
-            Key(
-                [mod, "shift"],
-                "Return",
-                lazy.spawn(
-                    build_shell_command(
-                        "rofi -show drun -show-icons -theme $rofi_home/launcher.rasi"
-                    )
-                ),
-                desc="Run Launcher",
-            ),
-            Key(
-                [mod, "control"],
-                "Tab",
-                lazy.spawn(
-                    build_shell_command(
-                        "rofi -show window -show-icons -theme $rofi_home/launcher.rasi"
-                    )
-                ),
-                desc="Run Launcher Window",
-            ),
-            Key(
-                [mod], "b", lazy.spawn(settings.environment.browser), desc="Web browser"
-            ),
-            Key(
-                [mod, "control"],
-                "x",
-                lazy.spawn(os.path.expanduser(settings.lock_screen.command)),
-                desc="Lock screen",
-            ),
-            Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-            Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-            Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-            Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-            Key(
-                [mod],
-                "r",
-                lazy.spawncmd(),
-                desc="Spawn a command using a prompt widget",
-            ),
-            # A list of available commands that can be bound to keys can be found
-            # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-            # Switch between windows
-            Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-            Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-            Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-            Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-            Key(
-                [mod],
-                "space",
-                lazy.layout.next(),
-                desc="Move window focus to other window",
-            ),
-            # Move windows between left/right columns or move up/down in current stack.
-            # Moving out of range in Columns layout will create new column.
-            Key(
-                [mod, "shift"],
-                "h",
-                lazy.layout.shuffle_left(),
-                desc="Move window to the left",
-            ),
-            Key(
-                [mod, "shift"],
-                "l",
-                lazy.layout.shuffle_right(),
-                desc="Move window to the right",
-            ),
-            Key(
-                [mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"
-            ),
-            Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-            # Grow windows. If current window is on the edge of screen and direction
-            # will be to screen edge - window would shrink.
-            Key(
-                [mod, "control"],
-                "h",
-                lazy.layout.grow_left(),
-                desc="Grow window to the left",
-            ),
-            Key(
-                [mod, "control"],
-                "l",
-                lazy.layout.grow_right(),
-                desc="Grow window to the right",
-            ),
-            Key(
-                [mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"
-            ),
-            Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-            Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-            Key(
-                [mod],
-                "m",
-                lazy.function(restore_all_minimized),
-                desc="Restore all minimized windows",
-            ),
-            # Toggle between split and unsplit sides of stack.
-            # Split = all windows displayed
-            # Unsplit = 1 window displayed, like Max layout, but still with
-            # multiple stack panes
-            # Key(
-            #     [mod, "shift"],
-            #     "Return",
-            #     lazy.layout.toggle_split(),
-            #     desc="Toggle between split and unsplit sides of stack",
-            # ),
-            # Toggle between different layouts as defined below
-            Key(
-                [mod],
-                "f",
-                lazy.window.toggle_fullscreen(),
-                desc="Toggle fullscreen on the focused window",
-            ),
-            Key(
-                [mod],
-                "t",
-                lazy.window.toggle_floating(),
-                desc="Toggle floating on the focused window",
-            ),
-            Key(
-                [],
-                "print",
-                lazy.spawn(settings.commands.get("screenshot"), shell=True),
-                desc="Take a screenshot",
-            ),
-            Key(
-                [mod],
-                "print",
-                lazy.spawn(settings.commands.get("screenshot_full"), shell=True),
-                desc="Take a screenshot of the full desktop",
-            ),
-        ]
-        + setup_volume_keys(settings)
-        + setup_backlight_keys(settings)
+    keys = setup_volume_keys(settings) + setup_backlight_keys(settings)
+
+    keys = _build_keys_from_config(settings, keys)
+
+    return keys
+
+
+def _build_keys_from_config(settings: AppSettings, keys: List[any]):
+    for binding in settings.keybindings:
+        action_callable = ACTIONS.get(binding.action)
+        key = None
+
+        if action_callable:
+            key = action_callable(settings, binding)
+
+        if key:
+            keys.append(key)
+
+    return keys
+
+
+def _build_key(keybinding: List[str], command):
+    return Key(
+        keybinding[:-1],
+        keybinding[-1],
+        command,
     )
+
+
+def _format_keybinding(settings: AppSettings, keys: List[str]):
+    return [k.replace("$mod", settings.environment.modkey) for k in keys]

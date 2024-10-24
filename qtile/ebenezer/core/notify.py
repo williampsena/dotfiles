@@ -1,7 +1,7 @@
 from ebenezer.core.command import run_shell_command
 
-TEMPLATE_NOTIFY = 'notify-send -r 999 --urgency=normal  "$message"'
-TEMPLATE_WITH_TITLE = 'notify-send -r 999 --urgency=normal  "$title" "$message"'
+TEMPLATE_NOTIFY = 'notify-send -r 999 --urgency=low  "$message"'
+TEMPLATE_WITH_TITLE = 'notify-send -r 999 --urgency=low  "$title" "$message"'
 TEMPLATE_NO_HISTORY = 'notify-send --urgency=low "$title" "$message"'
 
 

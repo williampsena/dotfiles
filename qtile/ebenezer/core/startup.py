@@ -10,7 +10,7 @@ def run_startup_once(settings: AppSettings):
     for raw_cmd in settings.startup:
         try:
             cmd = settings.startup[raw_cmd]
-            run_shell_command(cmd, **__env_substitutions__(settings))
+            run_shell_command(cmd, **_env_substitutions(settings))
             logger.info(f"the script {cmd} was loaded")
         except Exception as e:
             logger.warning(
@@ -18,7 +18,7 @@ def run_startup_once(settings: AppSettings):
             )
 
 
-def __env_substitutions__(settings: AppSettings) -> dict[str, Any]:
+def _env_substitutions(settings: AppSettings) -> dict[str, Any]:
     return {
         "lock_screen_timeout": settings.lock_screen.timeout,
         "wallpaper_dir": settings.environment.wallpaper_dir,

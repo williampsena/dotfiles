@@ -3,7 +3,7 @@ from libqtile import bar, widget
 from ebenezer.core.config.settings import AppSettings
 
 
-def build_spacer(settings: AppSettings, kwargs: dict):
+def build_spacer_widget(settings: AppSettings, kwargs: dict):
     default_args = {"length": bar.STRETCH}
     args = default_args | kwargs
 

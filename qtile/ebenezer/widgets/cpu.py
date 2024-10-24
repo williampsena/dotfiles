@@ -48,10 +48,14 @@ def build_cpu_widget(settings: AppSettings, kwargs: dict):
         "fontsize": settings.fonts.font_icon_size,
         "padding": 2,
         "foreground": settings.colors.fg_yellow,
+        "background": settings.colors.bg_topbar_arrow,
     }
 
     icon_args = build_widget_args(
-        settings, default_icon_args, kwargs.get("icon", {}), ["foreground"]
+        settings,
+        default_icon_args,
+        kwargs.get("icon", {}),
+        ["foreground", "background"],
     )
 
     default_args = {
@@ -63,10 +67,11 @@ def build_cpu_widget(settings: AppSettings, kwargs: dict):
         "format": "{load_percent}% ",
         "padding": 2,
         "foreground": settings.colors.fg_normal,
+        "background": settings.colors.bg_topbar_arrow,
     }
 
     args = build_widget_args(
-        settings, default_args, kwargs.get("sensor", {}), ["foreground"]
+        settings, default_args, kwargs.get("sensor", {}), ["foreground", "background"]
     )
 
     return [

@@ -312,6 +312,7 @@
     background = "#000000DD"
     foreground = "#ffffff"
     timeout = 5
+    history_ignore = yes
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 

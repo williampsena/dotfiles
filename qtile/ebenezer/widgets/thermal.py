@@ -51,10 +51,14 @@ def build_thermal_widget(settings: AppSettings, kwargs: dict):
         "fontsize": settings.fonts.font_icon_size,
         "padding": 2,
         "foreground": settings.colors.fg_ligth_blue,
+        "background": settings.colors.bg_topbar_arrow,
     }
 
     icon_args = build_widget_args(
-        settings, default_icon_args, kwargs.get("icon", {}), ["foreground"]
+        settings,
+        default_icon_args,
+        kwargs.get("icon", {}),
+        ["foreground", "background"],
     )
 
     default_args = {
@@ -67,13 +71,14 @@ def build_thermal_widget(settings: AppSettings, kwargs: dict):
         "padding": 2,
         "foreground": settings.colors.fg_normal,
         "foreground_alert": settings.colors.fg_normal,
+        "background": settings.colors.bg_topbar_arrow,
     }
 
     args = build_widget_args(
         settings,
         default_args,
         kwargs.get("sensor", {}),
-        ["foreground", "foreground_alert"],
+        ["foreground", "foreground_alert", "background"],
     )
 
     return [
@@ -82,7 +87,7 @@ def build_thermal_widget(settings: AppSettings, kwargs: dict):
     ]
 
 
-def __get_temperature__():
+def _get_temperature():
     temperatures = psutil.sensors_temperatures()
 
     if "coretemp" in temperatures:

@@ -1,18 +1,27 @@
 SHELL := /bin/bash
-
-VENV_PATH := $(shell realpath ../.venv/bin/activate)
+PIPENV=pipenv
+PIPFILE=Pipfile
+PYTHON=$(PIPENV) run python
 
 install:
-	@source $(VENV_PATH) && pip install -r requirements.txt
+	$(PIPENV) install
+
+activate:
+	$(PIPENV) shell
 
 check:
-	@source $(VENV_PATH) && qtile check
+	$(PIPENV) run qtile check
 
 test:
-	@source $(VENV_PATH) && pytest -s -vv
+	$(PIPENV) run pytest -s -vv
 
 format:
-	@source $(VENV_PATH) && \
-	autoflake --remove-all-unused-imports --in-place --recursive . && \
-	isort . && \
-	black .
+	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
+	$(PIPENV) run isort .
+	$(PIPENV) run black .
+
+truncate-logs:
+	truncate -s0 ~/.local/share/qtile/qtile.log 
+
+logs:
+	 cat ~/.local/share/qtile/qtile.log

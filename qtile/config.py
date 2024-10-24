@@ -29,7 +29,6 @@ from libqtile.config import Click, Drag, Match
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
-from ebenezer.core.command import lazy_command
 from ebenezer.core.config.settings import load_settings
 from ebenezer.core.groups import build_groups
 from ebenezer.core.keys import build_keys
@@ -65,7 +64,6 @@ mouse = [
         start=lazy.window.get_size(),
     ),
     Click([mod], "Button2", lazy.window.bring_to_front()),
-    Click([mod, "control"], "Button3", lazy_command(settings.commands.get("menu"))),
 ]
 
 dgroups_key_binder = None

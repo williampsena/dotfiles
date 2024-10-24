@@ -18,7 +18,7 @@ OUTPUT_FILE = "/tmp/i3lock.png"
 JOKE_OUTPUT_FILE = "/tmp/joke.png"
 
 
-def __is_i3lock_running__():
+def _is_i3lock_running():
     try:
         subprocess.check_output(["pgrep", "i3lock"])
         return True
@@ -26,7 +26,7 @@ def __is_i3lock_running__():
         return False
 
 
-def __remove_emojis__(text):
+def _remove_emojis(text):
     emoji_pattern = re.compile(
         "["  # Start of character class
         "\U0001F600-\U0001F64F"  # emoticons
@@ -48,7 +48,7 @@ def __remove_emojis__(text):
     return emoji_pattern.sub(r"", text)
 
 
-def __get_joke_from_icanhazdadjoke__(settings: AppSettings) -> Callable[[], str]:
+def _get_joke_from_icanhazdadjoke(settings: AppSettings) -> Callable[[], str]:
     def do_request():
         headers = {"Accept": "application/json"}
         return requests.get(settings.lock_screen.icanhazdad_joke_url, headers=headers)
@@ -57,14 +57,14 @@ def __get_joke_from_icanhazdadjoke__(settings: AppSettings) -> Callable[[], str]
         response = request_retry(do_request)
 
         if response.status_code == requests.codes.ok:
-            return __remove_emojis__(response.json()["joke"])
+            return _remove_emojis(response.json()["joke"])
         else:
             return "Something went wrong: {}".format(response.status_code)
 
     return inner
 
 
-def __get_joke_from_reddit__(settings: AppSettings) -> Callable[[], str]:
+def _get_joke_from_reddit(settings: AppSettings) -> Callable[[], str]:
     def do_request():
         headers = {"Accept": "application/json"}
         return requests.get(settings.lock_screen.reddit_joke_url).json()
@@ -76,22 +76,22 @@ def __get_joke_from_reddit__(settings: AppSettings) -> Callable[[], str]:
         joke = random.choice(jokes)
         data = joke.get("data")
 
-        punchline = re.sub("&amp;#x200B;", "", __remove_emojis__(data.get("selftext")))
+        punchline = re.sub("&amp;#x200B;", "", _remove_emojis(data.get("selftext")))
 
-        return f"{__remove_emojis__(data.get("title"))}\n{punchline}"
+        return f"{_remove_emojis(data.get("title"))}\n{punchline}"
 
     return inner
 
 
-def __load_joke_providers__(settings: AppSettings):
+def _load_joke_providers(settings: AppSettings):
     return {
-        "reddit": __get_joke_from_reddit__(settings),
-        "icanhazdad": __get_joke_from_icanhazdadjoke__(settings),
+        "reddit": _get_joke_from_reddit(settings),
+        "icanhazdad": _get_joke_from_icanhazdadjoke(settings),
     }
 
 
-def __get_joke__(settings: AppSettings) -> str:
-    joke_providers = __load_joke_providers__(settings)
+def _get_joke(settings: AppSettings) -> str:
+    joke_providers = _load_joke_providers(settings)
     joke_providers_selected = [
         key for key in settings.lock_screen.joke_providers if key in joke_providers
     ]
@@ -111,7 +111,7 @@ def __get_joke__(settings: AppSettings) -> str:
     return "No jokes!"
 
 
-def __remove_output_files__():
+def _remove_output_files():
     for raw_filepath in [OUTPUT_FILE, JOKE_OUTPUT_FILE]:
         file_path = Path(raw_filepath)
 
@@ -119,7 +119,7 @@ def __remove_output_files__():
             file_path.unlink()
 
 
-def __build_joke_image__(settings: AppSettings, joke: str, width: int, height: int):
+def _build_joke_image(settings: AppSettings, joke: str, width: int, height: int):
     img = Image.new(
         "RGB", (width, height), color=settings.lock_screen.joke_foreground_color
     )
@@ -145,12 +145,12 @@ def __build_joke_image__(settings: AppSettings, joke: str, width: int, height: i
     img.save(JOKE_OUTPUT_FILE)
 
 
-def __build_background__(settings: AppSettings):
+def _build_background(settings: AppSettings):
     background = Image.open(OUTPUT_FILE)
     width, height = background.size
 
-    joke = __get_joke__(settings)
-    __build_joke_image__(settings, joke=joke, width=width, height=height)
+    joke = _get_joke(settings)
+    _build_joke_image(settings, joke=joke, width=width, height=height)
 
     overlay = Image.open(JOKE_OUTPUT_FILE)
 
@@ -161,16 +161,16 @@ def __build_background__(settings: AppSettings):
     new_img.save(OUTPUT_FILE, "PNG")
 
 
-def __run_command__(commands: List[List[str]]):
+def _run_command(commands: List[List[str]]):
     for cmd in commands:
         command = subprocess.Popen(cmd)
         command.wait()
 
 
-def __prepare_lock_screen__(settings: AppSettings):
-    __remove_output_files__()
+def _prepare_lock_screen(settings: AppSettings):
+    _remove_output_files()
 
-    __run_command__(
+    _run_command(
         [
             ["scrot", OUTPUT_FILE],
             [
@@ -184,16 +184,16 @@ def __prepare_lock_screen__(settings: AppSettings):
         ]
     )
 
-    __build_background__(settings)
+    _build_background(settings)
 
 
 def lock_screen(settings: AppSettings):
-    if __is_i3lock_running__():
+    if _is_i3lock_running():
         logger.warning("i3lock already running")
         return
 
     push_notification_no_history("󰌾 Locking screen in seconds...", "")
-    __prepare_lock_screen__(settings)
+    _prepare_lock_screen(settings)
     run_i3_lock(settings)
 
 
@@ -254,10 +254,10 @@ def run_i3_lock(settings: AppSettings):
 
     cmd_options = re.sub(r"\s+", " ", cmd_options)
 
-    __run_command__([cmd_options.split(" ")])
+    _run_command([cmd_options.split(" ")])
 
 
-def click_lock_screen(settings: AppSettings):
+def _click_lock_screen(settings: AppSettings):
     def inner():
         try:
             lock_screen(settings)
@@ -276,5 +276,5 @@ def build_lock_screen_widget(settings: AppSettings):
         fontsize=settings.fonts.font_icon_size,
         padding=2,
         foreground=settings.colors.fg_normal,
-        mouse_callbacks={"Button1": click_lock_screen(settings)},
+        mouse_callbacks={"Button1": _click_lock_screen(settings)},
     )

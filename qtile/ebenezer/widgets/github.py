@@ -1,15 +1,12 @@
-import subprocess
-
 import requests
 from libqtile import widget
 from libqtile.lazy import lazy
 from libqtile.widget import base
 
+from ebenezer.core.command import build_shell_command
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.requests import request_retry
 from ebenezer.widgets.helpers.args import build_widget_args
-from ebenezer.core.command import run_shell_command
-import webbrowser
 
 
 class GitHubNotifications(base.ThreadPoolText):
@@ -39,7 +36,7 @@ class GitHubNotifications(base.ThreadPoolText):
 
         try:
 
-            def __do_request__():
+            def _do_request():
                 headers = {
                     "Authorization": f"token {self.token}",
                     "Accept": "application/vnd.github.v3+json",
@@ -49,7 +46,7 @@ class GitHubNotifications(base.ThreadPoolText):
                     "https://api.github.com/notifications", headers=headers
                 )
 
-            response = request_retry(__do_request__)
+            response = request_retry(_do_request)
 
             if response.status_code == 200:
                 notifications = response.json()
@@ -57,7 +54,7 @@ class GitHubNotifications(base.ThreadPoolText):
 
                 if count == 0:
                     self.icon.foreground = self.icon.foreground_normal
-                    return "0"
+                    return ""
                 else:
                     self.icon.foreground = self.icon.foreground_alert
                     return f"{count}+"
@@ -71,18 +68,22 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
     default_icon_args = {
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
-        "padding": 0,
+        "padding": 6,
         "foreground": settings.colors.fg_white,
         "foreground_normal": settings.colors.fg_white,
         "foreground_alert": settings.colors.fg_yellow,
+        "background": settings.colors.bg_topbar_arrow,
         "mouse_callbacks": {"Button1": go_to_notifications_url(settings)},
     }
 
     icon_args = build_widget_args(
-        settings, default_icon_args, kwargs.get("icon", {}), ["foreground"]
+        settings,
+        default_icon_args,
+        kwargs.get("icon", {}),
+        ["foreground", "background"],
     )
 
-    icon_widget = widget.TextBox(f"{icon_args.pop("text", "")} ", **icon_args)
+    icon_widget = widget.TextBox(f"{icon_args.pop("text", "")}", **icon_args)
 
     default_args = {
         "icon_widget": icon_widget,
@@ -91,10 +92,14 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
         "fontsize": settings.fonts.font_icon_size,
         "padding": 4,
         "foreground": settings.colors.fg_normal,
+        "background": settings.colors.bg_topbar_arrow,
     }
 
     args = build_widget_args(
-        settings, default_args, kwargs.get("widget", {}), ["foreground"]
+        settings,
+        default_args,
+        kwargs.get("widget", {}),
+        ["foreground", "background"],
     )
 
     return [
@@ -104,13 +109,9 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
 
 
 def go_to_notifications_url(settings: AppSettings):
-    @lazy.function
-    def __inner__(qtile):
-        cmd = settings.commands.get("open_url")
+    cmd = settings.commands.get("open_url")
 
-        if cmd is None:
-            return
+    if cmd is None:
+        return
 
-        run_shell_command(cmd, url="https://github.com/notifications")
-
-    return __inner__
+    return lazy.spawn(build_shell_command(cmd, url="https://github.com/notifications"))

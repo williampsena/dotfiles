@@ -7,7 +7,7 @@ from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
 
 
-def __notifications_actions__(cmd: str):
+def _notifications_actions(cmd: str):
     if cmd is None:
         return
 
@@ -97,7 +97,7 @@ class DunstWidget(base.ThreadPoolText):
         if self.count == 0:
             return
 
-        __notifications_actions__(self.modal_confirm_cmd)
+        _notifications_actions(self.modal_confirm_cmd)
 
 
 def build_notification_widget(settings: AppSettings, kwargs: dict):

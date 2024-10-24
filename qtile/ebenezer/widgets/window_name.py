@@ -4,7 +4,7 @@ from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
 
 
-def build_window_name(settings: AppSettings, kwargs: dict):
+def build_window_name_widget(settings: AppSettings, kwargs: dict):
     default_args = {
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,

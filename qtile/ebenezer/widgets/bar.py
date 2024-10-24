@@ -4,6 +4,8 @@ from libqtile import bar, widget
 from libqtile.log_utils import logger
 
 from ebenezer.core.config.settings import AppSettings
+from ebenezer.widgets.app_menu import build_app_menu_widget
+from ebenezer.widgets.arrow import build_arrow_widget
 from ebenezer.widgets.battery import build_battery_widget
 from ebenezer.widgets.clock import build_clock_widget
 from ebenezer.widgets.cpu import build_cpu_widget
@@ -15,16 +17,17 @@ from ebenezer.widgets.layout import build_current_layout_widget
 from ebenezer.widgets.memory import build_memory_widget
 from ebenezer.widgets.notification import build_notification_widget
 from ebenezer.widgets.powermenu import build_powermenu_widget
-from ebenezer.widgets.spacer import build_spacer
+from ebenezer.widgets.spacer import build_spacer_widget
 from ebenezer.widgets.task_list import build_task_list_widget
 from ebenezer.widgets.thermal import build_thermal_widget
 from ebenezer.widgets.volume import build_volume_widget
+from ebenezer.widgets.wallpaper import build_wallpaper_widget
 from ebenezer.widgets.weather import build_weather_widget
-from ebenezer.widgets.window_name import build_window_name
+from ebenezer.widgets.window_name import build_window_name_widget
 
 
 def build_bar(settings: AppSettings):
-    widgets = __build_widgets__(settings)
+    widgets = _build_widgets(settings)
 
     return bar.Bar(
         widgets,
@@ -37,19 +40,19 @@ def build_bar(settings: AppSettings):
 def build_fallback_bar(settings: AppSettings):
     return [
         build_group_box(settings, {}),
-        __build_separator__(settings, {}),
-        __build_prompt__(settings, {}),
+        _build_separator(settings, {}),
+        _build_prompt(settings, {}),
         build_clock_widget(settings, {}),
-        build_spacer(settings, {}),
+        build_spacer_widget(settings, {}),
         build_current_layout_widget(settings, {}),
     ]
 
 
-def __build_separator__(settings: AppSettings, args: dict):
+def _build_separator(settings: AppSettings, args: dict):
     return widget.Sep(**args)
 
 
-def __build_prompt__(settings: AppSettings, kwargs: dict):
+def _build_prompt(settings: AppSettings, kwargs: dict):
     default_args = {
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
@@ -68,33 +71,36 @@ def __build_prompt__(settings: AppSettings, kwargs: dict):
     return widget.Prompt(**args)
 
 
-def __build_task_list_widget__(settings: AppSettings, args: dict):
+def _build_task_list_widget(settings: AppSettings, args: dict):
     return build_task_list_widget(settings, args)
 
 
 WIDGETS = {
-    "group_box": build_group_box,
-    "separator": __build_separator__,
-    "prompt": __build_prompt__,
-    "task_list": __build_task_list_widget__,
-    "window_name": build_window_name,
-    "weather": build_weather_widget,
-    "clock": build_clock_widget,
-    "spacer": build_spacer,
-    "thermal": build_thermal_widget,
-    "cpu": build_cpu_widget,
-    "memory": build_memory_widget,
+    "arrow": build_arrow_widget,
+    "app_menu": build_app_menu_widget,
     "battery": build_battery_widget,
-    "volume": build_volume_widget,
-    "notification": build_notification_widget,
-    "powermenu": build_powermenu_widget,
-    "hidden_tray": build_hidden_tray,
+    "clock": build_clock_widget,
+    "cpu": build_cpu_widget,
     "current_layout": build_current_layout_widget,
     "github": build_github_widget,
+    "group_box": build_group_box,
+    "hidden_tray": build_hidden_tray,
+    "memory": build_memory_widget,
+    "notification": build_notification_widget,
+    "powermenu": build_powermenu_widget,
+    "separator": _build_separator,
+    "spacer": build_spacer_widget,
+    "prompt": _build_prompt,
+    "task_list": _build_task_list_widget,
+    "thermal": build_thermal_widget,
+    "volume": build_volume_widget,
+    "wallpaper": build_wallpaper_widget,
+    "weather": build_weather_widget,
+    "window_name": build_window_name_widget,
 }
 
 
-def __build_widget__(settings: AppSettings, widget_type: str, args: dict):
+def _build_widget(settings: AppSettings, widget_type: str, args: dict):
     builder = WIDGETS.get(widget_type)
 
     if builder is None:
@@ -103,12 +109,12 @@ def __build_widget__(settings: AppSettings, widget_type: str, args: dict):
     return builder(settings, args)
 
 
-def __build_widgets__(settings: AppSettings):
+def _build_widgets(settings: AppSettings):
     try:
         widgets: List[Any] = []
 
         for config in settings.bar.widgets:
-            next_widgets = __build_widget__(settings, config.type, config.args)
+            next_widgets = _build_widget(settings, config.type, config.args)
 
             if next_widgets is None:
                 logger.warn(

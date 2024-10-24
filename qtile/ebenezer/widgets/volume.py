@@ -13,6 +13,7 @@ def build_volume_widget(settings: AppSettings, kwargs: dict):
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
         "foreground": settings.colors.fg_normal,
+        "background": settings.colors.bg_topbar_arrow,
         "padding": 5,
         "emoji": True,
         "emoji_list": ["󰝟", "󰕿", "󰖀", "󰕾"],
@@ -21,12 +22,14 @@ def build_volume_widget(settings: AppSettings, kwargs: dict):
         "mouse_callbacks": {"Button1": lazy.spawn(settings.commands.get("mixer"))},
     }
 
-    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+    args = build_widget_args(
+        settings, default_args, kwargs, ["foreground", "background"]
+    )
 
     return widget.Volume(**args)
 
 
-def __get_current_volume__(settings: AppSettings):
+def _get_current_volume(settings: AppSettings):
     volume_level = settings.commands.get("volume_level")
 
     if volume_level is None:
@@ -37,7 +40,7 @@ def __get_current_volume__(settings: AppSettings):
     return output.stdout.replace("%", "").replace("\n", "")
 
 
-def __is_muted__(settings: AppSettings):
+def _is_muted(settings: AppSettings):
     cmd = settings.commands.get("mute_status")
 
     if cmd is None:
@@ -48,33 +51,33 @@ def __is_muted__(settings: AppSettings):
     return output.stdout.strip() == "yes"
 
 
-def __push_volume_notification__(settings: AppSettings, message: str):
-    level = __get_current_volume__(settings) or "0"
+def _push_volume_notification(settings: AppSettings, message: str):
+    level = _get_current_volume(settings) or "0"
     message = f"{message} {level}%"
     push_notification_progress(message=message, progress=int(level))
 
 
-def __volume_up__(settings: AppSettings):
+def _volume_up(settings: AppSettings):
     volume_cmd = settings.commands.get("volume_up")
 
     @lazy.function
     def inner(qtile):
-        level = int(__get_current_volume__(settings) or "0")
+        level = int(_get_current_volume(settings) or "0")
 
         if level > 115:
             return
 
-        __unmute__(settings)
+        _unmute(settings)
 
         if volume_cmd:
             run_shell_command(volume_cmd)
 
-        __push_volume_notification__(settings, "󰝝 Volume")
+        _push_volume_notification(settings, "󰝝 Volume")
 
     return inner
 
 
-def __volume_down__(settings: AppSettings):
+def _volume_down(settings: AppSettings):
     volume_cmd = settings.commands.get("volume_down")
 
     @lazy.function
@@ -82,20 +85,20 @@ def __volume_down__(settings: AppSettings):
         if volume_cmd:
             run_shell_command(volume_cmd)
 
-        __push_volume_notification__(settings, "󰝞 Volume")
+        _push_volume_notification(settings, "󰝞 Volume")
 
     return inner
 
 
-def __lazy_unmute__(settings: AppSettings):
+def _lazy_unmute(settings: AppSettings):
     @lazy.function
     def inner(qtile):
-        __unmute__(settings, notify=True)
+        _unmute(settings, notify=True)
 
     return inner
 
 
-def __unmute__(settings: AppSettings, notify=False):
+def _unmute(settings: AppSettings, notify=False):
     volume_cmd = settings.commands.get("mute_off")
 
     if volume_cmd:
@@ -105,21 +108,21 @@ def __unmute__(settings: AppSettings, notify=False):
         push_notification("Volume 󰖁", "Muted")
 
 
-def __lazy_mute_toggle__(settings: AppSettings):
+def _lazy_mute_toggle(settings: AppSettings):
     @lazy.function
     def inner(qtile):
-        __mute_toggle__(settings)
+        _mute_toggle(settings)
 
     return inner
 
 
-def __mute_toggle__(settings: AppSettings):
+def _mute_toggle(settings: AppSettings):
     volume_cmd = settings.commands.get("mute")
 
     if volume_cmd:
         run_shell_command(volume_cmd)
 
-    if __is_muted__(settings):
+    if _is_muted(settings):
         push_notification("Volume ", "Muted")
     else:
         push_notification("Volume  󰕾", "On")
@@ -130,25 +133,25 @@ def setup_volume_keys(settings: AppSettings):
         Key(
             [],
             "XF86AudioRaiseVolume",
-            __volume_up__(settings),
+            _volume_up(settings),
             desc="Up the volume",
         ),
         Key(
             [],
             "XF86AudioLowerVolume",
-            __volume_down__(settings),
+            _volume_down(settings),
             desc="Down the volume",
         ),
         Key(
             [],
             "XF86AudioMute",
-            __lazy_mute_toggle__(settings),
+            _lazy_mute_toggle(settings),
             desc="Toggle mute",
         ),
         Key(
             [],
             "XF86AudioMicMute",
-            __lazy_unmute__(settings),
+            _lazy_unmute(settings),
             desc="Toggle mute the microphone",
         ),
         Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play-pause"),

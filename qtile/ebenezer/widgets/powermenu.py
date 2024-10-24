@@ -5,7 +5,7 @@ from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
 
 
-def __powermenu_modal__(settings: AppSettings):
+def _powermenu_modal(settings: AppSettings):
     def inner():
         return run_shell_command(settings.commands.get("powermenu"), **{})
 
@@ -18,9 +18,12 @@ def build_powermenu_widget(settings: AppSettings, kwargs: dict):
         "fontsize": settings.fonts.font_icon_size,
         "padding": 4,
         "foreground": settings.colors.fg_normal,
-        "mouse_callbacks": {"Button1": __powermenu_modal__(settings)},
+        "background": settings.colors.bg_topbar_arrow,
+        "mouse_callbacks": {"Button1": _powermenu_modal(settings)},
     }
 
-    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+    args = build_widget_args(
+        settings, default_args, kwargs, ["foreground", "background"]
+    )
 
     return widget.TextBox(args.pop("text", ""), **args)
