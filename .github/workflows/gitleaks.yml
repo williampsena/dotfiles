@@ -1,12 +1,13 @@
 name: Gitleaks Scan
+run-name: Gitleaks Scan in [${{ github.ref_name }}] @${{ github.actor }}
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch if necessary
+      - main
   pull_request:
     branches:
-      - main  # Change this to your default branch if necessary
+      - main
 
 jobs:
   gitleaks:

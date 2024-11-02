@@ -1,5 +1,7 @@
 # About
 
+![test](https://github.com/williampsena/dotfiles/actions/workflows/qtille-test.yml/badge.svg?branch=main)
+
 This repository includes my dot files and python scripts for Qtile.
 
 This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".

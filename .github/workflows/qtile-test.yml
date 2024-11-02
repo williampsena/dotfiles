@@ -1,0 +1,30 @@
+name: Qtile tests
+run-name: Qtile tests in [${{ github.ref_name }}] @${{ github.actor }}
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python and install dependencies
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12' 
+      run: |
+        make install
+      working-directory: ./qtile
+
+    - name: Run tests
+      run: |
+        make tests
+      working-directory: ./qtile
