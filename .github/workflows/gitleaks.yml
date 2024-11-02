@@ -3,10 +3,10 @@ name: Gitleaks Scan
 on:
   push:
     branches:
-      - main  # Change to your main branch if different
+      - main  # Change this to your default branch if necessary
   pull_request:
     branches:
-      - main  # Change to your main branch if different
+      - main  # Change this to your default branch if necessary
 
 jobs:
   gitleaks:
@@ -14,21 +14,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install Gitleaks
-        run: |
-          wget https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64.gz
-          gunzip gitleaks-linux-amd64.gz
-          chmod +x gitleaks-linux-amd64
-          sudo mv gitleaks-linux-amd64 /usr/local/bin/gitleaks
+        uses: actions/checkout@v3
 
       - name: Run Gitleaks
-        run: |
-          gitleaks detect --source . --report-format json --report-path gitleaks_report.json || true
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} 
+          args: detect --report-format json --report-path gitleaks_report.json || true
 
       - name: Upload Gitleaks report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: gitleaks-report
           path: gitleaks_report.json
