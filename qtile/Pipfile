@@ -12,6 +12,7 @@ psutil = "*"
 pyyaml = "*"
 isort = "*"
 cairocffi = "*"
+pytest = "*"
 
 [dev-packages]
 black = "*"
@@ -22,6 +23,7 @@ types-psutil = "*"
 types-requests = "*"
 types-pillow = "*"
 mypy = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.12"
