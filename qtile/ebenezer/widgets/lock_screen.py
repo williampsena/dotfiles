@@ -121,7 +121,7 @@ def _remove_output_files():
 
 def _build_joke_image(settings: AppSettings, joke: str, width: int, height: int):
     img = Image.new(
-        "RGB", (width, height), color=settings.lock_screen.joke_foreground_color
+        "RGB", (width, height), color=settings.colors.lock_screen_joke_foreground_color
     )
     draw = ImageDraw.Draw(img)
 
@@ -139,7 +139,7 @@ def _build_joke_image(settings: AppSettings, joke: str, width: int, height: int)
         position,
         joke,
         font=font,
-        fill=settings.lock_screen.joke_text_color,
+        fill=settings.colors.lock_screen_joke_text_color,
     )
 
     img.save(JOKE_OUTPUT_FILE)
@@ -243,14 +243,16 @@ def run_i3_lock(settings: AppSettings):
         font_size=settings.lock_screen.font_size,
         font_size_medium=int(settings.lock_screen.font_size / 1.8),
         blurtype=settings.lock_screen.blurtype,
-        blank=settings.lock_screen.blank_color,
-        clear=settings.lock_screen.clear_color,
-        default=settings.lock_screen.default_color,
-        key=settings.lock_screen.key_color,
-        text=settings.lock_screen.text_color,
-        wrong=settings.lock_screen.wrong_color,
-        verifying=settings.lock_screen.verifying_color,
+        blank=settings.colors.lock_screen_blank_color,
+        clear=settings.colors.lock_screen_clear_color,
+        default=settings.colors.lock_screen_default_color,
+        key=settings.colors.lock_screen_key_color,
+        text=settings.colors.lock_screen_text_color,
+        wrong=settings.colors.lock_screen_wrong_color,
+        verifying=settings.colors.lock_screen_verifying_color,
     ).strip()
+
+    logger.warning(settings.colors.lock_screen_verifying_color)
 
     cmd_options = re.sub(r"\s+", " ", cmd_options)
 

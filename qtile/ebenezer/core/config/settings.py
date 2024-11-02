@@ -1,16 +1,18 @@
 from pathlib import Path
 from typing import Any, List
+
+from libqtile.log_utils import logger
+
 from ebenezer.core.config.applications import AppSettingsApplications
 from ebenezer.core.config.bar import AppSettingsBar
 from ebenezer.core.config.colors import AppSettingsColors
 from ebenezer.core.config.environment import AppSettingsEnvironment
 from ebenezer.core.config.fonts import AppSettingsFonts
+from ebenezer.core.config.keybindings import AppSettingsKeyBinding, build_keybindings
 from ebenezer.core.config.loader import load_raw_settings
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.monitoring import AppSettingsMonitoring
 from ebenezer.core.files import qtile_home
-from ebenezer.core.config.keybindings import AppSettingsKeyBinding, build_keybindings
-from libqtile.log_utils import logger
 
 
 def _load_config_file(name: str) -> str | None:
@@ -60,9 +62,11 @@ class AppSettings:
         self.startup = kwargs.get("startup", self.startup)
 
 
-def load_settings(
-    config_filepath=None, colors_filepath=None, applications_filepath=None
-):
+def load_settings_by_files(
+    config_filepath=None,
+    colors_filepath=None,
+    applications_filepath=None,
+) -> AppSettings:
     if config_filepath is None:
         config_filepath = _load_config_file("config")
 
@@ -77,6 +81,11 @@ def load_settings(
         colors_filepath=colors_filepath,
         applications_filepath=applications_filepath,
     )
+
+    return load_settings(raw_settings)
+
+
+def load_settings(raw_settings: dict) -> AppSettings:
     raw_keys = ["commands", "floating", "groups", "groups_layout", "startup"]
     args = {k: v for k, v in raw_settings.items() if k in raw_keys}
 

@@ -2,9 +2,14 @@ from typing import List
 
 from ebenezer.core.config.settings import AppSettings
 
+DEFAULT_COLOR_ARGS: List[str] = ["foreground", "background"]
+
 
 def build_widget_args(
-    settings: AppSettings, default_args: dict, args: dict, color_keys: List[str]
+    settings: AppSettings,
+    default_args: dict,
+    args: dict,
+    color_keys: List[str] = DEFAULT_COLOR_ARGS,
 ):
     args = default_args | args
 

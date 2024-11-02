@@ -1,31 +1,31 @@
-from pathlib import Path
+from ebenezer.core.dict import merge_dicts_recursive
+from ebenezer.core.yaml import read_yaml_file
 
-import yaml
-
-TEST_CONFIG = Path("config.test.yml")
+TEST_CONFIG = "config.test.yml"
+TEST_COLOR_CONFIG = "colors.test.yml"
 
 
 def load_raw_test_settings():
-    return load_raw_settings(str(TEST_CONFIG))
+    return load_raw_settings(
+        config_filepath=TEST_CONFIG, colors_filepath=TEST_COLOR_CONFIG
+    )
 
 
 def load_raw_settings(
-    config_filepath=None, colors_filepath=None, applications_filepath=None
-):
-    return merge_yaml([config_filepath, colors_filepath, applications_filepath])
+    config_filepath=None,
+    colors_filepath=None,
+    applications_filepath=None,
+    keybindings_filepath=None,
+) -> dict:
+    return merge_yaml(
+        [colors_filepath, applications_filepath, keybindings_filepath, config_filepath]
+    )
 
 
-def merge_yaml(file_paths):
-    merged_data = {}
-
+def merge_yaml(file_paths, merged_data: dict = {}) -> dict:
     for file_path in file_paths:
         if file_path:
-            data = _read_yaml_file(file_path)
-            merged_data.update(data)
+            data = read_yaml_file(file_path)
+            merged_data = merge_dicts_recursive(merged_data, data)
 
     return merged_data
-
-
-def _read_yaml_file(filepath: str):
-    with open(filepath, "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)

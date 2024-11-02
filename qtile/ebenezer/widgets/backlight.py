@@ -12,13 +12,14 @@ def build_backlight_widget(settings: AppSettings, kwargs: dict):
     default_args = {
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
+        "foreground": settings.colors.fg_normal,
         "backlight_name": settings.environment.backlight_name,
         "fmt": " ",
         "padding": 3,
         "mouse_callbacks": {"Button1": _backlight_level(settings)},
     }
 
-    args = build_widget_args(settings, default_args, kwargs, [])
+    args = build_widget_args(settings, default_args, kwargs)
 
     return widget.Backlight(**args)
 

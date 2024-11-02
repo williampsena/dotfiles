@@ -15,7 +15,7 @@ def test_parse_colors():
         bg_systray="#37444b",
         bg_selected="#5c6b73",
         fg_blue="#304FFE",
-        fg_ligth_blue="#B3E5FC",
+        fg_light_blue="#B3E5FC",
         fg_yellow="#FFFF00",
         fg_red="#D50000",
         fg_orange="#FFC107",
@@ -35,6 +35,15 @@ def test_parse_colors():
         taglist_bg_focus="#37474F",
         group_focus="#e0fbfc",
         group_normal="#C4C7C5",
+        lock_screen_blank_color="#00000000",
+        lock_screen_clear_color="#ffffff22",
+        lock_screen_default_color="#9db4c0",
+        lock_screen_key_color="#8a8ea800",
+        lock_screen_text_color="#4BC1CC",
+        lock_screen_wrong_color="#D50000",
+        lock_screen_verifying_color="#41445800",
+        lock_screen_joke_foreground_color="#000",
+        lock_screen_joke_text_color="#fff",
     )
 
     assert colors.__dict__ == expected.__dict__

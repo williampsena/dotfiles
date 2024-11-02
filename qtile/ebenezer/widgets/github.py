@@ -1,6 +1,7 @@
 import requests
 from libqtile import widget
 from libqtile.lazy import lazy
+from libqtile.log_utils import logger
 from libqtile.widget import base
 
 from ebenezer.core.command import build_shell_command
@@ -47,8 +48,9 @@ class GitHubNotifications(base.ThreadPoolText):
                 )
 
             response = request_retry(_do_request)
+            status_code = response.status_code
 
-            if response.status_code == 200:
+            if status_code == 200:
                 notifications = response.json()
                 count = len(notifications)
 
@@ -59,9 +61,11 @@ class GitHubNotifications(base.ThreadPoolText):
                     self.icon.foreground = self.icon.foreground_alert
                     return f"{count}+"
             else:
-                return "GitHub: API Error"
+                logger.warning("GitHub API Error... {status_code}")
+                return " "
         except Exception as e:
-            return f"GitHub: {e}"
+            logger.warning("GitHub Notifications Error: {e}")
+            return " "
 
 
 def build_github_widget(settings: AppSettings, kwargs: dict):
@@ -76,12 +80,7 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
         "mouse_callbacks": {"Button1": go_to_notifications_url(settings)},
     }
 
-    icon_args = build_widget_args(
-        settings,
-        default_icon_args,
-        kwargs.get("icon", {}),
-        ["foreground", "background"],
-    )
+    icon_args = build_widget_args(settings, default_icon_args, kwargs.get("icon", {}))
 
     icon_widget = widget.TextBox(f"{icon_args.pop("text", "")}", **icon_args)
 
@@ -95,12 +94,7 @@ def build_github_widget(settings: AppSettings, kwargs: dict):
         "background": settings.colors.bg_topbar_arrow,
     }
 
-    args = build_widget_args(
-        settings,
-        default_args,
-        kwargs.get("widget", {}),
-        ["foreground", "background"],
-    )
+    args = build_widget_args(settings, default_args, kwargs.get("widget", {}))
 
     return [
         icon_widget,

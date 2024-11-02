@@ -13,7 +13,7 @@ def test_parse_environment():
         wallpaper_timeout="60",
         os_logo="/home/foo/logos/linux.svg",
         os_logo_icon="󰌽",
-        os_logo_icon_color="#6200EA",
+        os_logo_icon_color="fg_purple",
         theme="ebenezer",
         backlight_name="",
         weather_api_key="foo",

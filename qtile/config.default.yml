@@ -7,7 +7,7 @@ environment:
   os_logo: /home/foo/logos/linux.svg
   theme: ebenezer
   os_logo_icon: 󰌽
-  os_logo_icon_color: "#6200EA"
+  os_logo_icon_color: "fg_purple"
   weather_api_key: foo
   city_id: 1
 
@@ -76,6 +76,44 @@ fonts:
   font_size: 14
   font_icon_size: 16
 
+keybindings:
+  - { name: Launch terminal, keys: $mod Return, action: terminal }
+  - { name: Launcher, keys: $mod shift Return, action: spawn_command, command: launcher }
+  - { name: Launch Window, keys: $mod control Tab, action: spawn_command, command: launcher_windows }
+  - { name: Web browser, keys: $mod b, action: browser }
+  - { name: Lock Screen, keys: $mod control x, action: lock_screen }
+
+  # qtile keys
+  - { name: Reload the config, keys: $mod shift r, action: reload_config }
+  - { name: Shutdown Qtile, keys: $mod control q, action: shutdown }
+
+  # window key
+  - { name: Toggle between layouts, keys: $mod Tab, action: next_layout }
+  - { name: Kill focused window, keys: $mod shift c, action: kill_window }
+  - { name: Move focus to left, keys: $mod h, action: focus_left }
+  - { name: Move focus to right, keys: $mod l, action: focus_right }
+  - { name: Move focus down, keys: $mod j, action: focus_down }
+  - { name: Move focus up, keys: $mod k, action: focus_up }
+  - { name: Move window focus to other window, keys: $mod space, action: focus_next }
+  - { name: Toggle fullscreen on the focused window, keys: $mod f, action: fullscreen }
+  - { name: Toggle floating on the focused window, keys: $mod t, action: floating }
+  - { name: Move window to the left, keys: $mod shift h, action: shuffle_left }
+  - { name: Move window to the right, keys: $mod shift l, action: shuffle_right }
+  - { name: Move window down, keys: $mod shift j, action: shuffle_down }
+  - { name: Move window up, keys: $mod shift k, action: shuffle_up }
+  - { name: Grow window to the left, keys: $mod control h, action: grow_left }
+  - { name: Grow window to the right, keys: $mod control l, action: grow_right }
+  - { name: Grow window down, keys: $mod control j, action: grow_down }
+  - { name: Grow window up, keys: $mod control k, action: grow_up }
+  - { name: Reset all window sizes, keys: $mod n, action: reset_windows }
+
+  # screenshot
+  - { name: Take a screenshot, keys: print, action: spawn_command, command: screenshot }
+  - { name: Take a screenshot of the full desktop, keys: $mod print, action: spawn_command, command: screenshot_full }
+
+  # options
+  # - { name: Spawn a command using a prompt widget, keys: $mod r, action: cmd }
+
 lock_screen:
   command: ~/.config/qtile/lock.py
   timeout: 10
@@ -85,18 +123,9 @@ lock_screen:
   joke_font_path: /usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf
   joke_font_path_alt: /usr/share/fonts/liberation/LiberationMono-Bold.ttf
   joke_providers: reddit,icanhazdad
-  joke_foreground_color: "#000"
-  joke_text_color: "#fff"
   icanhazdad_joke_url: https://icanhazdadjoke.com/
   reddit_joke_url: https://www.reddit.com/r/ProgrammerDadJokes.json
   blurtype: "0x7"
-  blank_color: "#00000000"
-  clear_color: "#ffffff22"
-  default_color: "#9db4c0"
-  key_color: "#8a8ea800"
-  text_color: "#4BC1CC"
-  wrong_color: "#D50000"
-  verifying_color: "#41445800"
 
 monitoring:
   default_color: 'fg_normal'

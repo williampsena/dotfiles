@@ -9,7 +9,7 @@ from ebenezer.core.config.settings import AppSettings, load_settings
 
 def test_parse_settings():
     raw_settings = load_raw_test_settings()
-    settings = load_settings(config_file=TEST_CONFIG)
+    settings = load_settings(raw_settings)
     expected = AppSettings(
         environment=AppSettingsEnvironment(
             mod="mod4",
@@ -19,7 +19,7 @@ def test_parse_settings():
             wallpaper_timeout="60",
             os_logo="/home/foo/logos/linux.svg",
             os_logo_icon="󰌽",
-            os_logo_icon_color="#6200EA",
+            os_logo_icon_color="fg_purple",
             theme="ebenezer",
             backlight_name="",
             weather_api_key="foo",
@@ -65,13 +65,15 @@ def test_parse_settings():
             bg_systray="#37444b",
             bg_selected="#5c6b73",
             fg_blue="#304FFE",
-            fg_ligth_blue="#B3E5FC",
+            fg_light_blue="#B3E5FC",
             fg_yellow="#FFFF00",
             fg_red="#D50000",
             fg_orange="#FFC107",
             fg_purple="#AA00FF",
             fg_green="#4BC1CC",
             fg_gray="#9db4c0",
+            fg_black="#000000",
+            fg_white="#ffffff",
             bg_topbar="#282a36",
             bg_topbar_arrow="#5c6b73",
             bg_topbar_selected="#6200EA",
@@ -83,6 +85,16 @@ def test_parse_settings():
             taglist_bg_focus="#37474F",
             group_focus="#e0fbfc",
             group_normal="#C4C7C5",
+            lock_screen_blank_color="#00000000",
+            lock_screen_clear_color="#ffffff22",
+            lock_screen_default_color="#9db4c0",
+            lock_screen_key_color="#8a8ea800",
+            lock_screen_text_color="#4BC1CC",
+            lock_screen_wrong_color="#D50000",
+            lock_screen_verifying_color="#41445800",
+            lock_screen_joke_foreground_color="#000",
+            lock_screen_joke_text_color="#fff",
+            theme=None,
         ),
         commands={
             "screenshot": "flameshot gui --clipboard --path ~/Pictures/Screenshots",
@@ -97,18 +109,9 @@ def test_parse_settings():
             joke_font_path="/usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf",
             joke_font_size=17,
             joke_providers="reddit,icanhazdad",
-            joke_foreground_color="#000",
-            joke_text_color="#fff",
             icanhazdad_joke_url="https://icanhazdadjoke.com/",
             reddit_joke_url="https://www.reddit.com/r/ProgrammerDadJokes.json",
             blurtype="0x7",
-            blank_color="#00000000",
-            clear_color="#ffffff22",
-            default_color="#9db4c0",
-            key_color="#8a8ea800",
-            text_color="#4BC1CC",
-            wrong_color="#D50000",
-            verifying_color="#41445800",
         ),
         monitoring=AppSettingsMonitoring(
             default_color="fg_normal",

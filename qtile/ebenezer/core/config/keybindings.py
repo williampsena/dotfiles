@@ -1,4 +1,5 @@
 from typing import List
+
 from libqtile.log_utils import logger
 
 

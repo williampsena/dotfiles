@@ -63,9 +63,6 @@ def _build_prompt(settings: AppSettings, kwargs: dict):
         settings,
         default_args,
         kwargs,
-        [
-            "foreground",
-        ],
     )
 
     return widget.Prompt(**args)

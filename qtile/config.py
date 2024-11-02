@@ -29,13 +29,16 @@ from libqtile.config import Click, Drag, Match
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
-from ebenezer.core.config.settings import load_settings
+from ebenezer.core.colors import preload_colors
+from ebenezer.core.config.settings import load_settings_by_files
 from ebenezer.core.groups import build_groups
 from ebenezer.core.keys import build_keys
 from ebenezer.core.screen import build_screen
 from ebenezer.core.startup import run_startup_once
 
-settings = load_settings()
+settings = load_settings_by_files()
+settings = preload_colors(settings)
+
 keys = build_keys(settings)
 groups, keys = build_groups(keys, settings)
 mod = settings.environment.modkey
@@ -146,7 +149,7 @@ layouts = [
 @hook.subscribe.startup_once
 def start_once():
     try:
-        settings = load_settings()
+        settings = load_settings_by_files()
         run_startup_once(settings)
         change_wallpaper(settings)
     except Exception as error:

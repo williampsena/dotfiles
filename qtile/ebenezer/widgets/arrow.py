@@ -13,6 +13,6 @@ def build_arrow_widget(settings: AppSettings, kwargs: dict):
         "padding": 0,
     }
 
-    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+    args = build_widget_args(settings, default_args, kwargs)
 
     return widget.TextBox(**args)

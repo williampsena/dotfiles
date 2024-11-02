@@ -50,7 +50,7 @@ def build_thermal_widget(settings: AppSettings, kwargs: dict):
         "font": settings.fonts.font_icon,
         "fontsize": settings.fonts.font_icon_size,
         "padding": 2,
-        "foreground": settings.colors.fg_ligth_blue,
+        "foreground": settings.colors.fg_light_blue,
         "background": settings.colors.bg_topbar_arrow,
     }
 
@@ -58,7 +58,6 @@ def build_thermal_widget(settings: AppSettings, kwargs: dict):
         settings,
         default_icon_args,
         kwargs.get("icon", {}),
-        ["foreground", "background"],
     )
 
     default_args = {

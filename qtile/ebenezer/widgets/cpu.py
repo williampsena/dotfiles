@@ -55,7 +55,6 @@ def build_cpu_widget(settings: AppSettings, kwargs: dict):
         settings,
         default_icon_args,
         kwargs.get("icon", {}),
-        ["foreground", "background"],
     )
 
     default_args = {
@@ -70,9 +69,7 @@ def build_cpu_widget(settings: AppSettings, kwargs: dict):
         "background": settings.colors.bg_topbar_arrow,
     }
 
-    args = build_widget_args(
-        settings, default_args, kwargs.get("sensor", {}), ["foreground", "background"]
-    )
+    args = build_widget_args(settings, default_args, kwargs.get("sensor", {}))
 
     return [
         widget.TextBox(f"{icon_args.pop("text", "")} ", **icon_args),

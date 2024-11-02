@@ -1,12 +1,11 @@
 import os
+from typing import List, Any
 
-from libqtile import qtile
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from libqtile.log_utils import logger
-from typing import List
+
+from ebenezer.core.command import lazy_spawn
 from ebenezer.core.config.keybindings import AppSettingsKeyBinding
-from ebenezer.core.command import build_shell_command, lazy_command, lazy_spawn
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.backlight import setup_backlight_keys
 from ebenezer.widgets.volume import setup_volume_keys
@@ -196,7 +195,7 @@ def build_keys(settings: AppSettings):
     return keys
 
 
-def _build_keys_from_config(settings: AppSettings, keys: List[any]):
+def _build_keys_from_config(settings: AppSettings, keys: List[Any]):
     for binding in settings.keybindings:
         action_callable = ACTIONS.get(binding.action)
         key = None

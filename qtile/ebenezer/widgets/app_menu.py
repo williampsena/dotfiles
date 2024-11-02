@@ -14,7 +14,7 @@ def build_app_menu_widget(settings: AppSettings, kwargs: dict):
         "foreground": settings.environment.os_logo_icon_color,
     }
 
-    args = build_widget_args(settings, default_args, kwargs, ["foreground"])
+    args = build_widget_args(settings, default_args, kwargs)
     icon = kwargs.pop("icon", settings.environment.os_logo_icon)
 
     return widget.TextBox(f" {icon}", **args)

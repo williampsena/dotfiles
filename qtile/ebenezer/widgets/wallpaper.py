@@ -20,7 +20,9 @@ def build_wallpaper_widget(settings: AppSettings, kwargs: dict):
     }
 
     args = build_widget_args(
-        settings, default_args, kwargs, ["foreground", "background"]
+        settings,
+        default_args,
+        kwargs,
     )
     icon = kwargs.pop("icon", " ")
 

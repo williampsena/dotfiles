@@ -22,9 +22,7 @@ def build_volume_widget(settings: AppSettings, kwargs: dict):
         "mouse_callbacks": {"Button1": lazy.spawn(settings.commands.get("mixer"))},
     }
 
-    args = build_widget_args(
-        settings, default_args, kwargs, ["foreground", "background"]
-    )
+    args = build_widget_args(settings, default_args, kwargs)
 
     return widget.Volume(**args)
 

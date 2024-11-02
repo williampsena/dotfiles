@@ -1,5 +1,6 @@
 from typing import Any, List
 
+from libqtile import qtile
 from libqtile.config import Group, Key
 
 from ebenezer.core.config.settings import AppSettings

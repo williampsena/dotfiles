@@ -20,8 +20,6 @@ def build_battery_widget(settings: AppSettings, kwargs: dict):
         "background": settings.colors.bg_topbar_arrow,
     }
 
-    args = build_widget_args(
-        settings, default_args, kwargs, ["foreground", "background"]
-    )
+    args = build_widget_args(settings, default_args, kwargs)
 
     return widget.Battery(**args)

@@ -16,9 +16,7 @@ def build_hidden_tray(settings: AppSettings, kwargs: dict):
         "background": settings.colors.bg_topbar_arrow,
     }
 
-    args = build_widget_args(
-        settings, default_args, kwargs, ["foreground", "background"]
-    )
+    args = build_widget_args(settings, default_args, kwargs)
 
     default_systray_args = {
         "padding": 4,
@@ -31,7 +29,6 @@ def build_hidden_tray(settings: AppSettings, kwargs: dict):
         settings,
         default_systray_args,
         kwargs.get("systray", {}),
-        ["foreground", "background"],
     )
 
     default_textbox_args = {
@@ -45,21 +42,18 @@ def build_hidden_tray(settings: AppSettings, kwargs: dict):
         settings,
         default_textbox_args,
         kwargs.get("backlight", {}),
-        ["foreground", "background"],
     )
 
     wallpaper_args = build_widget_args(
         settings,
         default_textbox_args,
         kwargs.get("wallpaper", {}),
-        ["foreground", "background"],
     )
 
     space_args = build_widget_args(
         settings,
         default_textbox_args,
         kwargs.get("space", {}),
-        ["foreground", "background"],
     )
 
     return widget.WidgetBox(

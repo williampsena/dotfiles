@@ -1,7 +1,4 @@
 colors:
-  # you can choose a defined theme
-  # theme: $qtile_home/conf/themes/dracula.yml
-  
   fg_normal: "#e0e0e0"
   fg_focus: "#ffffff"
   fg_urgent: "#ff6b6b"

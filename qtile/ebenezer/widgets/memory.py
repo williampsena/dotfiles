@@ -57,7 +57,6 @@ def build_memory_widget(settings: AppSettings, kwargs: dict):
         settings,
         default_icon_args,
         kwargs.get("icon", {}),
-        ["foreground", "background"],
     )
 
     default_args = {
@@ -73,7 +72,9 @@ def build_memory_widget(settings: AppSettings, kwargs: dict):
     }
 
     args = build_widget_args(
-        settings, default_args, kwargs.get("sensor", {}), ["foreground", "background"]
+        settings,
+        default_args,
+        kwargs.get("sensor", {}),
     )
 
     return [
