@@ -1,0 +1,34 @@
+name: Gitleaks Scan
+
+on:
+  push:
+    branches:
+      - main  # Change to your main branch if different
+  pull_request:
+    branches:
+      - main  # Change to your main branch if different
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Gitleaks
+        run: |
+          wget https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64.gz
+          gunzip gitleaks-linux-amd64.gz
+          chmod +x gitleaks-linux-amd64
+          sudo mv gitleaks-linux-amd64 /usr/local/bin/gitleaks
+
+      - name: Run Gitleaks
+        run: |
+          gitleaks detect --source . --report-format json --report-path gitleaks_report.json || true
+
+      - name: Upload Gitleaks report
+        uses: actions/upload-artifact@v2
+        with:
+          name: gitleaks-report
+          path: gitleaks_report.json

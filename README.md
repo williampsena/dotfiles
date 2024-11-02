@@ -1,5 +1,9 @@
 # About
 
+![gitleaks status](https://github.com/williampsena/dotfiles/actions/workflows/gitleaks.yml/badge.svg?branch=main)
+
+
+
 This repository includes my dot files and lua scripts for Awesome Window Manager.
 
 # Awesome WM

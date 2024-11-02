@@ -1,0 +1,14 @@
+# Gitleaks Configuration
+
+# The following are the default rules that Gitleaks uses to detect leaks.
+[[rules]]
+  id = "ssh_key" 
+  description = "SSH Private Key"
+  regex = '''-----BEGIN OPENSSH PRIVATE KEY-----'''
+  tags = ["ssh", "key"]
+
+[[rules]]
+  id = "github_token" 
+  description = "Private GitHub Token"
+  regex = '''(?i)ghp_[0-9a-zA-Z]{36}'''
+  tags = ["github", "token"]

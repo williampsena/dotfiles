@@ -45,3 +45,6 @@ awesome/config.ini
 awesome/config.backup.ini
 
 .venv/*
+
+# gitleaks
+gitleaks_report.json
