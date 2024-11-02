@@ -1,7 +1,7 @@
 from ebenezer.core.config.colors import AppSettingsColors
 from ebenezer.core.config.environment import AppSettingsEnvironment
 from ebenezer.core.config.fonts import AppSettingsFonts
-from ebenezer.core.config.loader import TEST_CONFIG, load_raw_test_settings
+from ebenezer.core.config.loader import load_raw_test_settings
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.monitoring import AppSettingsMonitoring
 from ebenezer.core.config.settings import AppSettings, load_settings

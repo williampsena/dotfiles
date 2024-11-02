@@ -1,5 +1,5 @@
 import os
-from typing import List, Any
+from typing import Any, List
 
 from libqtile.config import Key
 from libqtile.lazy import lazy

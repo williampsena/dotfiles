@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+precommit: leaks
+
 leaks:
 	docker run --rm \
     -v $(PWD):/repo \
