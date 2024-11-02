@@ -8,7 +8,7 @@ local envs = require('ebenezer.envs')
 local colors = style.colors
 local markup = lain.util.markup
 
-local temperature_ok = markup.fontfg(style.font_icon, colors.fg_ligth_blue,
+local temperature_ok = markup.fontfg(style.font_icon, colors.fg_light_blue,
                                      '󱃃')
 local temperature_high = markup.fontfg(style.font_icon, colors.fg_red, '󱃂')
 

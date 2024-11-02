@@ -11,10 +11,10 @@ local markup = lain.util.markup
 local icon_clear_sky = markup.fontfg(style.font_icon, colors.fg_orange, "󰖨")
 local icon_few_clouds = markup.fontfg(style.font_icon, colors.fg_yellow, "")
 local icon_clouds = markup.fontfg(style.font_icon, colors.fg_gray, "")
-local icon_drizzle = markup.fontfg(style.font_icon, colors.fg_ligth_blue, "")
+local icon_drizzle = markup.fontfg(style.font_icon, colors.fg_light_blue, "")
 local icon_rain = markup.fontfg(style.font_icon, colors.fg_blue, "")
 local icon_thunder = markup.fontfg(style.font_icon, colors.fg_yellow, "")
-local icon_snow = markup.fontfg(style.font_icon, colors.fg_ligth_blue, "")
+local icon_snow = markup.fontfg(style.font_icon, colors.fg_light_blue, "")
 local icon_mist = markup.fontfg(style.font_icon, colors.fg_yellow, "")
 
 local function factory()
