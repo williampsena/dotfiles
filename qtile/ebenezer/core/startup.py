@@ -5,12 +5,16 @@ from libqtile.log_utils import logger
 from ebenezer.core.command import run_shell_command
 from ebenezer.core.config.settings import AppSettings
 
+DEFAULT_TIMEOUT = 3
+
 
 def run_startup_once(settings: AppSettings):
     for raw_cmd in settings.startup:
         try:
             cmd = settings.startup[raw_cmd]
-            run_shell_command(cmd, **_env_substitutions(settings))
+            run_shell_command(
+                cmd, timeout=DEFAULT_TIMEOUT, **_env_substitutions(settings)
+            )
             logger.info(f"the script {cmd} was loaded")
         except Exception as e:
             logger.warning(

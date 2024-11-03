@@ -1,9 +1,12 @@
 import subprocess
 from string import Template
+from typing import Optional
 
 from libqtile.lazy import lazy
 
 from ebenezer.core.files import resolve_file_path
+
+DEFAULT_TIMEOUT = 10
 
 
 def build_shell_command(raw_cmd: str, **kwargs: object) -> str:
@@ -12,7 +15,9 @@ def build_shell_command(raw_cmd: str, **kwargs: object) -> str:
     return cmd_template.safe_substitute(kwargs).strip()
 
 
-def run_shell_command(raw_cmd: str, **kwargs: object) -> subprocess.CompletedProcess:
+def run_shell_command(
+    raw_cmd: str, timeout: Optional[float] = 10, **kwargs: object
+) -> subprocess.CompletedProcess:
     return subprocess.run(
         build_shell_command(raw_cmd, **kwargs),
         shell=True,
