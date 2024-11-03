@@ -250,7 +250,7 @@ colors:
 
 ## Task List with Font Icon
 
-To turn task list icons compatible with bar design, I built an option to use [FontIconTaskList](./qtile/ebenezer/widgets/task_list.py)
+To make task list icons suitable with bar design, I added the option to use [FontIconTaskList](./qtile/ebenezer/widgets/task_list.py).
 
 ![theming](images/task_list_icon.png)
 
