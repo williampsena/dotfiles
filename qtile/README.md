@@ -248,8 +248,15 @@ colors:
 
 ![theming](images/theming.gif)
 
+## Task List with Font Icon
+
+To turn task list icons compatible with bar design, I built an option to use [FontIconTaskList](./qtile/ebenezer/widgets/task_list.py)
+
+![theming](images/task_list_icon.png)
+
 # TODO
 
+- Create *Ebenezer* 🪨 python package and github, allowing anyone to use components other than all dotfiles.
 - Add apt/pacman widget support.
 - Improve wifi widget information.
 - Build install script.
