@@ -1,6 +1,6 @@
 # About
 
-![test](https://github.com/williampsena/dotfiles/actions/workflows/qtille-test.yml/badge.svg?branch=main)
+![test](https://github.com/williampsena/dotfiles/actions/workflows/qtile-test.yml/badge.svg?branch=main)
 
 This repository includes my dot files and python scripts for Qtile.
 
