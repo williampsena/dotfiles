@@ -13,7 +13,7 @@ check:
 	$(PIPENV) run qtile check
 
 test:
-	$(PIPENV) run pytest -s -vv
+	$(PIPENV) run pytest --maxfail=5 --disable-warnings
 
 format:
 	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
