@@ -252,8 +252,6 @@ def run_i3_lock(settings: AppSettings):
         verifying=settings.colors.lock_screen_verifying_color,
     ).strip()
 
-    logger.warning(settings.colors.lock_screen_verifying_color)
-
     cmd_options = re.sub(r"\s+", " ", cmd_options)
 
     _run_command([cmd_options.split(" ")])
