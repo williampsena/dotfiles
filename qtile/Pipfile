@@ -13,6 +13,7 @@ pyyaml = "*"
 isort = "*"
 cairocffi = "*"
 pytest = "*"
+pytest-sugar = "*"
 
 [dev-packages]
 black = "*"
@@ -24,6 +25,7 @@ types-requests = "*"
 types-pillow = "*"
 mypy = "*"
 pytest = "*"
+pytest-sugar = "*"
 
 [requires]
 python_version = "3.12"
