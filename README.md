@@ -16,7 +16,7 @@ If you want to use this setup, [click here](./awesome/README.md) for instruction
 
 # Qtile
 
-- October 14, 2024
+- November 03, 2024
 
 ![screenshot](./qtile/images/desktop.png)
 
