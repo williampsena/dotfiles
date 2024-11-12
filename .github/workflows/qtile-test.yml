@@ -5,9 +5,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'qtile/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'qtile/**'
 
 jobs:
   test:
