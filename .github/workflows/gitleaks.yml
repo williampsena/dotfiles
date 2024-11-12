@@ -15,13 +15,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} 
-          args: detect --report-format json --report-path gitleaks_report.json || true
+          args: detect --report-format json --report-path gitleaks_report.json --config-path .gitleaks.toml
 
       - name: Upload Gitleaks report
         uses: actions/upload-artifact@v3
