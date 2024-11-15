@@ -171,6 +171,7 @@ bar:
     - type: 'notification'
     - type: 'spacer'
       length: 'stretch'
+    - type: 'arrow'
     # - type: 'thermal'
     #   sensor:
     #     threshold_medium: 55
