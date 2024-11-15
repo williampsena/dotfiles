@@ -107,6 +107,7 @@ cd /home/qtileuser
 
 if [ -d "dotfiles" ] && [ "$(ls -A dotfiles)" ]; then
     echo "dotfiles directory already exists and is not empty. Skipping clone."
+    (cd /home/qtileuser/dotfiles && git pull)
 else
     git clone https://github.com/williampsena/dotfiles
 fi
