@@ -276,6 +276,8 @@ su root # password: osboxes.org
 bash /tmp/install.sh
 ```
 
+> After installation, go to the Virtual Box GUI with the username 'qtileuser' and password 'qtile'.
+
 # TODO
 
 - Create *Ebenezer* 🪨 python package and github, allowing anyone to use components other than all dotfiles.
