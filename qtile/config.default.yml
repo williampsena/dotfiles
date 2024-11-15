@@ -161,7 +161,7 @@ bar:
       urgent_alert_method: border
       urgent_border: fg_urgent
     - type: 'separator'
-    #- type: 'task_list'
+    - type: 'task_list'
     #- type: 'weather'
     - type: 'spacer'
       length: 10
