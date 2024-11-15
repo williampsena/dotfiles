@@ -43,7 +43,7 @@ EOF
 }
 
 setup_dotfiles() {
-    local dotfiles="alacritty dunst flameshot fontconfig gtk-3.0 gtk-4.0 i3lock lxqt pcmanfm picom qt5ct qt6ct qtile rofi vscode xrandr .gtkr"
+    local dotfiles="alacritty dunst flameshot fontconfig gtk-3.0 gtk-4.0 i3lock lxqt pcmanfm picom qt5ct qt6ct qtile rofi vscode xrandr .gtkrc-2.0"
 
     mkdir -p $HOME/.config
 
