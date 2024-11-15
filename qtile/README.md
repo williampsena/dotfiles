@@ -254,6 +254,28 @@ To make task list icons suitable with bar design, I added the option to use [Fon
 
 ![theming](images/task_list_icon.png)
 
+# Testing with docker (virtual machine)
+
+Run the following command to prepare a virtual machine with Qtile.
+I advise you take a coffee 𓍢ִ໋☕️✧˚ ༘ ⋆
+
+
+
+```shell
+sudo pacman -S virt-manager libvirt qemu cloud-init
+
+make vm-iso
+make vm-create
+make vm-ssh
+```
+
+Then run this commands to install Qtile:
+
+```shell
+su root # password: osboxes.org
+bash /tmp/install.sh
+```
+
 # TODO
 
 - Create *Ebenezer* 🪨 python package and github, allowing anyone to use components other than all dotfiles.

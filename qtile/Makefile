@@ -25,3 +25,18 @@ truncate-logs:
 
 logs:
 	 cat ~/.local/share/qtile/qtile.log
+
+vm-iso:
+	bash vm.sh download_iso
+
+vm-create:
+	bash vm.sh create
+
+vm-start:
+	bash vm.sh start
+
+vm-stop:
+	bash vm.sh stop
+
+vm-ssh:
+	bash vm.sh ssh

@@ -15,6 +15,7 @@ applications:
     pcmanfm: 
     thunar: 
     dolphin: 
+    files: 
 
     # Text Editors
     code: 
@@ -33,6 +34,9 @@ applications:
     mpv:  
     spotify:  
 
+    # Video Editors
+    kdenlive: 
+
     # Office Applications
     libreoffice_writer: 
     libreoffice_calc: 
@@ -42,6 +46,7 @@ applications:
     htop: 
     gparted: 󰋊
     system_monitor: 󰨇
+    pamac: 󰏓
 
     # Communication
     slack: 
@@ -49,7 +54,7 @@ applications:
     telegram: 
 
     # Design Tools
-    gimp: 
+    gimp: 
     inkscape: 
     blender:  
     krita: 
@@ -67,3 +72,11 @@ applications:
 
     # Apps
     wine: 
+
+    # Virtualization
+    virtualbox: 
+
+    # Desktop (fallback)
+    gnome: 
+    kde: 
+    plasma: 

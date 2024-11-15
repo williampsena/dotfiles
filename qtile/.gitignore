@@ -170,3 +170,7 @@ config.bkp.yml
 colors.yml
 applications.yml
 keybindings.yml
+
+# virtual machine files
+.vm
+VBoxHeadless.dxvk-cache

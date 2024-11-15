@@ -95,7 +95,6 @@
     "All"
   ],
   "window.menuBarVisibility": "compact",
-  "redhat.telemetry.enabled": true,
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },

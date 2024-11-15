@@ -1,14 +1,14 @@
 environment:
   modkey: mod4
-  terminal: kitty
+  terminal: alacritty
   browser: firefox
-  wallpaper_dir: /home/foo/wallpapers
+  wallpaper_dir: /usr/share/backgrounds/archlinux/
   wallpaper_timeout: 60
-  os_logo: /home/foo/logos/linux.svg
+  os_logo: /home/qtileuser/logos/linux.svg
   theme: ebenezer
   os_logo_icon: 󰌽
-  os_logo_icon_color: "fg_purple"
-  weather_api_key: foo
+  os_logo_icon_color: "fg_white"
+  weather_api_key: none
   city_id: 1
 
 groups:
@@ -35,9 +35,9 @@ startup:
 
 
 commands:
-  screenshot: flameshot gui --clipboard --path ~/Pictures/Screenshots
-  screenshot_full: flameshot full --clipboard --path ~/Pictures/Screenshots
-  change_wallpaper: $scripts/wallpaper.sh set /home/william/Pictures/Wallpapers/Active
+  screenshot: flameshot gui --clipboard --path $home/Pictures/Screenshots
+  screenshot_full: flameshot full --clipboard --path $home/Pictures/Screenshots
+  change_wallpaper: $scripts/wallpaper.sh set /usr/share/backgrounds/archlinux/
   mixer: kitty "pulsemixer" # another option: pavucontrol
   powermenu: cd $rofi_home/powermenu && bash powermenu.sh
   volume_level: $scripts/volume.sh level
@@ -50,6 +50,11 @@ commands:
   backlight_level: $scripts/backlight.sh level
   backlight_up: $scripts/backlight.sh up
   backlight_down: $scripts/backlight.sh down
+  modal_confirm: cd $rofi_home/modals && bash confirm.sh "$title" "$question"
+  wallpaper_menu: cd $rofi_home/wallpaper_menu && bash wallpaper_menu.sh "$wallpaper_cmd"
+  open_url: zen-browser --new-tab $url
+  launcher: rofi -show drun -show-icons -theme $rofi_home/launcher.rasi
+  launcher_windows: rofi -show window -show-icons -theme $rofi_home/launcher.rasi
 
 floating:
   wm_class:
@@ -156,10 +161,8 @@ bar:
       urgent_alert_method: border
       urgent_border: fg_urgent
     - type: 'separator'
-    - type: 'task_list'
-    - type: 'window_name'
-      max_chars: 20
-    - type: 'weather'
+    #- type: 'task_list'
+    #- type: 'weather'
     - type: 'spacer'
       length: 10
     - type: 'clock'
