@@ -171,10 +171,10 @@ bar:
     - type: 'notification'
     - type: 'spacer'
       length: 'stretch'
-    - type: 'thermal'
-      sensor:
-        threshold_medium: 55
-        threshold_high: 65
+    # - type: 'thermal'
+    #   sensor:
+    #     threshold_medium: 55
+    #     threshold_high: 65
     - type: 'cpu'
       sensor:
         threshold_medium: 65
