@@ -13,14 +13,18 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 # Installing
 
 ```shell
-pacman -S install dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd unclutter nerd-fonts-inter ttf-fira-sans python-pyaml python-pulsectl-asyncio python-dbus-next python-psutil python-pytest-subtests python-pulsectl-asyncio pulsemixer papirus-icon-theme pavucontrol xautolock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor nm-applet picom-git yq tk pacmac-gtk3 polkit-gnome qt5ct qt6ct
+pacman -S kitty alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers notification-daemon xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock xss-lock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-requests python-pyaml python-dbus-next rofi pcmanfm-qt
 
-DOTFILES_PATH="$HOME/dotfiles"
-mkdir -p $DOTFILES_PATH
+DOTFILES_PATH=/tmp/dotfiles
 
-ln -sf $DOTFILES_PATH/qtile $HOME/.config/qtile  
-ln -sf $DOTFILES_PATH/dunst $HOME/.config/dunst  
+(cd /tmp && git clone https://github.com/williampsena/dotfiles)
+
+cp -R $DOTFILES_PATH/qtile $HOME/.config  
+cp -R $DOTFILES_PATH/dunst $HOME/.config
+cp -R $DOTFILES_PATH/picom $HOME/.config
 ```
+
+> 💡 You will see multiple dotfiles, and you can copy what is essential to your setup
 
 # Settings
 
@@ -254,15 +258,13 @@ To make task list icons suitable with bar design, I added the option to use [Fon
 
 ![theming](images/task_list_icon.png)
 
-# Testing with docker (virtual machine)
+# Testing with virtualbox (virtual machine)
 
 Run the following command to prepare a virtual machine with Qtile.
 I advise you take a coffee 𓍢ִ໋☕️✧˚ ༘ ⋆
 
-
-
 ```shell
-sudo pacman -S virt-manager libvirt qemu cloud-init
+sudo pacman -S virtualbox linux66-virtualbox-host-module
 
 make vm-iso
 make vm-create
