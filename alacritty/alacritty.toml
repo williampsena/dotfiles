@@ -1,2 +1,20 @@
-[general]
-import = ["dracula.toml"]
+import = ["~/.config/alacritty/dracula.toml"]
+
+[window]
+
+opacity = 0.9
+
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+decorations_theme_variant = "Dark"
+
+[font]
+
+normal.family = "Mononoki Nerd Font"
+bold.family = "Mononoki Nerd Font"
+italic.family = "Mononoki Nerd Font"
+bold_italic.family = "Mononoki Nerd Font"
+
+size = 12.0

@@ -51,12 +51,11 @@ setup_dotfiles() {
         src="$DOTFILES/$dotfile"
         dest="$HOME/.config/$dotfile"
 
-        mkdir -p $dest
-
         if [ -d "$src" ]; then
-            cp -R "$src" $HOME/.config || true
+            mkdir -p $dest
+            cp -R "$src" $HOME/.config
         else
-            cp "$src" $HOME/.config || true
+            cp "$src" "$dest"
         fi
     done
 }
@@ -105,7 +104,7 @@ setup_qtile() {
 mkdir -p /home/qtileuser
 cd /home/qtileuser
 
-if [ -d "dotfiles" ] && [ "$(ls -A dotfiles)" ]; then
+if [ -d "/home/qtileuser/dotfiles" ]; then
     echo "dotfiles directory already exists and is not empty. Skipping clone."
     (cd /home/qtileuser/dotfiles && git pull)
 else
