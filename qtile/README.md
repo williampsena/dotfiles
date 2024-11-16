@@ -276,7 +276,9 @@ su root # password: osboxes.org
 bash /tmp/install.sh
 ```
 
-> After installation, go to the Virtual Box GUI with the username 'qtileuser' and password 'qtile'.
+> After installation, go to the Virtual Box GUI with the username 'qtileuser' and password 'qtile'. Some widgets, such as thermal and backlight, will not operate in a virtual machine.
+
+![VM working](images/vm.png)
 
 # TODO
 
