@@ -34,7 +34,7 @@ startup:
   nm_applet: nm-applet &
   lock_screen: xautolock -time 10 -locker "python ~/.config/qtile/lock.py" &
   wallpaper_slideshow: $scripts/wallpaper.sh slideshow $wallpaper_dir $wallpaper_timeout &
-  dunst: pkill dunst && dunst &
+  dunst: dunst &
   pcmanfm: pcmanfm-qt --daemon-mode &
 
 commands:
