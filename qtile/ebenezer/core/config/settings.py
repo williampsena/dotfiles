@@ -1,8 +1,6 @@
 from pathlib import Path
 from typing import Any, List
 
-from libqtile.log_utils import logger
-
 from ebenezer.core.config.applications import AppSettingsApplications
 from ebenezer.core.config.bar import AppSettingsBar
 from ebenezer.core.config.colors import AppSettingsColors
@@ -13,6 +11,7 @@ from ebenezer.core.config.loader import load_raw_settings
 from ebenezer.core.config.lock_screen import AppSettingsLockScreen
 from ebenezer.core.config.monitoring import AppSettingsMonitoring
 from ebenezer.core.files import qtile_home
+from libqtile.log_utils import logger
 
 
 def _load_config_file(name: str) -> str | None:

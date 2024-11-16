@@ -1,7 +1,6 @@
-from libqtile import widget
-
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
+from libqtile import widget
 
 
 def build_battery_widget(settings: AppSettings, kwargs: dict):

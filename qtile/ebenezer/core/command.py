@@ -2,9 +2,8 @@ import subprocess
 from string import Template
 from typing import Optional
 
-from libqtile.lazy import lazy
-
 from ebenezer.core.files import resolve_file_path
+from libqtile.lazy import lazy
 
 DEFAULT_TIMEOUT = 10
 

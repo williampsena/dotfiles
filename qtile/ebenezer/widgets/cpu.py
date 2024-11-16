@@ -1,9 +1,8 @@
-from libqtile import widget
-from libqtile.widget import CPU
-
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.formatter import burn_text
 from ebenezer.widgets.helpers.args import build_widget_args
+from libqtile import widget
+from libqtile.widget import CPU
 
 
 class ColorizedCPUWidget(CPU):

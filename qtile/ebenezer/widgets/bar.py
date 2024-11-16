@@ -1,8 +1,5 @@
 from typing import Any, List
 
-from libqtile import bar, widget
-from libqtile.log_utils import logger
-
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.app_menu import build_app_menu_widget
 from ebenezer.widgets.arrow import build_arrow_widget
@@ -24,6 +21,8 @@ from ebenezer.widgets.volume import build_volume_widget
 from ebenezer.widgets.wallpaper import build_wallpaper_widget
 from ebenezer.widgets.weather import build_weather_widget
 from ebenezer.widgets.window_name import build_window_name_widget
+from libqtile import bar, widget
+from libqtile.log_utils import logger
 
 
 def build_bar(settings: AppSettings):

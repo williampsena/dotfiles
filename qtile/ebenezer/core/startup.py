@@ -1,9 +1,8 @@
 from typing import Any
 
-from libqtile.log_utils import logger
-
 from ebenezer.core.command import run_shell_command
 from ebenezer.core.config.settings import AppSettings
+from libqtile.log_utils import logger
 
 DEFAULT_TIMEOUT = 3
 

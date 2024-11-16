@@ -1,11 +1,10 @@
 from pathlib import Path
 
-from libqtile.log_utils import logger
-
 from ebenezer.core.config.settings import AppSettings, AppSettingsColors
 from ebenezer.core.dict import merge_dicts_recursive
 from ebenezer.core.files import resolve_file_path
 from ebenezer.core.yaml import read_yaml_file
+from libqtile.log_utils import logger
 
 
 def preload_colors(settings: AppSettings) -> AppSettings:

@@ -6,13 +6,12 @@ from string import Template
 from typing import Callable, List
 
 import requests
-from libqtile import widget
-from libqtile.log_utils import logger
-from PIL import Image, ImageDraw, ImageFont
-
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.core.notify import push_notification_no_history
 from ebenezer.core.requests import request_retry
+from libqtile import widget
+from libqtile.log_utils import logger
+from PIL import Image, ImageDraw, ImageFont
 
 OUTPUT_FILE = "/tmp/i3lock.png"
 JOKE_OUTPUT_FILE = "/tmp/joke.png"

@@ -1,10 +1,9 @@
 import subprocess
 
-from libqtile.widget import base
-
 from ebenezer.core.command import build_shell_command, run_shell_command
 from ebenezer.core.config.settings import AppSettings
 from ebenezer.widgets.helpers.args import build_widget_args
+from libqtile.widget import base
 
 
 def _notifications_actions(cmd: str):
