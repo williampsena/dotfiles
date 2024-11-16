@@ -3,13 +3,14 @@ environment:
   terminal: alacritty
   browser: firefox
   wallpaper_dir: /usr/share/backgrounds/archlinux/
-  wallpaper_timeout: 60
+  wallpaper_timeout: 30
   os_logo: /home/qtileuser/logos/linux.svg
   theme: ebenezer
-  os_logo_icon: 󰌽
+  os_logo_icon: 
   os_logo_icon_color: "fg_white"
-  weather_api_key: none
+  weather_api_key: foo
   city_id: 1
+  github_notifications_token: foo
 
 groups:
   browsers: 
@@ -22,17 +23,19 @@ groups:
 groups_layout:
   default: monadtall
   win: tile
+  files: floating
+  editors: monadtall
+  games: max
 
 startup:
   keyboard_layout: setxkbmap -model abnt2 -layout br && localectl set-x11-keymap br
-  pamac: GDK_BACKEND=x11 pamac-tray &
   polkit: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-  picom: picom --daemon
+  picom: picom --config $home/.config/picom/picom.conf --daemon 
   nm_applet: nm-applet &
   lock_screen: xautolock -time 10 -locker "python ~/.config/qtile/lock.py" &
   wallpaper_slideshow: $scripts/wallpaper.sh slideshow $wallpaper_dir $wallpaper_timeout &
   dunst: pkill dunst && dunst &
-
+  pcmanfm: pcmanfm-qt --daemon-mode &
 
 commands:
   screenshot: flameshot gui --clipboard --path $home/Pictures/Screenshots
@@ -77,9 +80,11 @@ fonts:
   font_light: Fira Code Nerd Font Light
   font_strong: Fira Code Nerd Font Semibold
   font_strong_bold: Fira Code Nerd Font Bold
-  font_icon: Fira Code Nerd Font Medium
   font_size: 14
+  font_icon: Fira Code Nerd Font Medium
   font_icon_size: 16
+  font_arrow: Fira Code Nerd Font Medium
+  font_arrow_size: 30
 
 keybindings:
   - { name: Launch terminal, keys: $mod Return, action: terminal }
@@ -120,17 +125,17 @@ keybindings:
   # - { name: Spawn a command using a prompt widget, keys: $mod r, action: cmd }
 
 lock_screen:
-  command: ~/.config/qtile/lock.py
+  command: "~/.config/qtile/lock.py"
   timeout: 10
-  font_size: 40
-  font: Mononoki Nerd Font Bold
-  joke_font_size: 17
-  joke_font_path: /usr/share/fonts/TTF/MononokiNerdFont-Regular.ttf
+  font_size: 45
+  font: Inter ExtraBold
+  joke_font_size: 22
+  joke_font_path: /usr/share/fonts/inter/IosevkaNerdFontMono-ExtraBoldOblique.ttf
   joke_font_path_alt: /usr/share/fonts/liberation/LiberationMono-Bold.ttf
   joke_providers: reddit,icanhazdad
   icanhazdad_joke_url: https://icanhazdadjoke.com/
   reddit_joke_url: https://www.reddit.com/r/ProgrammerDadJokes.json
-  blurtype: "0x7"
+  blurtype: "0x8"
 
 monitoring:
   default_color: 'fg_normal'
@@ -140,15 +145,15 @@ monitoring:
   threshold_high: 90
   burn: yes
 
-
 bar:
   position: 'top'
+  size: 34
   widgets:
     - type: 'group_box'
       margin_y: 3
       margin_x: 3
-      padding: 3
-      borderwidth: 3
+      padding: 0
+      borderwidth: 0
       active: fg_normal
       inactive: fg_normal
       this_current_screen_border: bg_topbar_selected
@@ -164,18 +169,20 @@ bar:
     - type: 'task_list'
     #- type: 'weather'
     - type: 'spacer'
-      length: 10
+      length: 5
     - type: 'clock'
     - type: 'spacer'
-      length: 10
+      length: 5
     - type: 'notification'
+      animated: true
     - type: 'spacer'
       length: 'stretch'
     - type: 'arrow'
-    # - type: 'thermal'
-    #   sensor:
-    #     threshold_medium: 55
-    #     threshold_high: 65
+    #- type: 'github'
+    #- type: 'thermal'
+    #  sensor:
+    #    threshold_medium: 55
+    #    threshold_high: 65
     - type: 'cpu'
       sensor:
         threshold_medium: 65
@@ -184,7 +191,6 @@ bar:
       sensor:
         threshold_medium: 65
         threshold_high: 85
-
     - type: 'battery'
     - type: 'volume'
     - type: 'powermenu'

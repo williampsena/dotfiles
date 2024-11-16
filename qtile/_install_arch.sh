@@ -18,7 +18,7 @@ check_root() {
 install_packages() {
     [ -f /var/lib/pacman/db.lck ] && rm /var/lib/pacman/db.lck
 
-    local packages="alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-requests python-pyaml python-dbus-next rofi"
+    local packages="alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock xss-lock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-requests python-pyaml python-dbus-next rofi pcmanfm-qt"
 
     pacman -Syu --noconfirm &&
         pacman -S --needed --noconfirm $packages &&
