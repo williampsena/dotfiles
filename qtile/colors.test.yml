@@ -20,6 +20,7 @@ colors:
   fg_gray: "#a0a0a0"
   fg_white: "#ffffff"
   fg_black: "#000000"
+  fg_selected: "#AA00FF"
   bg_topbar: "#1E1E1E"
   bg_topbar_selected: "#AA00FF"
   bg_topbar_arrow: "#3E0D5C"

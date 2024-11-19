@@ -24,6 +24,7 @@ def test_parse_colors():
         fg_gray="#9db4c0",
         fg_white="#ffffff",
         fg_black="#000000",
+        fg_selected="#AA00FF",
         bg_topbar="#282a36",
         bg_topbar_selected="#6200EA",
         bg_topbar_arrow="#5c6b73",

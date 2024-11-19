@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 
 import yaml
-from ebenezer.core.colors import _apply_theme_color
 from ebenezer.core.config.settings import AppSettings, AppSettingsColors
+from ebenezer.core.theme import _apply_theme_color
 
 
 class TestApplyThemeColor(unittest.TestCase):

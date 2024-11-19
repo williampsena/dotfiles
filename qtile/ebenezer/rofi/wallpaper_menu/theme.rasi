@@ -1,23 +1,12 @@
 /* Confirm Dialog */
 
-@import "_vars.rasi"
+@import "../_vars.rasi"
 
 * {
     background-color:       @background;
     text-color:             @foreground;
     font:                   "Inter Bold 14";
     opacity: 1.0; 
-}
-
-/*****----- Global Properties -----*****/
-* {
-    font:                        "Inter Bold 10";
-    background:                  #282a36;
-    background-alt:              #1E2320;
-    foreground:                  #FFFFFF;
-    selected:                    #6200EA;
-    active:                      #AA00FF;
-    urgent:                      #c678dd;
 }
 
 /*

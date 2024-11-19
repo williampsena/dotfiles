@@ -74,6 +74,7 @@ def test_parse_settings():
             fg_gray="#9db4c0",
             fg_black="#000000",
             fg_white="#ffffff",
+            fg_selected="#AA00FF",
             bg_topbar="#282a36",
             bg_topbar_arrow="#5c6b73",
             bg_topbar_selected="#6200EA",

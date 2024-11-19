@@ -1,7 +1,6 @@
-@import "_vars.rasi"
+@import "../_vars.rasi"
 
 configuration {
-    font:                           "Inter Bold 14";
     show-icons:                     false;
 	icon-theme: 					"Papirus";
     drun-display-format:            "{name}";
@@ -90,12 +89,12 @@ element alternate.urgent {
 
 element normal.active,
 element alternate.active {
-    background-color:               @background-alt;
+    background-color:               @fg-selected;
     text-color:                     @foreground;
 }
 
 element selected {
-    background-color:               @selected;
+    background-color:               @fg-selected;
     text-color:                     @foreground;
     border:                  		0% 0% 0.2% 0%;
     border-radius:                  0%;

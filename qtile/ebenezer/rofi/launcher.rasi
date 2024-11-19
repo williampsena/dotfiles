@@ -4,6 +4,7 @@
 //  / _, _/ /_/ / __/ /  
 // /_/ |_|\____/_/ /_/   
 
+@import "_vars.rasi"
 
 /*Dracula theme based on the Purple official rofi theme*/
 
@@ -15,12 +16,11 @@ configuration {
 }
 
 * {
-    font: "Fira Sans 16";
-    foreground: #f8f8f2;
-    background-color: #282a36;
-    active-background: #AA00FF;
-    urgent-background: #D50000;
-    urgent-foreground: #282a36;
+    foreground: @fg-normal;
+    background-color: @background;
+    active-background: @fg-selected;
+    urgent-background: @fg-normal;
+    urgent-foreground: @bg-urgent;
     selected-background: @active-background;
     selected-urgent-background: @urgent-background;
     selected-active-background: @active-background;

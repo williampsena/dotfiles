@@ -170,6 +170,7 @@ config.bkp.yml
 colors.yml
 applications.yml
 keybindings.yml
+ebenezer/rofi/_vars.rasi
 
 # virtual machine files
 .vm

@@ -1,0 +1,19 @@
+* {
+    font:                        "$font";
+    background:                  $background;
+    background-alt:              $background_alt;
+    foreground:                  $foreground;
+    selected:                    $selected;
+    active:                      $active;
+    urgent:                      $urgent;
+    border:                      $border;
+    border-alt:                  $border_alt;
+$colors
+}
+
+configuration {
+    show-icons:                 false;
+    hover-select: true;
+    me-select-entry: "MousePrimary";
+    me-accept-entry: "!MousePrimary";
+}

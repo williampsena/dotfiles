@@ -9,6 +9,10 @@ class AppSettingsFonts:
     font_icon_size: int = 10
     font_arrow: str = ""
     font_arrow_size: int = 10
+    rofi_font: str = ""
+    rofi_font_size: int = 10
+    font_notification: str = ""
+    font_notification_size: int = 10
 
     def __init__(self, **kwargs):
         self.font = kwargs.get("font", self.font)
@@ -24,4 +28,10 @@ class AppSettingsFonts:
         self.font_arrow = kwargs.get("font_arrow", self.font_arrow)
         self.font_arrow_size = int(
             kwargs.get("font_arrow_size", str(self.font_arrow_size))
+        )
+        self.rofi_font = kwargs.get("rofi_font", self.font)
+        self.rofi_font_size = int(kwargs.get("rofi_font_size", str(self.font_size)))
+        self.font_notification = kwargs.get("font_notification", self.font)
+        self.font_notification_size = int(
+            kwargs.get("font_notification_size", str(self.font_size))
         )

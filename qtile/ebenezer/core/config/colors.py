@@ -22,6 +22,7 @@ class AppSettingsColors:
     fg_gray = "#9db4c0"
     fg_black = "#000000"
     fg_white = "#ffffff"
+    fg_selected = "#000"
     bg_topbar = "#5c6b73"
     bg_topbar_selected = "#000"
     bg_topbar_arrow = "#5c6b73"
@@ -42,6 +43,14 @@ class AppSettingsColors:
     lock_screen_verifying_color = "#41445800"
     lock_screen_joke_foreground_color = "#000"
     lock_screen_joke_text_color = "#fff"
+    rofi_background = "#000"
+    rofi_background_alt = "#fff"
+    rofi_foreground = "#fff"
+    rofi_selected = "#5c6b73"
+    rofi_active = "#4BC1CC"
+    rofi_urgent = "#D50000"
+    rofi_border = "#5c6b73"
+    rofi_border_alt = "#9db4c0"
 
     def __init__(self, **kwargs):
         self.theme = kwargs.pop("theme", None)
@@ -67,6 +76,7 @@ class AppSettingsColors:
                 "fg_gray",
                 "fg_black",
                 "fg_white",
+                "fg_selected",
                 "bg_topbar",
                 "bg_topbar_selected",
                 "bg_topbar_arrow",
@@ -86,6 +96,14 @@ class AppSettingsColors:
                 "lock_screen_verifying_color",
                 "lock_screen_joke_foreground_color",
                 "lock_screen_joke_text_color",
+                "rofi_background",
+                "rofi_background_alt",
+                "rofi_foreground",
+                "rofi_selected",
+                "rofi_active",
+                "rofi_urgent",
+                "rofi_border",
+                "rofi_border_alt",
             ],
         )
 
