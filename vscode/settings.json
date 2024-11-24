@@ -64,7 +64,7 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 1.5,
   "terminal.integrated.gpuAcceleration": "off",
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -75,7 +75,7 @@
     "RGB",
     "HSL"
   ],
-  "workbench.colorTheme": "Bearded Theme Aquarelle Hydrangea",
+  "workbench.colorTheme": "Bearded Theme Monokai Stone",
   "workbench.iconTheme": "bearded-icons",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.defaultProfile.osx": "zsh",
@@ -98,4 +98,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "workbench.activityBar.location": "bottom",
+  "window.customTitleBarVisibility": "auto",
+  "makefile.configureOnOpen": false,
 }
