@@ -14,6 +14,7 @@ isort = "*"
 cairocffi = "*"
 pytest = "*"
 pytest-sugar = "*"
+qtile-ebenezer = "*"
 
 [dev-packages]
 black = "*"
@@ -32,3 +33,6 @@ twine = "*"
 
 [requires]
 python_version = "3.12"
+
+[pipenv]
+allow_prereleases = true

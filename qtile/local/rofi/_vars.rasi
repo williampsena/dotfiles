@@ -1,0 +1,65 @@
+* {
+    font:                        "Fira Code Nerd Font Medium 14";
+    background:                  #282a36;
+    background-alt:              #44475a;
+    foreground:                  #f8f8f2;
+    selected:                    #bd93f9;
+    active:                      #50fa7b;
+    urgent:                      #ff5555;
+    border:                      #6272a4;
+    border-alt:                  #bd93f9;
+    fg-normal: #f8f8f2;
+    fg-focus: #f8f8f2;
+    fg-urgent: #ff5555;
+    bg-normal: #282a36;
+    bg-focus: #44475a;
+    bg-urgent: #ff5555;
+    bg-systray: #282a36;
+    bg-selected: #44475a;
+    fg-blue: #6272a4;
+    fg-light-blue: #8be9fd;
+    fg-yellow: #f1fa8c;
+    fg-red: #ff5555;
+    fg-orange: #ffb86c;
+    fg-purple: #bd93f9;
+    fg-green: #50fa7b;
+    fg-gray: #44475a;
+    fg-white: #f8f8f2;
+    fg-black: #000000;
+    fg-selected: #bd93f9;
+    bg-topbar: #282a36;
+    bg-topbar-selected: #bd93f9;
+    bg-topbar-arrow: #44475a;
+    border-color-normal: #bd93f9;
+    border-color-active: #6272a4;
+    border-color-marked: #ff79c6;
+    titlebar-bg-focus: #282a36;
+    titlebar-bg-normal: #44475a;
+    taglist-bg-focus: #6272a4;
+    group-focus: #f8f8f2;
+    group-normal: #6272a4;
+    lock-screen-blank-color: #00000000;
+    lock-screen-clear-color: #ffffff22;
+    lock-screen-default-color: #f8f8f2;
+    lock-screen-key-color: #bd93f9;
+    lock-screen-text-color: #50fa7b;
+    lock-screen-wrong-color: #ff5555;
+    lock-screen-verifying-color: #6272a4;
+    lock-screen-joke-foreground-color: #000;
+    lock-screen-joke-text-color: #fff;
+    rofi-background: #282a36;
+    rofi-background-alt: #44475a;
+    rofi-foreground: #f8f8f2;
+    rofi-selected: #bd93f9;
+    rofi-active: #50fa7b;
+    rofi-urgent: #ff5555;
+    rofi-border: #6272a4;
+    rofi-border-alt: #bd93f9;
+}
+
+configuration {
+    show-icons:                 false;
+    hover-select: true;
+    me-select-entry: "MousePrimary";
+    me-accept-entry: "!MousePrimary";
+}

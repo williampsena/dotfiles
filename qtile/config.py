@@ -24,12 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ebenezer.core.config.settings import load_settings_by_files
-from ebenezer.core.groups import build_groups
-from ebenezer.core.keys import build_keys
-from ebenezer.core.screen import build_screen
-from ebenezer.core.startup import run_startup_once
-from ebenezer.core.theme import preload_colors
+from local.core.config.settings import load_settings_by_files
+from local.core.groups import build_groups
+from local.core.keys import build_keys
+from local.core.screen import build_screen
+from local.core.startup import run_startup_once
+from local.core.theme import preload_colors
 from libqtile import hook, layout, qtile
 from libqtile.config import Click, Drag, Match
 from libqtile.lazy import lazy
