@@ -98,7 +98,6 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "workbench.activityBar.location": "bottom",
   "window.customTitleBarVisibility": "auto",
   "makefile.configureOnOpen": false,
 }

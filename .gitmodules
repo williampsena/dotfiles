@@ -7,3 +7,6 @@
 [submodule "awesome/awesome-wm-widgets"]
 	path = awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule "qtile/ebenezer"]
+	path = qtile/ebenezer
+	url = https://github.com/williampsena/qtile-ebenezer.git

@@ -5,11 +5,13 @@ on:
   push:
     branches:
       - main
+      - nightly
     paths:
       - 'qtile/**'
   pull_request:
     branches:
       - main
+      - nightly
     paths:
       - 'qtile/**'
 

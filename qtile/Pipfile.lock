@@ -549,12 +549,12 @@
         },
         "qtile-ebenezer": {
             "hashes": [
-                "sha256:be9647ca90d001df3fe747db87e066f8aef9f33b83b50b1c018d82168a5873ae",
-                "sha256:d03c385489282031d06848fb85fc004d32a6806401c918ec3abb73da032edee6"
+                "sha256:07bcd94296a3f77a842746bc480990dfc07e8145e767b694a9ead14038e9c33d",
+                "sha256:41a376bf15eb90f44cc88ee2fc1e829e4482c8eba5bf0f515210fcd4d31d6dd1"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.12'",
-            "version": "==0.1.6"
+            "version": "==0.1.8"
         },
         "requests": {
             "hashes": [

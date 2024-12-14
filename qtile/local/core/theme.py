@@ -1,17 +1,19 @@
 from pathlib import Path
 from string import Template
 
-from local.core.config.settings import AppSettings, AppSettingsColors
-from local.core.dict import merge_dicts_recursive
-from local.core.files import resolve_file_path
-from local.core.yaml import read_yaml_file
+from ebenezer.config.settings import AppSettings, AppSettingsColors
+from ebenezer.core.dict import merge_dicts_recursive
+from ebenezer.core.files import resolve_file_path, qtile_home
+from ebenezer.core.yaml import read_yaml_file
 from libqtile.log_utils import logger
+
+LOCAL_ROFI_HOME = str(Path.joinpath(Path(qtile_home), "local/rofi"))
 
 ROFI_TEMPLATES = [
     [
         # TODO: move rofi shell scripts to python library
-        resolve_file_path("$rofi_home/_vars.template.rasi"),
-        resolve_file_path("$rofi_home/_vars.rasi"),
+        resolve_file_path(f"{LOCAL_ROFI_HOME}/_vars.template.rasi"),
+        resolve_file_path(f"{LOCAL_ROFI_HOME}/_vars.rasi"),
     ]
 ]
 DUNSTRC_HOME_PATH = "$home/.config/dunst"
