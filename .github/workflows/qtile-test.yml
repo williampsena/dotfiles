@@ -38,7 +38,7 @@ jobs:
         make install
       working-directory: ./qtile
 
-    - name: Run tests
+    - name: Run check
       run: |
-        make test
+        make check
       working-directory: ./qtile
