@@ -45,8 +45,8 @@ commands:
   powermenu: ebenezer ui powermenu
   wallpaper_menu: ebenezer ui wallpaper-menu
   open_url: zen-browser --new-tab $url
-  launcher: rofi -show drun -show-icons -theme $qtile_home/local/rofi/launcher.rasi
-  launcher_windows: rofi -show window -show-icons -theme $qtile_home/local/rofi/launcher.rasi
+  launcher: rofi -show drun -show-icons -theme $rofi_home/launcher.rasi
+  launcher_windows: rofi -show window -show-icons -theme $rofi_home/launcher.rasi
 
 floating:
   wm_class:
