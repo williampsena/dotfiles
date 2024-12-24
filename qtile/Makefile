@@ -10,7 +10,10 @@ activate:
 	$(PIPENV) shell
 
 check:
-	$(PIPENV) run qtile check $(file)
+	$(PIPENV) run qtile check
+
+ci:
+	$(PIPENV) run qtile check -c qtile/config.py 
 
 format:
 	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
