@@ -46,6 +46,10 @@ jobs:
         make install
       working-directory: ./qtile
 
+    - name: Required aliases
+      run: |
+        ln -sf $(pwd)/qtile /home/runner/.config/qtile
+
     - name: Run ci
       run: |
         make ci
