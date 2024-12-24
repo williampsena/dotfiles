@@ -15,6 +15,11 @@ on:
     paths:
       - 'qtile/**'
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'main'
 
 jobs:
   test:
@@ -22,6 +27,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.inputs.branch }}
     
     - name: Set up Python
       uses: actions/setup-python@v5
