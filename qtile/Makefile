@@ -13,7 +13,7 @@ check:
 	$(PIPENV) run qtile check
 
 ci:
-	$(PIPENV) run qtile check -c qtile/config.py 
+	$(PIPENV) run qtile check -c $(PWD)/config.py 
 
 format:
 	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
