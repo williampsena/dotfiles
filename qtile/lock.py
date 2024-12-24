@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from ebenezer.config.settings import load_settings_by_files
-from local.core.theme import preload_colors
+from ebenezer.core.theme import preload_colors
 from ebenezer.widgets.lock_screen import lock_screen
 
 

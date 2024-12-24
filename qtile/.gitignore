@@ -167,6 +167,7 @@ cython_debug/
 # config files
 config.yml
 config.bkp.yml
+config.bkp*.yml
 colors.yml
 applications.yml
 keybindings.yml

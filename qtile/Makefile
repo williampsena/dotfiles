@@ -12,9 +12,6 @@ activate:
 check:
 	$(PIPENV) run qtile check
 
-test:
-	$(PIPENV) run pytest --maxfail=5 --disable-warnings
-
 format:
 	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
 	$(PIPENV) run isort .

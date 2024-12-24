@@ -32,32 +32,21 @@ startup:
   polkit: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   picom: picom --config $home/.config/picom/picom.conf --daemon 
   nm_applet: nm-applet &
-  lock_screen: xautolock -time 10 -locker "python ~/.config/qtile/lock.py" &
-  wallpaper_slideshow: $scripts/wallpaper.sh slideshow $wallpaper_dir $wallpaper_timeout &
+  lock_screen: xautolock -time 10 -locker "ebenezer ui lock" &
+  wallpaper_slideshow: ebenezer wallpaper random $wallpaper_dir --timeout $wallpaper_timeout
   dunst: dunst &
   pcmanfm: pcmanfm-qt --daemon-mode &
 
 commands:
   screenshot: flameshot gui --clipboard --path $home/Pictures/Screenshots
   screenshot_full: flameshot full --clipboard --path $home/Pictures/Screenshots
-  change_wallpaper: $scripts/wallpaper.sh set /usr/share/backgrounds/archlinux/
-  mixer: kitty "pulsemixer" # another option: pavucontrol
-  powermenu: cd $rofi_home/powermenu && bash powermenu.sh
-  volume_level: $scripts/volume.sh level
-  volume_up: $scripts/volume.sh up
-  volume_down: $scripts/volume.sh down
-  mute: $scripts/volume.sh mute
-  mute_on: $scripts/volume.sh mute_on
-  mute_off: $scripts/volume.sh mute_off
-  mute_status: $scripts/volume.sh mute_status
-  backlight_level: $scripts/backlight.sh level
-  backlight_up: $scripts/backlight.sh up
-  backlight_down: $scripts/backlight.sh down
-  modal_confirm: cd $rofi_home/modals && bash confirm.sh "$title" "$question"
-  wallpaper_menu: cd $rofi_home/wallpaper_menu && bash wallpaper_menu.sh "$wallpaper_cmd"
+  change_wallpaper: ebenezer wallpaper set /usr/share/backgrounds/archlinux/
+  mixer: pavucontrol # another option: kitty "pulsemixer"
+  powermenu: ebenezer ui powermenu
+  wallpaper_menu: ebenezer ui wallpaper-menu
   open_url: zen-browser --new-tab $url
-  launcher: rofi -show drun -show-icons -theme $rofi_home/launcher.rasi
-  launcher_windows: rofi -show window -show-icons -theme $rofi_home/launcher.rasi
+  launcher: rofi -show drun -show-icons -theme $qtile_home/local/rofi/launcher.rasi
+  launcher_windows: rofi -show window -show-icons -theme $qtile_home/local/rofi/launcher.rasi
 
 floating:
   wm_class:
