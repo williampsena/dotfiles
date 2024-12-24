@@ -48,5 +48,6 @@ jobs:
 
     - name: Run check
       run: |
+        ln -sf $(pwd)/qtile/config.py /home/runner/.config/qtile/config.py
         make check
       working-directory: ./qtile
