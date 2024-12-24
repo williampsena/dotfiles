@@ -30,7 +30,7 @@
     
     # height
     # The maximum height of a single notification.
-    height = 500
+    height = (0, 100)
 
     # Turn on the progess bar
     progress_bar = true
