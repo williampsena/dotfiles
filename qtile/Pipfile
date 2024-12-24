@@ -13,9 +13,9 @@ isort = "*"
 cairocffi = "*"
 pytest = "*"
 pytest-sugar = "*"
-qtile-ebenezer = "*"
 mypy = "*"
 "ruamel.yaml" = "*"
+qtile-ebenezer = "*"
 
 [dev-packages]
 black = "*"
