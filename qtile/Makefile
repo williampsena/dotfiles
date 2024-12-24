@@ -10,7 +10,7 @@ activate:
 	$(PIPENV) shell
 
 check:
-	$(PIPENV) run qtile check
+	$(PIPENV) run qtile check $(file)
 
 format:
 	$(PIPENV) run autoflake --remove-all-unused-imports --in-place --recursive .
