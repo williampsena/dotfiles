@@ -36,7 +36,7 @@ from libqtile.lazy import lazy
 from libqtile.log_utils import logger
 
 settings = load_settings_by_files()
-settings = preload_colors(settings)
+settings = preload_colors(settings, complete=True)
 
 keys = build_keys(settings)
 groups, keys = build_groups(keys, settings)
