@@ -47,6 +47,7 @@ commands:
   open_url: zen-browser --new-tab $url
   launcher: rofi -show drun -show-icons -theme $rofi_home/launcher.rasi
   launcher_windows: rofi -show window -show-icons -theme $rofi_home/launcher.rasi
+  desktop_settings: ebenezer ui settings
 
 floating:
   wm_class:
@@ -109,6 +110,10 @@ keybindings:
   # screenshot
   - { name: Take a screenshot, keys: print, action: spawn_command, command: screenshot }
   - { name: Take a screenshot of the full desktop, keys: $mod print, action: spawn_command, command: screenshot_full }
+
+  # desktop
+  - {name: Change wallpaper, keys: $mod control w, action: spawn_command, command: change_wallpaper}
+  - {name: Desktop Settings, keys: $mod control Escape, action: spawn_command, command: desktop_settings}
 
   # options
   # - { name: Spawn a command using a prompt widget, keys: $mod r, action: cmd }
