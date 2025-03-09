@@ -28,7 +28,7 @@ jobs:
           args: detect --report-format json --report-path gitleaks_report.json --config-path .gitleaks.toml
 
       - name: Upload Gitleaks report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: gitleaks-report
           path: gitleaks_report.json
