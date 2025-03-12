@@ -30,6 +30,7 @@ from ebenezer.core.keys import build_keys
 from ebenezer.core.screen import build_screen
 from ebenezer.core.startup import run_startup_once
 from ebenezer.core.theme import preload_colors
+from ebenezer.core.wallpaper import change_wallpaper
 from libqtile import hook, layout, qtile
 from libqtile.config import Click, Drag, Match
 from libqtile.lazy import lazy
