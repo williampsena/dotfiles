@@ -95,43 +95,54 @@ fonts:
   font_arrow_size: 30
 
 keybindings:
-  - { name: Launch terminal, keys: $mod Return, action: terminal }
-  - { name: Launcher, keys: $mod shift Return, action: spawn_command, command: launcher }
-  - { name: Launch Window, keys: $mod control Tab, action: spawn_command, command: launcher_windows }
-  - { name: Web browser, keys: $mod b, action: browser }
-  - { name: Lock Screen, keys: $mod control x, action: lock_screen }
+- {name: Launch terminal, group: apps, keys: $mod Return, action: terminal}
+- {name: Launcher, group: apps, keys: $mod shift Return, action: spawn_command, command: launcher}
+- {name: Launch Group Windows, group: apps, keys: $mod control Tab, action: spawn_command, command: launcher_windows}
+- {name: Web browser, group: apps, keys: $mod b, action: browser}
+- {name: Lock Screen, group: apps, keys: $mod control x, action: lock_screen}
 
   # qtile keys
-  - { name: Reload the config, keys: $mod shift r, action: reload_config }
-  - { name: Shutdown Qtile, keys: $mod control q, action: shutdown }
+- {name: Reload the config, group: qtile, keys: $mod shift r, action: reload_config}
+- {name: Shutdown Qtile, group: qtile, keys: $mod control q, action: shutdown}
+
+  # layout key
+- {name: Toggle screen, group: layout, keys: $mod shift Tab, action: toggle_group}
+- {name: Toggle between layouts, group: layout, keys: $mod Tab, action: next_layout}
+- {name: Toggle fullscreen on the focused, group: layout, keys: $mod f, action: fullscreen}
+- {name: Toggle floating on the focused, group: layout, keys: $mod t, action: floating}
+
+# screen key
+- {name: Next monitor, group: screen, keys: $mod control Right, action: next_screen}
+- {name: Previous monitor, group: screen, keys: $mod control Left, action: previous_screen}
+- {name: First screen layout, group: screen, keys: $mod control 1, action: first_screen}
+- {name: Second screen layout, group: screen, keys: $mod control 2, action: second_screen}
+- {name: Focus next screen, group: screen, keys: $mod control space, action: focus_group}
 
   # window key
-  - { name: Toggle between layouts, keys: $mod Tab, action: next_layout }
-  - { name: Kill focused window, keys: $mod shift c, action: kill_window }
-  - { name: Move focus to left, keys: $mod h, action: focus_left }
-  - { name: Move focus to right, keys: $mod l, action: focus_right }
-  - { name: Move focus down, keys: $mod j, action: focus_down }
-  - { name: Move focus up, keys: $mod k, action: focus_up }
-  - { name: Move window focus to other window, keys: $mod space, action: focus_next }
-  - { name: Toggle fullscreen on the focused window, keys: $mod f, action: fullscreen }
-  - { name: Toggle floating on the focused window, keys: $mod t, action: floating }
-  - { name: Move window to the left, keys: $mod shift h, action: shuffle_left }
-  - { name: Move window to the right, keys: $mod shift l, action: shuffle_right }
-  - { name: Move window down, keys: $mod shift j, action: shuffle_down }
-  - { name: Move window up, keys: $mod shift k, action: shuffle_up }
-  - { name: Grow window to the left, keys: $mod control h, action: grow_left }
-  - { name: Grow window to the right, keys: $mod control l, action: grow_right }
-  - { name: Grow window down, keys: $mod control j, action: grow_down }
-  - { name: Grow window up, keys: $mod control k, action: grow_up }
-  - { name: Reset all window sizes, keys: $mod n, action: reset_windows }
+- {name: Kill focused window, group: window, keys: $mod shift c, action: kill_window}
+- {name: Move focus to left, group: window, keys: $mod h, action: focus_left}
+- {name: Move focus to right, group: window, keys: $mod l, action: focus_right}
+- {name: Move focus down, group: window, keys: $mod j, action: focus_down}
+- {name: Move focus up, group: window, keys: $mod k, action: focus_up}
+- {name: Move window focus to other window, group: window, keys: $mod space, action: focus_next}
+- {name: Move window to the left, group: window, keys: $mod shift h, action: shuffle_left}
+- {name: Move window to the right, group: window, keys: $mod shift l, action: shuffle_right}
+- {name: Move window down, group: window, keys: $mod shift j, action: shuffle_down}
+- {name: Move window up, group: window, keys: $mod shift k, action: shuffle_up}
+- {name: Grow window to the left, group: window, keys: $mod control h, action: grow_left}
+- {name: Grow window to the right, group: window, keys: $mod control l, action: grow_right}
+- {name: Grow window down, group: window, keys: $mod control j, action: grow_down}
+- {name: Grow window up, group: window, keys: $mod control k, action: grow_up}
+- {name: Reset all window sizes, group: window, keys: $mod n, action: reset_windows}
 
   # screenshot
-  - { name: Take a screenshot, keys: print, action: spawn_command, command: screenshot }
-  - { name: Take a screenshot of the full desktop, keys: $mod print, action: spawn_command, command: screenshot_full }
+- {name: Take a screenshot, group: screenshot, keys: print, action: spawn_command, command: screenshot}
+- {name: Take a screenshot of the full desktop, group: screenshot, keys: $mod print, action: spawn_command,
+  command: screenshot_full}
 
   # desktop
-  - {name: Change wallpaper, keys: $mod control w, action: spawn_command, command: change_wallpaper}
-  - {name: Desktop Settings, keys: $mod control Escape, action: spawn_command, command: desktop_settings}
+- {name: Change wallpaper, group: settings, keys: $mod control w, action: spawn_command, command: change_wallpaper}
+- {name: Desktop Settings, group: settings, keys: $mod control Escape, action: spawn_command, command: desktop_settings}
 
   # options
   # - { name: Spawn a command using a prompt widget, keys: $mod r, action: cmd }
