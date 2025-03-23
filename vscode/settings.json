@@ -107,4 +107,5 @@
     "scminput": false
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
+  "yaml.validate": false
 }
