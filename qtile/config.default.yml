@@ -116,7 +116,6 @@ keybindings:
 - {name: Previous monitor, group: screen, keys: $mod control Left, action: previous_screen}
 - {name: First screen layout, group: screen, keys: $mod control 1, action: first_screen}
 - {name: Second screen layout, group: screen, keys: $mod control 2, action: second_screen}
-- {name: Focus next screen, group: screen, keys: $mod control space, action: focus_group}
 
   # window key
 - {name: Kill focused window, group: window, keys: $mod shift c, action: kill_window}
