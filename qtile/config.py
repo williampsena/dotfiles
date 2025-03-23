@@ -26,17 +26,16 @@
 
 from ebenezer.config.settings import load_settings_by_files
 from ebenezer.core.groups import build_groups
-from ebenezer.core.layout import build_layouts
 from ebenezer.core.keys import build_keys
+from ebenezer.core.layout import build_layouts
 from ebenezer.core.screen import build_screen
 from ebenezer.core.startup import run_startup_once
 from ebenezer.core.theme import preload_colors
 from ebenezer.core.wallpaper import change_wallpaper
 from libqtile import hook, qtile
-from libqtile.config import Click, Drag
+from libqtile.config import Click, Drag, Screen
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
-from libqtile.config import Screen
 
 settings = load_settings_by_files()
 settings = preload_colors(settings, complete=True)
@@ -150,3 +149,10 @@ def maximize_by_switching_layout(qtile):
 def prevent_minimize(window):
     if window.minimized:
         window.unminimize()
+
+
+@hook.subscribe.startup_once
+def set_wmname():
+    import subprocess
+
+    subprocess.run(["xsetroot", "-name", "LG3D"])

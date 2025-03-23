@@ -65,6 +65,8 @@ commands:
   launcher: rofi -show drun -show-icons -theme $rofi_home/launcher.rasi
   launcher_windows: rofi -show window -show-icons -theme $rofi_home/launcher.rasi
   desktop_settings: ebenezer ui settings
+  keybindings_help: kitty --override background_opacity=0.8 sh -c "htop; exec $SHELL"
+
 
 floating:
   wm_class:
@@ -142,6 +144,7 @@ keybindings:
   # desktop
 - {name: Change wallpaper, group: settings, keys: $mod control w, action: spawn_command, command: change_wallpaper}
 - {name: Desktop Settings, group: settings, keys: $mod control Escape, action: spawn_command, command: desktop_settings}
+- {name: Keybindings help, group: settings, keys: $mod slash, action: dropdown, command: htop}
 
   # options
   # - { name: Spawn a command using a prompt widget, keys: $mod r, action: cmd }
