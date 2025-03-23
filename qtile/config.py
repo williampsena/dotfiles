@@ -26,21 +26,24 @@
 
 from ebenezer.config.settings import load_settings_by_files
 from ebenezer.core.groups import build_groups
+from ebenezer.core.layout import build_layouts
 from ebenezer.core.keys import build_keys
 from ebenezer.core.screen import build_screen
 from ebenezer.core.startup import run_startup_once
 from ebenezer.core.theme import preload_colors
 from ebenezer.core.wallpaper import change_wallpaper
-from libqtile import hook, layout, qtile
-from libqtile.config import Click, Drag, Match
+from libqtile import hook, qtile
+from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 from libqtile.log_utils import logger
+from libqtile.config import Screen
 
 settings = load_settings_by_files()
 settings = preload_colors(settings, complete=True)
 
 keys = build_keys(settings)
 groups, keys = build_groups(keys, settings)
+
 mod = settings.environment.modkey
 
 widget_defaults = dict(
@@ -50,7 +53,7 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [build_screen(settings)]
+screens = [build_screen(settings), Screen()]
 
 # Drag floating layouts.
 mouse = [
@@ -101,49 +104,7 @@ wl_xcursor_size = 24
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
-layout_theme = {
-    "border_width": 2,
-    "margin": 8,
-    "border_focus": settings.colors.border_color_normal,
-    "border_normal": settings.colors.border_color_active,
-}
-
-floating_layout = layout.Floating(
-    **layout_theme,
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="pavucontrol"),  # gitk
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
-    + [Match(title=f) for f in settings.floating["wm_class"]]
-    + [Match(wm_class=f) for f in settings.floating["title"]]
-)
-
-layouts = [
-    # layout.Bsp(**layout_theme),
-    floating_layout,
-    # layout.RatioTile(**layout_theme),
-    # layout.VerticalTile(**layout_theme),
-    # layout.Matrix(**layout_theme),
-    layout.MonadTall(**layout_theme),
-    # layout.MonadWide(**layout_theme),
-    layout.Tile(
-        shift_windows=True,
-        border_width=0,
-        margin=0,
-        ratio=0.335,
-    ),
-    layout.Max(
-        border_width=0,
-        margin=0,
-    ),
-]
+layouts = build_layouts(settings)
 
 
 @hook.subscribe.startup_once
