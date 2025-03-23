@@ -47,7 +47,7 @@ startup:
   keyboard_layout: setxkbmap -model abnt2 -layout br && localectl set-x11-keymap br
   polkit: /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
   picom: picom --config $home/.config/picom/picom.conf --daemon 
-  xrandr: xrandr --output eDP-1 --primary && xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1 --auto
+  xrandr: xrandr --output HDMI-1 --auto --mode 1920x1080 --left-of eDP-1
   nm_applet: nm-applet &
   lock_screen: xautolock -time 10 -locker "ebenezer ui lock" &
   wallpaper_slideshow: ebenezer wallpaper random $wallpaper_dir --timeout $wallpaper_timeout
