@@ -107,5 +107,6 @@
     "scminput": false
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
-  "yaml.validate": false
+  "yaml.validate": false,
+  "git.openRepositoryInParentFolders": "never"
 }
