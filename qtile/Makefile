@@ -40,3 +40,6 @@ vm-stop:
 
 vm-ssh:
 	bash vm.sh ssh
+
+upgrade-deps:
+	pipenv update qtile-ebenezer

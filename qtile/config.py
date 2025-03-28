@@ -114,10 +114,6 @@ layouts = build_layouts(settings)
 center_windows_titles = ["ebenezer - configuration manager"]
 
 
-def is_ebenezer_window(window):
-    return any(title.lower() in window.name.lower() for title in center_windows_titles)
-
-
 @hook.subscribe.startup_once
 def start_once():
     try:

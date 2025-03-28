@@ -16,7 +16,7 @@ pytest-sugar = "*"
 mypy = "*"
 "ruamel.yaml" = "*"
 autoflake = "*"
-qtile-ebenezer = "*"
+qtile-ebenezer = "==0.1.34"
 
 [dev-packages]
 black = "*"
@@ -33,7 +33,7 @@ wheel = "*"
 twine = "*"
 
 [requires]
-python_version = "3.12"
+python_version = "3.13"
 
 [pipenv]
 allow_prereleases = true
