@@ -15,8 +15,8 @@ pytest = "*"
 pytest-sugar = "*"
 mypy = "*"
 "ruamel.yaml" = "*"
-qtile-ebenezer = "*"
 autoflake = "*"
+qtile-ebenezer = "*"
 
 [dev-packages]
 black = "*"

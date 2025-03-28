@@ -24,12 +24,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import time
 
 from ebenezer.config.settings import load_settings_by_files
 from ebenezer.core.groups import build_groups
 from ebenezer.core.keys import build_keys
-from ebenezer.core.layout import build_layouts, set_floating_window
+from ebenezer.core.layout import (
+    build_layouts,
+    centralize_window,
+    is_ebenezer_window,
+    set_floating_window,
+)
 from ebenezer.core.screen import build_screen
 from ebenezer.core.startup import run_startup_once
 from ebenezer.core.theme import preload_colors
@@ -107,6 +111,12 @@ wmname = "LG3D"
 
 layouts = build_layouts(settings)
 
+center_windows_titles = ["ebenezer - configuration manager"]
+
+
+def is_ebenezer_window(window):
+    return any(title.lower() in window.name.lower() for title in center_windows_titles)
+
 
 @hook.subscribe.startup_once
 def start_once():
@@ -165,24 +175,4 @@ def set_floating(window):
     set_floating_window(window)
 
     if is_ebenezer_window(window):
-        centralize_window(window)
-
-
-def is_ebenezer_window(window):
-    return "ebenezer" in window.name.lower()
-
-
-def centralize_window(window):
-    if window.floating:
-        width = int(qtile.current_screen.width * 0.8)
-        height = int(qtile.current_screen.height * 0.8)
-
-        window.place(
-            x=0,
-            y=0,
-            width=width,
-            height=height,
-            borderwidth=1,
-            bordercolor=settings.colors.border_color_active,
-        )
-        window.center()
+        centralize_window(settings, window)
