@@ -64,7 +64,7 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "window.zoomLevel": 1.5,
+  "window.zoomLevel": 1,
   "terminal.integrated.gpuAcceleration": "off",
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
