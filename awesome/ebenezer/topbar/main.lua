@@ -105,7 +105,7 @@ local function build(screen)
         margins = 10,
         position = "top",
         bg = style.topbar, -- .. 55,
-        height = 34,
+        height = 30,
         screen = screen,
         widget = {
 
