@@ -38,7 +38,7 @@ style.taglist_bg_focus = envs.colors.taglist_bg_focus
 -- }}}
 
 -- {{{ Systray
-style.bg_systray = "#ff0000"
+style.bg_systray = envs.colors.bg_systray
 style.systray_icon_spacing = dpi(2)
 -- }}}
 

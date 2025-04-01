@@ -7,8 +7,10 @@ local style = require('ebenezer.style')
 local function build(screen)
     screen.systray = wibox.widget {
         widget = wibox.widget.systray,
-        base_size = dpi(envs.environment.icon_tray_widget_with), -- Set icon size
-        visible = false -- Set systray to be invisible by default
+        font = style.font_regular,
+        halign = "center",
+        base_size = dpi(envs.environment.icon_tray_widget_with),
+        visible = false
     }
 
     local systray_with_background = wibox.container.background(screen.systray,
