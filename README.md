@@ -9,14 +9,14 @@ This repository includes my dot files and lua scripts for Awesome Window Manager
 
 - March 31, 2025
 
-![screenshot](./images/awesome_wm.png)
+![screenshot](./awesome/images/awesome_wm.png)
 
 If you want to use this setup, [click here](./awesome/README.md) for instructions.
 
 
 # Qtile
 
-- November 03, 2024
+- March 31, 2025
 
 ![screenshot](./qtile/images/desktop.png)
 
