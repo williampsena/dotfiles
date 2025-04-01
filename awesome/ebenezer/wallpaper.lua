@@ -29,7 +29,6 @@ local function setup_wallpaper(screen, wallpaper)
         gears.wallpaper.maximized(wallpaper, s)
     end)
 end
-
 local function wallpaper_slideshow(screen)
     local wallpapers = fs.get_files(envs.environment.wallpaper_dir)
 
@@ -43,10 +42,10 @@ local function wallpaper_slideshow(screen)
     setup_wallpaper(screen, random_wallpaper())
 
     local wallpaper_timeout = envs.environment.wallpaper_timeout or 600
-    local wallpaper_timer = timer {timeout = wallpaper_timeout}
+    local wallpaper_timer = gears.timer {timeout = wallpaper_timeout}
 
     wallpaper_timer:connect_signal("timeout", function()
-        wallpaper_timer:stop() --       
+        wallpaper_timer:stop()
 
         change_wallpaper(screen, random_wallpaper())
 

@@ -7,7 +7,7 @@ local colors = style.colors
 local markup = lain.util.markup
 
 local function factory(icon)
-    icon = icon or "  "
+    icon = icon or "  "
 
     local separator_icon = wibox.widget {
         markup = markup.fontfg(style.font_icon, colors.fg_focus, icon),

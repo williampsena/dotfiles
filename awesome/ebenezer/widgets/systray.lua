@@ -6,13 +6,17 @@ local style = require('ebenezer.style')
 
 local function build(screen)
     screen.systray = wibox.widget {
-        font = style.font_regular,
-        halign = "center",
-        base_size = dpi(envs.environment.icon_tray_widget_with),
-        widget = wibox.widget.systray
+        widget = wibox.widget.systray,
+        base_size = dpi(envs.environment.icon_tray_widget_with), -- Set icon size
+        visible = false -- Set systray to be invisible by default
     }
 
-    return wibox.container.margin(screen.systray, dpi(3), dpi(3), dpi(5), dpi(5))
+    local systray_with_background = wibox.container.background(screen.systray,
+                                                               style.bg_systray 
+    )
+
+    return wibox.container.margin(systray_with_background, dpi(3), dpi(3),
+                                  dpi(5), dpi(5))
 end
 
 local function setup_keybindings(modkey)

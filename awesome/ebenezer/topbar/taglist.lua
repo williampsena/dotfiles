@@ -1,3 +1,5 @@
+local wibox = require("wibox")
+local gears = require("gears")
 local envs = require("ebenezer.envs")
 local modkey = envs.modkey
 local awful = require('awful')

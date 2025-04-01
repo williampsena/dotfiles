@@ -12,7 +12,7 @@ local wifi_weak = "󰤟"
 local wifi_diconnected = "󰤯"
 local ethernet_on = "󰈀"
 
-local wifi_signal = 0
+local wifi_signal = -100
 local wifi_signal_count = 0
 local network_name = nil
 
@@ -27,13 +27,14 @@ local function get_wifi_network_name()
 end
 
 local function calculate_signal(current_wifi_signal)
+    local alpha = 0.2
+
     if wifi_signal == 0 then
         return current_wifi_signal
     else
-        return (wifi_signal + current_wifi_signal) / 2
+        return wifi_signal * (1 - alpha) + current_wifi_signal * alpha
     end
 end
-
 local function bind_open_network_manager(net_icon)
     if envs.commands.network_manager then
         net_icon:connect_signal("button::press", function(_, _, _, _)
@@ -57,12 +58,10 @@ local function get_ethernet_status(net_now, net_icon)
         "Internet access through cable\n" .. "Received: " .. net_now.received ..
             "\n" .. "Sent: " .. net_now.sent
 end
-
 local function get_wifi_status(net_now, net_icon)
     local wifi_device = net_now.devices.wlan0 or net_now.devices.wlp6s0
 
-    local network_text = "Received: " .. net_now.received .. "\n" .. "Sent: " ..
-                             net_now.sent
+    local network_text = "Received: " .. net_now.received .. "\n" .. "Sent: " .. net_now.sent
 
     if wifi_device then
         if wifi_device.wifi then
@@ -77,18 +76,17 @@ local function get_wifi_status(net_now, net_icon)
                 wifi_signal_count = wifi_signal_count + 1
                 net_icon:set_markup(wifi_good)
             else
-                if wifi_signal < -83 then
+                if wifi_signal < -80 then
                     net_icon:set_markup(wifi_weak)
                 elseif wifi_signal < -70 then
                     net_icon:set_markup(wifi_mid)
-                elseif wifi_signal < -53 then
+                elseif wifi_signal < -60 then
                     net_icon:set_markup(wifi_good)
-                elseif wifi_signal >= -53 then
+                else
                     net_icon:set_markup(wifi_great)
                 end
 
-                network_text = network_text .. "\nSignal: " ..
-                                   string.format("%.3f", wifi_signal)
+                network_text = network_text .. "\nSignal: " .. string.format("%.1f dBm", wifi_signal)
             end
 
             if network_name then

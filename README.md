@@ -7,9 +7,9 @@ This repository includes my dot files and lua scripts for Awesome Window Manager
 
 # Awesome WM
 
-- Nov 18, 2023
+- March 31, 2025
 
-![screenshot](./images/Screenshot.png)
+![screenshot](./images/awesome_wm.png)
 
 If you want to use this setup, [click here](./awesome/README.md) for instructions.
 
