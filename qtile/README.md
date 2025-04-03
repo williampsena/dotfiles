@@ -266,9 +266,9 @@ I advise you take a coffee 𓍢ִ໋☕️✧˚ ༘ ⋆
 ```shell
 sudo pacman -S virtualbox linux66-virtualbox-host-module
 
-make vm-iso
-make vm-create
-make vm-ssh
+make vm-iso type=arch
+make vm-create type=arch
+make vm-ssh type=arch
 ```
 
 Then run this commands to install Qtile:
