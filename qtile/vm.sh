@@ -47,7 +47,7 @@ download_iso() {
         iso_path="$VM_HOME/arch_64bit.7z"
         iso_url="$ARCH_ISO_URL"
     elif [[ "$vm_type" == "debian" ]]; then
-        iso_path="$VM_HOME/debian.iso"
+        iso_path="$VM_HOME/debian_64bit.7z"
         iso_url="$DEBIAN_ISO_URL"
     else
         echo "Invalid VM type. Use 'arch' or 'debian'."
@@ -65,6 +65,12 @@ download_iso() {
         echo "Extracting Arch Linux VDI..."
         7z x "$iso_path" -o"$VM_HOME"
         mv "$VM_HOME/Arch-Linux-x86_64.vdi" "$ARCH_VDI_BASE_PATH"
+    elif [[ "$vm_type" == "debian" && ! -f "$DEBIAN_VDI_BASE_PATH" ]]; then
+        echo "Extracting Debian VDI..."
+        7z x "$iso_path" -o"$VM_HOME"
+        mv "$VM_HOME/64bit/Debian 12.6.0 (64bit).vdi" "$DEBIAN_VDI_BASE_PATH"
+    else
+        echo "The $vm_type VDI is already extracted."
     fi
 }
 
@@ -93,7 +99,7 @@ create_vm() {
     fi
 
     if [[ ! -f "$vdi_path" ]]; then
-        echo "😮 VDI not found. Copying base VDI..."
+        echo "😮 VDI $vdi_path not found. Copying base VDI..."
         cp "$vdi_base_path" "$vdi_path"
     fi
 
@@ -104,7 +110,7 @@ create_vm() {
         echo "💖 $vm_type VM already exists."
     fi
 
-    echo "🖥️ Configuring $vm_type VM settings (CPU, RAM, Network)..."
+    echo "🖥️  Configuring $vm_type VM settings (CPU, RAM, Network)..."
     VBoxManage modifyvm "$vm_name" --ioapic on
     VBoxManage modifyvm "$vm_name" --cpus 2 --memory 6144 --vram 128
     VBoxManage modifyvm "$vm_name" --nic1 nat
