@@ -2,12 +2,6 @@
 
 set -e
 
-setup_virtualbox_guest_additions() {
-    mount /dev/cdrom /mnt
-    /mnt/VBoxLinuxAdditions.run || true
-    umount /mnt
-}
-
 check_root() {
     if [ "$EUID" -ne 0 ]; then
         echo "😎 Please run as root"
@@ -16,30 +10,45 @@ check_root() {
 }
 
 install_packages() {
-    [ -f /var/lib/pacman/db.lck ] && rm /var/lib/pacman/db.lck
+    apt update && apt upgrade -y
 
-    local packages="alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers notification-daemon xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock xss-lock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-dbus-next rofi pcmanfm-qt"
+    local packages="alacritty firefox lm-sensors qtile x11vnc dbus-x11 linux-headers-$(uname -r) \
+        notification-daemon xorg xserver-xorg xinit git build-essential dunst fonts-dejavu \
+        fonts-iosevka-nerd fonts-firacode fonts-hack-ttf fonts-jetbrains-mono unclutter \
+        fonts-firacode fonts-mononoki pulsemixer papirus-icon-theme pavucontrol xautolock \
+        xss-lock scrot i3lock flameshot feh lxsession network-manager-gnome python3-requests \
+        python3 python3-pip python3-pillow python3-psutil python3-dbus python3-pipenv rofi \
+        pcmanfm-qt"
 
-    pacman -Syu --noconfirm &&
-        pacman -S --needed --noconfirm $packages &&
-        pacman -Scc --noconfirm
+    apt install -y $packages
 }
 
-install_aur_packages() {
-    local aur_packages="nerd-fonts-inter python-pulsectl-asyncio picom-git pamac-classic"
+install_extra_packages() {
+    echo "Installing additional packages not available in APT..."
 
-    sudo -u qtileuser bash <<EOF
-    if ! command -v yay > /dev/null 2>&1; then
-        git clone https://aur.archlinux.org/yay.git /tmp/yay &&
-        cd /tmp/yay &&
-        makepkg -si --noconfirm &&
-        cd .. &&
-        rm -rf /tmp/yay
+    # Nerd Fonts
+    if ! fc-list | grep -q "Nerd Font"; then
+        echo "Installing Nerd Fonts..."
+        mkdir -p /usr/share/fonts/nerd-fonts
+        wget -qO /tmp/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
+        unzip -o /tmp/FiraCode.zip -d /usr/share/fonts/nerd-fonts
+        fc-cache -fv
     fi
 
-    # Install AUR packages using yay
-    yay -S --needed --noconfirm $aur_packages
-EOF
+    # Picom (Compositor)
+    if ! command -v picom > /dev/null 2>&1; then
+        echo "Installing Picom..."
+        apt install -y meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev \
+            libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev \
+            libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev \
+            libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev \
+            libevdev-dev uthash-dev libev-dev libx11-xcb-dev
+        git clone https://github.com/yshui/picom.git /tmp/picom
+        cd /tmp/picom
+        meson --buildtype=release . build
+        ninja -C build
+        ninja -C build install
+    fi
 }
 
 setup_dotfiles() {
@@ -93,8 +102,6 @@ create_qtile_user() {
     echo "exec qtile start" > ~/.xsession
     chmod +x ~/.xsession
 EOF
-
-    echo "needs_root_rights = no" >/etc/X11/Xwrapper.config
 }
 
 setup_qtile() {
@@ -119,30 +126,11 @@ bash /tmp/install.sh setup-qtileuser
 EOF
 }
 
-disable_lockout() {
-    echo "Disabling account lockout for multiple failed login attempts"
-
-    cp /etc/pam.d/system-auth /etc/pam.d/system-auth.bak
-
-    sed -i '/pam_faillock.so/s/^/#/' /etc/pam.d/system-auth
-
-    echo "Account lockout disabled"
-}
-
 post_install() {
-    # Disabled temporary SSH connection has stopped working.
-    # setup_virtualbox_guest_additions
-    disable_lockout
-
-    systemctl enable xdm
-    systemctl start xdm
+    echo "Enabling graphical target and services..."
     systemctl set-default graphical.target
-
-    if ! systemctl is-enabled dbus.socket >/dev/null 2>&1; then
-        systemctl enable dbus.socket
-    fi
-
-    systemctl start dbus.socket
+    systemctl enable gdm
+    systemctl start gdm
 
     read -p "Reboot the system now? (y/n): " REBOOT
     if [[ "$REBOOT" =~ ^[Yy]$ ]]; then
@@ -164,7 +152,7 @@ install)
     check_root
     create_qtile_user
     install_packages
-    install_aur_packages
+    install_extra_packages
     setup_qtile
     post_install
     ;;

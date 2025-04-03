@@ -27,19 +27,19 @@ logs:
 	 cat ~/.local/share/qtile/qtile.log
 
 vm-iso:
-	bash vm.sh download_iso
+	bash vm.sh download_iso $(type)
 
 vm-create:
-	bash vm.sh create
+	bash vm.sh create $(type)
 
 vm-start:
-	bash vm.sh start
+	bash vm.sh start $(type)
 
 vm-stop:
-	bash vm.sh stop
+	bash vm.sh stop $(type)
 
 vm-ssh:
-	bash vm.sh ssh
+	bash vm.sh ssh $(type)
 
 upgrade-deps:
 	pipenv update qtile-ebenezer

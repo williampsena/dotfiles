@@ -1,139 +1,159 @@
 #!/bin/bash
 
-VM_NAME="ArchLinuxVM"
+# General VM Configuration
 VM_FOLDER="$HOME/VirtualBox VMs"
 VM_HOME="$(pwd)/.vm"
-VDI_BASE_PATH="$VM_HOME/arch-linux-base.vdi"
-VDI_PATH="$(pwd)/.vm/arch-linux.vdi"
-VM_PASSWORD="osboxes.org"
-RDP_PORT="10001"
-SSH_PORT="2222"
-SSH_USER="osboxes"
+RDP_PORT_ARCH="10001"
+RDP_PORT_DEBIAN="10002"
+SSH_PORT_ARCH="2222"
+SSH_PORT_DEBIAN="2223"
 VM_IP="127.0.0.1"
 
+# Arch Linux VM Configuration
+ARCH_VM_NAME="ArchLinuxVM"
+ARCH_VDI_BASE_PATH="$VM_HOME/arch-linux-base.vdi"
+ARCH_VDI_PATH="$VM_HOME/arch-linux.vdi"
+ARCH_ISO_URL="https://sourceforge.net/projects/osboxes/files/v/vb/4-Ar---c-x/20240601/CLI/64bit.7z/download"
+ARCH_VM_PASSWORD="osboxes.org"
+ARCH_SSH_USER="osboxes"
+
+# Debian VM Configuration
+DEBIAN_VM_NAME="DebianVM"
+DEBIAN_VDI_BASE_PATH="$VM_HOME/debian-base.vdi"
+DEBIAN_VDI_PATH="$VM_HOME/debian.vdi"
+DEBIAN_ISO_URL="https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/12.6.0/64bit.7z/download"
+DEBIAN_VM_PASSWORD="debian"
+DEBIAN_SSH_USER="debian"
+
 option=$1
+vm_type=$2 # Specify "arch" or "debian"
+
+get_vm_name() {
+    if [[ "$vm_type" == "arch" ]]; then
+        echo "$ARCH_VM_NAME"
+    elif [[ "$vm_type" == "debian" ]]; then
+        echo "$DEBIAN_VM_NAME"
+    else
+        echo "Invalid VM type. Use 'arch' or 'debian'." >&2
+        exit 1
+    fi
+}
 
 download_iso() {
-    local iso_path="$VM_HOME/arch_64bit.7z"
-    if [[ ! -f "$iso_path" ]]; then
-        echo "Downloading Arch Linux ISO..."
-        wget -O "$iso_path" "https://sourceforge.net/projects/osboxes/files/v/vb/4-Ar---c-x/20240601/CLI/64bit.7z/download"
+    local iso_path
+    local iso_url
+
+    if [[ "$vm_type" == "arch" ]]; then
+        iso_path="$VM_HOME/arch_64bit.7z"
+        iso_url="$ARCH_ISO_URL"
+    elif [[ "$vm_type" == "debian" ]]; then
+        iso_path="$VM_HOME/debian.iso"
+        iso_url="$DEBIAN_ISO_URL"
     else
-        echo "The Arch Linux ISO is already downloaded."
+        echo "Invalid VM type. Use 'arch' or 'debian'."
+        exit 1
     fi
 
-    if [[ ! -f "$VDI_BASE_PATH" ]]; then
+    if [[ ! -f "$iso_path" ]]; then
+        echo "Downloading $vm_type ISO..."
+        wget -O "$iso_path" "$iso_url"
+    else
+        echo "The $vm_type ISO is already downloaded."
+    fi
+
+    if [[ "$vm_type" == "arch" && ! -f "$ARCH_VDI_BASE_PATH" ]]; then
         echo "Extracting Arch Linux VDI..."
         7z x "$iso_path" -o"$VM_HOME"
-        mv "$VM_HOME/Arch-Linux-x86_64.vdi" "$VDI_BASE_PATH"
-    else
-        echo "The Arch Linux VDI is already extracted."
+        mv "$VM_HOME/Arch-Linux-x86_64.vdi" "$ARCH_VDI_BASE_PATH"
     fi
 }
 
 create_vm() {
-    if [[ ! -f "$VDI_PATH" ]]; then
-        echo "😮 VDI not found. Copying base VDI..."
-        cp "$VDI_BASE_PATH" "$VDI_PATH"
-    fi
+    local vm_name
+    local vdi_path
+    local vdi_base_path
+    local rdp_port
+    local ssh_port
 
-    if ! VBoxManage list vms | grep -q "\"$VM_NAME\""; then
-        echo "🚧 Creating VM..."
-        VBoxManage createvm --name "$VM_NAME" --register --basefolder "$VM_FOLDER" --ostype "Linux_64"
+    if [[ "$vm_type" == "arch" ]]; then
+        vm_name="$ARCH_VM_NAME"
+        vdi_path="$ARCH_VDI_PATH"
+        vdi_base_path="$ARCH_VDI_BASE_PATH"
+        rdp_port="$RDP_PORT_ARCH"
+        ssh_port="$SSH_PORT_ARCH"
+    elif [[ "$vm_type" == "debian" ]]; then
+        vm_name="$DEBIAN_VM_NAME"
+        vdi_path="$DEBIAN_VDI_PATH"
+        vdi_base_path="$DEBIAN_VDI_BASE_PATH"
+        rdp_port="$RDP_PORT_DEBIAN"
+        ssh_port="$SSH_PORT_DEBIAN"
     else
-        echo "💖 VM already exists."
+        echo "Invalid VM type. Use 'arch' or 'debian'."
+        exit 1
     fi
 
-    echo "🖥️ Configuring VM settings (CPU, RAM, Network)..."
-    VBoxManage modifyvm "$VM_NAME" --ioapic on
-    VBoxManage modifyvm "$VM_NAME" --cpus 2 --memory 6144 --vram 128
-    VBoxManage modifyvm "$VM_NAME" --nic1 nat
-    VBoxManage modifyvm "$VM_NAME" --graphicscontroller vmsvga
-    VBoxManage modifyvm "$VM_NAME" --accelerate3d on
+    if [[ ! -f "$vdi_path" ]]; then
+        echo "😮 VDI not found. Copying base VDI..."
+        cp "$vdi_base_path" "$vdi_path"
+    fi
+
+    if ! VBoxManage list vms | grep -q "\"$vm_name\""; then
+        echo "🚧 Creating $vm_type VM..."
+        VBoxManage createvm --name "$vm_name" --register --basefolder "$VM_FOLDER" --ostype "Linux_64"
+    else
+        echo "💖 $vm_type VM already exists."
+    fi
+
+    echo "🖥️ Configuring $vm_type VM settings (CPU, RAM, Network)..."
+    VBoxManage modifyvm "$vm_name" --ioapic on
+    VBoxManage modifyvm "$vm_name" --cpus 2 --memory 6144 --vram 128
+    VBoxManage modifyvm "$vm_name" --nic1 nat
+    VBoxManage modifyvm "$vm_name" --graphicscontroller vmsvga
+    VBoxManage modifyvm "$vm_name" --accelerate3d on
 
     echo "⛃ Configuring storage..."
-    VBoxManage storagectl "$VM_NAME" --name "SATA Controller" --add sata --controller IntelAhci
-    VBoxManage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$VDI_PATH"
-    VBoxManage modifyvm "$VM_NAME" --boot1 disk
+    VBoxManage storagectl "$vm_name" --name "SATA Controller" --add sata --controller IntelAhci
+    VBoxManage storageattach "$vm_name" --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$vdi_path"
+    VBoxManage modifyvm "$vm_name" --boot1 disk
 
     echo "🔗 Configuring RDP..."
-    VBoxManage modifyvm "$VM_NAME" --vrde on
-    VBoxManage modifyvm "$VM_NAME" --vrdemulticon on --vrdeport "$RDP_PORT"
-    VBoxManage modifyvm "$VM_NAME" --natpf1 "ssh,tcp,,${SSH_PORT},,22"
+    VBoxManage modifyvm "$vm_name" --vrde on
+    VBoxManage modifyvm "$vm_name" --vrdemulticon on --vrdeport "$rdp_port"
+    VBoxManage modifyvm "$vm_name" --natpf1 "ssh,tcp,,${ssh_port},,22"
 
     start_vm
-
-    echo "🫠 Waiting for SSH access..."
-
-    while ! ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "$SSH_USER@$VM_IP" -p "$SSH_PORT" "exit"; do
-        echo "Waiting for SSH access..."
-        sleep 5
-    done
-
-    echo "🔥 VM is up and SSH is available."
-
-    # Disabled temporary SSH connection has stopped working.
-    # install_guest_additions
-}
-
-install_guest_additions() {
-    echo "📦 Installing VirtualBox Guest Additions..."
-
-    local iso_path="$VM_HOME/additions.iso"
-
-    if [[ ! -f "$iso_path" ]]; then
-        echo "Downloading Virtual Box Guest Additions ISO..."
-        wget https://download.virtualbox.org/virtualbox/7.1.0/VBoxGuestAdditions_7.1.0.iso -O $iso_path
-    else
-        echo "The Downloading Virtual Box Guest Additions is already downloaded."
-    fi
-
-    VBoxManage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium $iso_path
-
-    echo "✅ Guest Additions installed."
-}
-
-umount_guest_additions() {
-    VBoxManage storageattach "$VM_NAME" --storagectl "SATA Controller" --port 1 --device 0 --type dvddrive --medium none
 }
 
 start_vm() {
-    VM_STATUS=$(VBoxManage list runningvms | grep "\"$VM_NAME\"")
+    local vm_name=$(get_vm_name)
+
+    VM_STATUS=$(VBoxManage list runningvms | grep "\"$vm_name\"")
 
     if [[ -z "$VM_STATUS" ]]; then
-        echo "🏁 Starting VM..."
-        VBoxHeadless --startvm "$VM_NAME" &>/dev/null &
+        echo "🏁 Starting $vm_type VM..."
+        VBoxHeadless --startvm "$vm_name" &>/dev/null &
         sleep 60
     else
-        echo "🖥️ VM is already running."
+        echo "🖥️ $vm_type VM is already running."
     fi
 }
 
 stop_vm() {
-    VM_STATUS=$(VBoxManage list runningvms | grep "\"$VM_NAME\"")
+    local vm_name = $(get_vm_name)
+
+    VM_STATUS=$(VBoxManage list runningvms | grep "\"$vm_name\"")
 
     if [[ -n "$VM_STATUS" ]]; then
-        echo "🛑 Stopping VM..."
-        VBoxManage controlvm "$VM_NAME" acpipowerbutton
+        echo "🛑 Stopping $vm_type VM..."
+        VBoxManage controlvm "$vm_name" acpipowerbutton
         sleep 10
-        if VBoxManage list runningvms | grep -q "\"$VM_NAME\""; then
-            echo "⚠️ VM did not shut down gracefully, forcing power off..."
-            VBoxManage controlvm "$VM_NAME" poweroff
+        if VBoxManage list runningvms | grep -q "\"$vm_name\""; then
+            echo "⚠️ $vm_type VM did not shut down gracefully, forcing power off..."
+            VBoxManage controlvm "$vm_name" poweroff
         fi
     else
-        echo "🖥️ VM is not running."
+        echo "🖥️ $vm_type VM is not running."
     fi
-}
-
-connect_ssh() {
-    echo "🌐 Connecting over ssh..."
-
-    sync
-    sshpass -p "$VM_PASSWORD" ssh "$SSH_USER@$VM_IP" -p "$SSH_PORT"
-}
-
-sync() {
-    sshpass -p "$VM_PASSWORD" scp -P "$SSH_PORT" _install_arch.sh "$SSH_USER@$VM_IP:/tmp/install.sh"
 }
 
 case $option in
@@ -143,26 +163,14 @@ download_iso)
 create)
     create_vm
     ;;
-install_guest_additions)
-    install_guest_additions
-    ;;
-umount_guest_additions)
-    umount_guest_additions
-    ;;
 start)
     start_vm
     ;;
 stop)
     stop_vm
     ;;
-ssh)
-    connect_ssh
-    ;;
-sync)
-    sync
-    ;;
 *)
-    echo "Usage: $0 {create|download_iso|install_guest_additions|start|ssh|sync|umount_guest_additions}"
+    echo "Usage: $0 {download_iso|create|start|stop} {arch|debian}"
     exit 1
     ;;
 esac

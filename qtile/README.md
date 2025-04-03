@@ -13,7 +13,7 @@ This theme was named *Ebenezer* 🪨, which meaning "stone of helper.".
 # Installing
 
 ```shell
-pacman -S kitty alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers notification-daemon xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock xss-lock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-requests python-pyaml python-dbus-next rofi pcmanfm-qt
+pacman -S kitty alacritty archlinux-wallpaper firefox lm_sensors qtile x11vnc dbus linux-headers notification-daemon xorg-server xorg-xinit xorg-server-xvfb xorg-twm xorg-xdm xorg-xclock xterm git base-devel dunst ttf-dejavu ttf-iosevka-nerd brightnessctl arc-gtk-theme ttf-firacode-nerd ttf-hack-nerd ttf-jetbrains-mono-nerd unclutter ttf-fira-sans ttf-mononoki-nerd pulsemixer papirus-icon-theme pavucontrol xautolock xss-lock scrot i3lock flameshot feh lxsession network-manager-applet nm-connection-editor yq tk polkit-gnome qt5ct qt6ct network-manager-applet python-requests python python-pip python-pipenv python-pillow python-psutil python-dbus-next rofi pcmanfm-qt
 
 DOTFILES_PATH=/tmp/dotfiles
 
