@@ -9,21 +9,20 @@ SSH_PORT_ARCH="2222"
 SSH_PORT_DEBIAN="2223"
 VM_IP="127.0.0.1"
 
+SSH_USER="osboxes"
+VM_PASSWORD="osboxes.org"
+
 # Arch Linux VM Configuration
 ARCH_VM_NAME="ArchLinuxVM"
 ARCH_VDI_BASE_PATH="$VM_HOME/arch-linux-base.vdi"
 ARCH_VDI_PATH="$VM_HOME/arch-linux.vdi"
 ARCH_ISO_URL="https://sourceforge.net/projects/osboxes/files/v/vb/4-Ar---c-x/20240601/CLI/64bit.7z/download"
-ARCH_VM_PASSWORD="osboxes.org"
-ARCH_SSH_USER="osboxes"
 
 # Debian VM Configuration
 DEBIAN_VM_NAME="DebianVM"
 DEBIAN_VDI_BASE_PATH="$VM_HOME/debian-base.vdi"
 DEBIAN_VDI_PATH="$VM_HOME/debian.vdi"
 DEBIAN_ISO_URL="https://sourceforge.net/projects/osboxes/files/v/vb/14-D-b/12.6.0/64bit.7z/download"
-DEBIAN_VM_PASSWORD="debian"
-DEBIAN_SSH_USER="debian"
 
 option=$1
 vm_type=$2 # Specify "arch" or "debian"
@@ -33,6 +32,17 @@ get_vm_name() {
         echo "$ARCH_VM_NAME"
     elif [[ "$vm_type" == "debian" ]]; then
         echo "$DEBIAN_VM_NAME"
+    else
+        echo "Invalid VM type. Use 'arch' or 'debian'." >&2
+        exit 1
+    fi
+}
+
+get_vm_ssh_port() {
+    if [[ "$vm_type" == "arch" ]]; then
+        echo "$SSH_PORT_ARCH"
+    elif [[ "$vm_type" == "debian" ]]; then
+        echo "$SSH_PORT_DEBIAN"
     else
         echo "Invalid VM type. Use 'arch' or 'debian'." >&2
         exit 1
@@ -162,6 +172,20 @@ stop_vm() {
     fi
 }
 
+connect_ssh() {
+    echo "🌐 Connecting over ssh..."
+
+    local ssh_port=$(get_vm_ssh_port)
+
+    sync
+    sshpass -p "$VM_PASSWORD" ssh "$SSH_USER@$VM_IP" -p "$ssh_port"
+}
+
+sync() {
+    local ssh_port=$(get_vm_ssh_port)
+    sshpass -p "$VM_PASSWORD" scp -P "$ssh_port" _install_debian.sh "$SSH_USER@$VM_IP:/tmp/install.sh"
+}
+
 case $option in
 download_iso)
     download_iso
@@ -175,8 +199,14 @@ start)
 stop)
     stop_vm
     ;;
+ssh)
+    connect_ssh
+    ;;
+sync)
+    sync
+    ;;
 *)
-    echo "Usage: $0 {download_iso|create|start|stop} {arch|debian}"
+    echo "Usage: $0 {download_iso|create|start|stop|ssh|sync} {arch|debian}"
     exit 1
     ;;
 esac

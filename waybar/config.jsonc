@@ -1,0 +1,179 @@
+{
+    "position": "top",
+    "height": 30,
+    "margin": "4 4 4 4",
+    "spacing": 4,
+    "modules-left": [
+        "custom/ebenezer-logo",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "idle_inhibitor",
+        "power-profiles-daemon",
+        "pulseaudio",
+        "custom/ebenezer-cpu",
+        "custom/ebenezer-memory",
+        "custom/ebenezer-temperature",
+        "backlight",
+        "battery",
+        "clock",
+        "tray",
+        "custom/power"
+    ],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": " ",
+            "default": " ",
+            "empty": " ",
+            "persistent": " "
+        },
+        "all-outputs": false,
+        "disable-scroll": true,
+        "persistent_workspaces": {
+            "*": 5
+        }
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "  {usage}%",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "  {}%"
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C <span foreground='#E38C8F'>{icon}</span>",
+        "format": "{icon}  {temperatureC}°C",
+        "format-icons": [
+            "",
+            "",
+            ""
+        ]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "<span size='13000' foreground='#a6e3a1'>{icon} </span> {capacity}%",
+        "format-warning": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {capacity}%",
+        "format-critical": "<span size='13000' foreground='#E38C8F'>{icon} </span> {capacity}%",
+        "format-charging": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+        "format-plugged": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+        "format-alt": "<span size='13000' foreground='#B1E3AD'>{icon} </span> {time}",
+        "format-full": "<span size='13000' foreground='#B1E3AD'> </span>{capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip-format": "{time}"
+    },
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                " "
+            ]
+        },
+        "on-click": "pavucontrol",
+    },
+    "custom/power": {
+        "format": "⏻  ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": ".config/waybar/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "shutdown -h now",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate",
+            "logout": "hyprctl dispatch exit"
+        }
+    },
+    // ebenezer widgers
+    "custom/ebenezer-cpu": {
+        "format": "{}",
+        "interval": 3,
+        "tooltip": true,
+        "exec": "~/.local/bin/ebenezer-cli widgets cpu --format waybar --icon-color '#f1fa8c'",
+        "return-type": "json"
+    },
+    "custom/ebenezer-memory": {
+        "format": "{}",
+        "interval": 3,
+        "tooltip": true,
+        "exec": "~/.local/bin/ebenezer-cli widgets memory --format waybar --icon-color '#ff79c6'",
+        "return-type": "json"
+    },
+    "custom/ebenezer-temperature": {
+        "format": "{}",
+        "interval": 3,
+        "tooltip": true,
+        "exec": "~/.local/bin/ebenezer-cli widgets temperature --format waybar --icon-color '#ffb86c'",
+        "return-type": "json"
+    },
+    "custom/ebenezer-logo": {
+        "format": "{}",
+        "tooltip": true,
+        "exec": "~/.local/bin/ebenezer-cli widgets logo --format waybar --icon-color '#1793D1'",
+        "return-type": "json"
+    }
+}

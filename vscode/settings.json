@@ -5,12 +5,15 @@
   "editor.fontLigatures": true,
   "terminal.integrated.fontSize": 13,
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "javascript.updateImportsOnFileMove.enabled": "never",
@@ -41,9 +44,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "cSpell.userWords": [
     "cacheable",
     "seguinte",
@@ -59,7 +59,8 @@
     "python",
     "shell",
     "yml",
-    "yaml"
+    "yaml",
+    "css"
   ],
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
@@ -77,16 +78,17 @@
   ],
   "workbench.colorTheme": "Bearded Theme Arc EolStorm",
   "workbench.iconTheme": "bearded-icons",
-  "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.defaultProfile.windows": "zsh",
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.defaultProfile.windows": "fish",
   "[lua]": {
     "editor.defaultFormatter": "Koihik.vscode-lua-format"
   },
-  "pixelbyte.love2d.path": "/usr/bin/love",
-  "pixelbyte.love2d.debug": false,
-  "pixelbyte.love2d.runOnSave": true,
   "go.toolsManagement.autoUpdate": true,
+  "go.gopath": "/home/william/go",
+  "go.toolsGopath": "/home/william/go",
+  "go.useLanguageServer": true,
+  "go.goroot": "/home/william/.local/share/mise/installs/go/latest",
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
@@ -108,5 +110,5 @@
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "yaml.validate": false,
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
 }

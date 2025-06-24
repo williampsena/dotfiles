@@ -41,5 +41,8 @@ vm-stop:
 vm-ssh:
 	bash vm.sh ssh $(type)
 
+vm-sync:
+	bash vm.sh sync $(type)
+
 upgrade-deps:
 	pipenv update qtile-ebenezer

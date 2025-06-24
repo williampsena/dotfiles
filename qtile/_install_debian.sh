@@ -12,15 +12,36 @@ check_root() {
 install_packages() {
     apt update && apt upgrade -y
 
-    local packages="alacritty firefox lm-sensors qtile x11vnc dbus-x11 linux-headers-$(uname -r) \
+    local packages="alacritty firefox-esr lm-sensors x11vnc dbus-x11 \
         notification-daemon xorg xserver-xorg xinit git build-essential dunst fonts-dejavu \
-        fonts-iosevka-nerd fonts-firacode fonts-hack-ttf fonts-jetbrains-mono unclutter \
+        fonts-firacode fonts-hack-ttf fonts-jetbrains-mono unclutter \
         fonts-firacode fonts-mononoki pulsemixer papirus-icon-theme pavucontrol xautolock \
         xss-lock scrot i3lock flameshot feh lxsession network-manager-gnome python3-requests \
-        python3 python3-pip python3-pillow python3-psutil python3-dbus python3-pipenv rofi \
-        pcmanfm-qt"
+        python3 python3-pip python3-pillow python3-psutil python3-dbus pipenv python3.11-venv rofi \
+        pcmanfm-qt passwd xserver-xorg xinit libpangocairo-1.0-0 python3-pip python3-xcffib python3-cairocffi xcb xcb-proto picom"
 
     apt install -y $packages
+}
+
+install_qtile() {
+    mkdir -p /opt/python-envs
+    python3 -m venv /opt/python-envs/qtile
+    /opt/python-envs/qtile/bin/pip3 install qtile qtile-ebenezer
+    ln -f /opt/python-envs/qtile/bin/qtile /usr/bin/qtile
+
+    cat <<EOF > /usr/share/xsessions/qtile.desktop
+[Desktop Entry]
+Version=1.0
+Name=Qtile
+Comment=Dynamic tiling window manager
+Exec=env PATH=\$PATH:/opt/python-envs /opt/python-envs/qtile/bin/qtile start
+TryExec=qtile
+Icon=
+Type=Application
+X-LightDM-DesktopName=Qtile
+EOF
+
+
 }
 
 install_extra_packages() {
@@ -30,24 +51,16 @@ install_extra_packages() {
     if ! fc-list | grep -q "Nerd Font"; then
         echo "Installing Nerd Fonts..."
         mkdir -p /usr/share/fonts/nerd-fonts
-        wget -qO /tmp/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip
-        unzip -o /tmp/FiraCode.zip -d /usr/share/fonts/nerd-fonts
-        fc-cache -fv
-    fi
 
-    # Picom (Compositor)
-    if ! command -v picom > /dev/null 2>&1; then
-        echo "Installing Picom..."
-        apt install -y meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev \
-            libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev \
-            libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev \
-            libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev \
-            libevdev-dev uthash-dev libev-dev libx11-xcb-dev
-        git clone https://github.com/yshui/picom.git /tmp/picom
-        cd /tmp/picom
-        meson --buildtype=release . build
-        ninja -C build
-        ninja -C build install
+        fonts=("FiraCode" "Iosevka")
+        base_url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download"
+
+        for font in "${fonts[@]}"; do
+            wget -qO "/tmp/${font}.zip" "${base_url}/${font}.zip"
+            unzip -o "/tmp/${font}.zip" -d /usr/share/fonts/nerd-fonts
+        done
+
+        fc-cache -fv
     fi
 }
 
@@ -153,6 +166,7 @@ install)
     create_qtile_user
     install_packages
     install_extra_packages
+    install_qtile
     setup_qtile
     post_install
     ;;

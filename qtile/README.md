@@ -258,7 +258,7 @@ To make task list icons suitable with bar design, I added the option to use [Fon
 
 ![theming](images/task_list_icon.png)
 
-# Testing with virtualbox (virtual machine)
+# Testing with virtualbox (virtual machine) - ARCH
 
 Run the following command to prepare a virtual machine with Qtile.
 I advise you take a coffee 𓍢ִ໋☕️✧˚ ༘ ⋆
@@ -281,6 +281,46 @@ bash /tmp/install.sh
 > After installation, go to the Virtual Box GUI with the username 'qtileuser' and password 'qtile'. Some widgets, such as thermal and backlight, will not operate in a virtual machine.
 
 ![VM working](images/vm.png)
+
+# Testing with virtualbox (virtual machine) - DEBIAN
+
+
+Run the following command to prepare a virtual machine with Qtile.
+I advise you take a coffee 𓍢ִ໋☕️✧˚ ༘ ⋆
+
+```shell
+sudo pacman -S virtualbox linux66-virtualbox-host-module
+
+make vm-iso type=debian
+make vm-create type=debian
+```
+
+> ⚠️ Note: OSBoxes Debian does not include the OpenSSH Server by default. You will need to manually install it using the VirtualBox Manager before proceeding, after login type following command:
+
+```shell
+sudo apt update
+sudo apt upgrade
+sudo apt install openssh-server
+```
+
+Now we can use an automated script to simplify the installation process. Just run the following command:
+
+```shell
+bash /tmp/install.sh
+```
+
+This script will handle the setup for you, ensuring all necessary components are installed and configured.
+make vm-ssh type=arch
+```
+
+Then run this commands to install Qtile:
+
+```shell
+su - # password: osboxes.org
+bash /tmp/install.sh
+```
+
+> After installation, go to the Virtual Box GUI with the username 'qtileuser' and password 'qtile'. Some widgets, such as thermal and backlight, will not operate in a virtual machine.
 
 # TODO
 
