@@ -109,7 +109,7 @@
   "window.customTitleBarVisibility": "auto",
   "window.menuBarVisibility": "compact",
   "window.titleBarStyle": "custom",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0.8,
   "workbench.colorTheme": "Bearded Theme Arc EolStorm",
   "workbench.iconTheme": "bearded-icons",
   "yaml.validate": false,
