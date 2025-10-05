@@ -1,31 +1,4 @@
 {
-  "window.titleBarStyle": "custom",
-  "editor.fontFamily": "JetBrainsMonoNL Nerd Font",
-  "editor.fontSize": 15,
-  "editor.fontLigatures": true,
-  "terminal.integrated.fontSize": 13,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[handlebars]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
@@ -41,13 +14,48 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off"
   },
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "cSpell.userWords": [
-    "cacheable",
-    "seguinte",
-    "Underconstructions"
+  "[lua]": {
+    "editor.defaultFormatter": "Koihik.vscode-lua-format"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "colorize.colorized_colors": [
+    "BROWSERS_COLORS",
+    "HEXA",
+    "RGB",
+    "HSL"
   ],
   "colorize.languages": [
     "javascript",
@@ -62,53 +70,49 @@
     "yaml",
     "css"
   ],
+  "cSpell.userWords": [
+    "cacheable",
+    "seguinte",
+    "Underconstructions"
+  ],
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
-  "window.zoomLevel": 1,
-  "terminal.integrated.gpuAcceleration": "off",
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "colorize.colorized_colors": [
-    "BROWSERS_COLORS",
-    "HEXA",
-    "RGB",
-    "HSL"
-  ],
-  "workbench.colorTheme": "Bearded Theme Arc EolStorm",
-  "workbench.iconTheme": "bearded-icons",
-  "terminal.integrated.defaultProfile.linux": "fish",
-  "terminal.integrated.defaultProfile.osx": "fish",
-  "terminal.integrated.defaultProfile.windows": "fish",
-  "[lua]": {
-    "editor.defaultFormatter": "Koihik.vscode-lua-format"
-  },
-  "go.toolsManagement.autoUpdate": true,
-  "go.gopath": "/home/william/go",
-  "go.toolsGopath": "/home/william/go",
-  "go.useLanguageServer": true,
-  "go.goroot": "/home/william/.local/share/mise/installs/go/latest",
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true
-  },
-  "python.experiments.optOutFrom": [
-    "All"
-  ],
-  "window.menuBarVisibility": "compact",
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "window.customTitleBarVisibility": "auto",
-  "makefile.configureOnOpen": false,
+  "git.openRepositoryInParentFolders": "never",
   "github.copilot.enable": {
-    "*": true,
+    "*": false,
     "plaintext": false,
     "markdown": false,
     "scminput": false
   },
-  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "go.gopath": "~/go",
+  "go.goroot": "~/.local/share/mise/installs/go/latest",
+  "go.toolsGopath": "~/go",
+  "go.toolsManagement.autoUpdate": true,
+  "go.useLanguageServer": true,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "makefile.configureOnOpen": false,
+  "python.experiments.optOutFrom": [
+    "All"
+  ],
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.defaultProfile.windows": "fish",
+  "terminal.integrated.fontFamily": "'Mononoki Nerd Font', 'Noto Color Emoji', monospace",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.lineHeight": 1.2,
+  "window.customTitleBarVisibility": "auto",
+  "window.menuBarVisibility": "compact",
+  "window.titleBarStyle": "custom",
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "Bearded Theme Arc EolStorm",
+  "workbench.iconTheme": "bearded-icons",
   "yaml.validate": false,
-  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.editor.empty.hint": "hidden"
 }

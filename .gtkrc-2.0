@@ -1,4 +1,5 @@
-gtk-theme-name="Arc-Dark"
+gtk-theme-name="Catppuccin-Mocha-Sky"
+gtk-icon-theme-name="Catppuccin"
 gtk-font-name="Inter Regular 12"
 
 # Set background color

@@ -126,7 +126,9 @@ window {
 
 /* Selected Entry */
 #entry:selected {
-  border: 0.11em solid @lavender;
+  border-bottom: 0.1em dashed @lavender;
+  outline: none;
+  font-weight: bold;
 }
 
 #entry:selected #text {

@@ -29,7 +29,7 @@ button {
 
 button:hover {
     background: inherit;
-    color: #bd93f9;
+    color: #1793D1;
 }
 
 #workspaces {
@@ -45,7 +45,7 @@ button:hover {
 }
 
 #workspaces button.active {
-    color: #bd93f9;
+    color: #1793D1;
 }
 
 #workspaces button.urgent {
@@ -75,7 +75,7 @@ button:hover {
 }
 
 #clock {
-    color: #ff6e6e;
+    color: #f8f8f2;
 }
 
 #clock.date {

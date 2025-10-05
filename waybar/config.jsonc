@@ -20,6 +20,7 @@
         "backlight",
         "battery",
         "clock",
+        "custom/ebenezer-notifications",
         "tray",
         "custom/power"
     ],
@@ -174,6 +175,19 @@
         "format": "{}",
         "tooltip": true,
         "exec": "~/.local/bin/ebenezer-cli widgets logo --format waybar --icon-color '#1793D1'",
+        "return-type": "json"
+    },
+    "custom/ebenezer-notifications": {
+        "format": "{}",
+        "menu": "on-click",
+		"menu-file": "~/.config/waybar/notifications.xml",
+         "menu-actions": {
+            "view": "swaync-client -t",
+            "clear": "ebenezer-cli desktop notifications --clear --provider swaync"
+        },
+        "interval": 3,
+        "tooltip": true,
+        "exec": "~/.local/bin/ebenezer-cli widgets notifications --format waybar --icon-color '#f1fa8c'",
         "return-type": "json"
     }
 }
