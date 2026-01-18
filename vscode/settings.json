@@ -111,8 +111,19 @@
   "window.titleBarStyle": "custom",
   "window.zoomLevel": 1,
   "workbench.colorTheme": "Bearded Theme Arc EolStorm",
-  "workbench.iconTheme": "bearded-icons",
   "yaml.validate": false,
   "github.copilot.nextEditSuggestions.enabled": true,
-  "workbench.editor.empty.hint": "hidden"
+  "workbench.editor.empty.hint": "hidden",
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "workbench.iconTheme": "bearded-icons",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1"
 }

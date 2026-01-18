@@ -1,11 +1,11 @@
 jobs:
-- name: set_random_wallpaper 
-  description: Sets a random wallpaper from the specified directory every X minutes.
-  type: defined
-  command: $set_random_wallpaper
-  args:
-    path: ~/Pictures/Wallpapers/Active
-  interval: 30m
+# - name: set_random_wallpaper 
+#   description: Sets a random wallpaper from the specified directory every X minutes.
+#   type: defined
+#   command: $set_random_wallpaper
+#   args:
+#     path: ~/Pictures/Wallpapers/Active
+#   interval: 1m
 
 - name: update_lock_screen_phrase
   description: Sets a random lock phrase from the specified file every X minutes.
